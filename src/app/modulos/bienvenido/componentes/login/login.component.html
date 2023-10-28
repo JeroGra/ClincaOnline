@@ -1,0 +1,20 @@
+
+
+<div id="div_login">
+    <img (click)="bienvenida()" class="logo mb-4" src="../../../../../assets/imagenes/logo.png" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Iniciar Sesion</h1>
+    <form class="form-signin">
+        <label class="sr-only">Email</label>
+        <input name="email" type="email" [(ngModel)]="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus >
+        <label class="sr-only">Contraseña</label>
+        <input name="contrasenia" type="password" [(ngModel)]="contrasenia" id="inputPassword" class="form-control" placeholder="Contraseña" >
+        <button class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold btn_login btn_form" type="submit">Ingresar</button>
+        <button (click)="register()" class="btn btn-lg btn-outline-light btn-block btn_form" type="submit">Registrarme</button>
+        <button (click)="desplegarUsiarios()" class="btn btn-lg btn-primary btn-block btn_form btn_users">Desplegar usuarios</button>
+    </form>
+</div>
+<div *ngIf="usuarios" id="div_users">
+    <button (click)="admin()" class="bt_user btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold btn_login btn_form" ><img class="img_user" src="../../../../../assets/imagenes/admin.png">Admin</button>
+    <button (click)="especialista()" class="bt_user btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold btn_login btn_form" ><img class="img_user" src="../../../../../assets/imagenes/especialista.png">Especialista</button>
+    <button (click)="paciente()" class="bt_user btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold btn_login btn_form" ><img class="img_user" src="../../../../../assets/imagenes/paciente.png">Paciente</button>
+</div>

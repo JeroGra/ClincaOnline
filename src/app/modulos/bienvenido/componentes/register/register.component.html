@@ -1,0 +1,179 @@
+<div *ngIf="select" class="div_regist">
+    <h4>Seleccione perfil a registrar</h4>
+    <button (click)="Especialista()" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold btn_esp btn_form" type="submit" >Especialista</button>
+    <button (click)="Paciente()" class="btn btn-lg btn-outline-light btn-block btn_form" type="submit" >Paciente</button>
+</div>
+
+
+
+<div *ngIf="especialistaSelec"  style="margin-top: 1rem;text-align: start;"  class="div_regist">
+  <h4 class="mb-3">Registro</h4>
+  <form >
+
+    <div class="row g-3">
+      <div class="col-sm-6">
+        <label class="form-label">Nombre</label>
+        <input type="text" class="form-control" name="nombre" placeholder="nombre" [(ngModel)]="nombre" >
+        <div class="invalid-feedback">
+          Valid first name is required.
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <label for="lastName" class="form-label">Apellido</label>
+        <input type="text" class="form-control" name="apellido" placeholder="apellido" [(ngModel)]="apellido" >
+        <div class="invalid-feedback">
+          Valid last name is required.
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label for="cc-cvv" class="form-label">Edad</label>
+        <input type="number" class="form-control" name="edad" placeholder="edad" [(ngModel)]="edad" >
+        <div class="invalid-feedback">
+          Security code required
+        </div>
+      </div>
+  
+        <div class="col-sm-9">
+          <label for="lastName" class="form-label">DNI</label>
+          <input type="number" class="form-control" name="dni" placeholder="dni" [(ngModel)]="dni" > 
+          <div class="invalid-feedback">
+            Valid last name is required.
+          </div>
+        </div>
+
+        <div class="col-md-12">
+            <label for="country" class="form-label">Especialidad Principal</label>
+            <select class="form-select" name="especialidad" [(ngModel)]="especialidadElegida" >
+                <option [value]="especialidad" *ngFor="let especialidad of especialidades">{{especialidad}}</option>
+            </select>
+            <br>
+            <p *ngIf="especialidadElegida === 'Otra' "  >Coloque su especialidad si es otra</p>
+            <input *ngIf="especialidadElegida === 'Otra' " type="text" class="form-control" id="lastName" placeholder="especialidad"  [(ngModel)]="miEspecialidad" >
+            <div class="invalid-feedback">
+              Please select a valid country.
+            </div>
+          </div>
+
+      <div class="col-12">
+        <label for="username" class="form-label">Email</label>
+        <div class="input-group has-validation">
+          <input type="text" class="form-control" name="email" placeholder="email" [(ngModel)]="email" >
+        <div class="invalid-feedback">
+            Your username is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <label for="email" class="form-label">Contraseña</label>
+        <input type="email" class="form-control" name="contrasenia" placeholder="contraseña" [(ngModel)]="contrasenia" >
+        <div class="invalid-feedback">
+          Please enter a valid email address for shipping updates.
+        </div>
+      </div>
+
+      <div class="col-12">
+        <label for="address" class="form-label">Foto</label>
+        <input type="file" class="form-control" id="address" name="foto" placeholder="foto" [(ngModel)]="fotos[0]" >
+        <div class="invalid-feedback">
+          Please enter your shipping address.
+        </div>
+      </div>
+
+      <img src="">
+
+    </div>
+    <hr class="my-4">
+    <button class="w-100 btn btn-primary btn-lg btn_form" type="submit">Continue to checkout</button>
+    <button class="btn btn-lg btn-outline-light btn-block btn_form" type="submit" >Cancelar</button>
+  </form>
+</div>
+
+<!--PACIENTE-->
+
+<div *ngIf="pacienteSelec" style="margin-top: 1rem;text-align: start;" class="div_regist">
+    <h4 class="mb-3">Registro</h4>
+    <form >
+
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <label for="firstName" class="form-label">Nombre</label>
+            <input type="text" class="form-control" name="nombre" placeholder="nombre" [(ngModel)]="nombre" >
+            <div class="invalid-feedback">
+              Valid first name is required.
+            </div>
+          </div>
+    
+          <div class="col-sm-6">
+            <label for="lastName" class="form-label">Apellido</label>
+            <input type="text" class="form-control" name="apellido"  placeholder="apellido" [(ngModel)]="apellido" >
+            <div class="invalid-feedback">
+              Valid last name is required.
+            </div>
+          </div>
+    
+          <div class="col-md-3">
+            <label for="cc-cvv" class="form-label">Edad</label>
+            <input type="text" class="form-control" name="edad"placeholder="edad" [(ngModel)]="edad" >
+            <div class="invalid-feedback">
+              Security code required
+            </div>
+          </div>
+      
+            <div class="col-sm-9">
+              <label for="lastName" class="form-label">DNI</label>
+              <input type="text" class="form-control"name="dni"  placeholder="dni" [(ngModel)]="dni" >
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>
+    
+            <div class="col-md-12">
+                <label for="country" class="form-label">Obra Social</label>
+                <select  class="form-select" name="obra" [(ngModel)]="obraSocialElegida">
+                    <option [value]="obra" *ngFor="let obra of obrasSociales">{{obra}}</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please select a valid country.
+                </div>
+              </div>
+    
+          <div class="col-12">
+            <label for="username" class="form-label">Email</label>
+            <div class="input-group has-validation">
+              <input type="text" class="form-control" name="email"placeholder="email" [(ngModel)]="email" >
+            <div class="invalid-feedback">
+                Your username is required.
+              </div>
+            </div>
+          </div>
+    
+          <div class="col-12">
+            <label for="email" class="form-label">Contraseña</label>
+            <input type="email" class="form-control"  name="contrasenia" placeholder="contraseña" [(ngModel)]="contrasenia" >
+            <div class="invalid-feedback">
+              Please enter a valid email address for shipping updates.
+            </div>
+          </div>
+    
+          <div class="col-12">
+            <label for="address" class="form-label">Primera Foto</label>
+            <input type="file" class="form-control" name="foto"placeholder="foto" [(ngModel)]="fotos" >
+            <label for="address" class="form-label">Segunda Foto</label>
+            <input type="file" class="form-control" name="foto"placeholder="foto" [(ngModel)]="fotos" >
+            <div class="invalid-feedback">
+              Please enter your shipping address.
+            </div>
+          </div>
+          
+          <img>
+          <img>
+
+        </div>
+        <hr class="my-4">
+        <button class="w-100 btn btn-primary btn-lg btn_form" type="submit">Continue to checkout</button>
+        <button class="btn btn-lg btn-outline-light btn-block btn_form" type="submit" >Cancelar</button>
+      </form>
+  </div>

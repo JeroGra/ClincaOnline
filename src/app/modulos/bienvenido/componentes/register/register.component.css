@@ -1,0 +1,39 @@
+.div_regist{
+    padding: 1%;
+    width: 25%;
+    height: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #0F2636;
+    border-radius: 5px;
+    backdrop-filter: blur(70px);
+    -webkit-backdrop-filter: blur(70px);
+    box-shadow: 0px 0px 44px 44px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: white;
+    margin-top: 5.5%;
+}
+
+.btn_form{
+    margin-top: 5px;
+    width: 100%;
+    height: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight:500;
+}
+
+.btn_form:active{
+    transform: scale(0.8);
+}
+
+.btn_esp{
+    margin-top: 20px;
+    border-color:#80ED99 ;
+    color:#80ED99 ;
+}
+
+.btn_esp:hover{
+    background-color: #80ED99;
+    color:#0F2636 ;
+}

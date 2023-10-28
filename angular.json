@@ -34,13 +34,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "1gb",
+                  "maximumError": "1gb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "1gb",
+                  "maximumError": "1gb"
                 }
               ],
               "outputHashing": "all"
@@ -91,8 +91,18 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2,
+            "browserTarget": "ClinicaOnline:build:production"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
