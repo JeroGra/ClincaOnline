@@ -1,4 +1,5 @@
 <div *ngIf="select" class="div_regist">
+    <img (click)="bienvenida()" class="logo mb-4" src="../../../../../assets/imagenes/logo.png" alt="" width="72" height="72">
     <h4>Seleccione perfil a registrar</h4>
     <button (click)="Especialista()" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold btn_esp btn_form" type="submit" >Especialista</button>
     <button (click)="Paciente()" class="btn btn-lg btn-outline-light btn-block btn_form" type="submit" >Paciente</button>
@@ -8,77 +9,132 @@
 
 <div *ngIf="especialistaSelec"  style="margin-top: 1rem;text-align: start;"  class="div_regist">
   <h4 class="mb-3">Registro</h4>
-  <form >
+  <form  [formGroup]="formEspecialista" >
 
     <div class="row g-3">
       <div class="col-sm-6">
         <label class="form-label">Nombre</label>
-        <input type="text" class="form-control" name="nombre" placeholder="nombre" [(ngModel)]="nombre" >
-        <div class="invalid-feedback">
-          Valid first name is required.
+        <input type="text" class="form-control" name="nombre" placeholder="nombre" [(ngModel)]="nombre" formControlName="nombre" >
+        <div *ngIf="formEspecialista.controls['nombre'].errors != null">
+            <small  *ngIf="formEspecialista.controls['nombre'].errors!['required'] && formEspecialista.controls['nombre'].touched" style="color: rgb(254, 112, 112);">
+                *Obligatorio
+            </small>
+            <small 
+            *ngIf="!formEspecialista.controls['nombre'].errors!['minLength'] && formEspecialista.controls['nombre'].touched"
+            style="color: rgb(254, 112, 112);"
+          >
+             *minimo 2 caracteres, maximo 15
+          </small> 
         </div>
       </div>
 
       <div class="col-sm-6">
         <label for="lastName" class="form-label">Apellido</label>
-        <input type="text" class="form-control" name="apellido" placeholder="apellido" [(ngModel)]="apellido" >
-        <div class="invalid-feedback">
-          Valid last name is required.
+        <input type="text" class="form-control" name="apellido" placeholder="apellido" [(ngModel)]="apellido" formControlName="apellido" >
+        <div *ngIf="formEspecialista.controls['apellido'].errors != null">
+            <small  *ngIf="formEspecialista.controls['apellido'].errors!['required'] && formEspecialista.controls['apellido'].touched" style="color: rgb(254, 112, 112);">
+                *Obligatorio
+            </small>
+            <small 
+            *ngIf="!formEspecialista.controls['apellido'].errors!['minLength'] && formEspecialista.controls['apellido'].touched"
+            style="color: rgb(254, 112, 112);"
+          >
+             *minimo 2 caracteres, maximo 15
+          </small> 
         </div>
       </div>
 
       <div class="col-md-3">
         <label for="cc-cvv" class="form-label">Edad</label>
-        <input type="number" class="form-control" name="edad" placeholder="edad" [(ngModel)]="edad" >
-        <div class="invalid-feedback">
-          Security code required
+        <input type="number" class="form-control" name="edad" [(ngModel)]="edad" formControlName="edad" >
+        <div *ngIf="formEspecialista.controls['edad'].errors != null" >
+            <small  *ngIf="formEspecialista.controls['edad'].errors!['required'] && formEspecialista.controls['edad'].touched" style="color: rgb(254, 112, 112);">
+                *Obligatorio
+            </small>
+            <small 
+                *ngIf="formEspecialista.controls['edad'].errors!['min'] && formEspecialista.controls['edad'].touched"
+               style="color: rgb(254, 112, 112);"
+                >
+                *edad minima 18
+             </small>
         </div>
       </div>
   
         <div class="col-sm-9">
           <label for="lastName" class="form-label">DNI</label>
-          <input type="number" class="form-control" name="dni" placeholder="dni" [(ngModel)]="dni" > 
-          <div class="invalid-feedback">
-            Valid last name is required.
-          </div>
+          <input type="number" class="form-control" name="dni" [(ngModel)]="dni" formControlName="dni" > 
+          <div *ngIf="formEspecialista.controls['dni'].errors != null" >
+            <small  *ngIf="formEspecialista.controls['dni'].errors!['required'] && formEspecialista.controls['dni'].touched" style="color: rgb(254, 112, 112);">
+                *Obligatorio
+            </small>
+            <small 
+                *ngIf="formEspecialista.controls['dni'].errors!['min'] && formEspecialista.controls['dni'].touched"
+               style="color: rgb(254, 112, 112);"
+                >
+                 *coloque un DNI valido
+             </small>
+        </div>
         </div>
 
         <div class="col-md-12">
             <label for="country" class="form-label">Especialidad Principal</label>
-            <select class="form-select" name="especialidad" [(ngModel)]="especialidadElegida" >
-                <option [value]="especialidad" *ngFor="let especialidad of especialidades">{{especialidad}}</option>
+            <select  class="form-select" name="especialidad" [(ngModel)]="especialidadElegida" formControlName="especialidad" (ngModelChange)="OtraEsp($event)" >
+                <option  [value]="especialidad" *ngFor="let especialidad of especialidades">{{especialidad}}</option>
             </select>
+            <div *ngIf="formEspecialista.controls['especialidad'].errors != null">
+                <small  *ngIf="formEspecialista.controls['especialidad'].errors!['required'] && formEspecialista.controls['especialidad'].touched" style="color: rgb(254, 112, 112);">
+                    *Obligatorio
+                </small>
+            </div>
             <br>
             <p *ngIf="especialidadElegida === 'Otra' "  >Coloque su especialidad si es otra</p>
-            <input *ngIf="especialidadElegida === 'Otra' " type="text" class="form-control" id="lastName" placeholder="especialidad"  [(ngModel)]="miEspecialidad" >
-            <div class="invalid-feedback">
-              Please select a valid country.
+            <input (ngModelChange)="esOtraEsp($event)" *ngIf="especialidadElegida === 'Otra' " type="text" class="form-control" name="miEspecialidad" id="miEspecialidad" placeholder="especialidad"  [(ngModel)]="miEspecialidad" formControlName="miEspecialidad" >
+            <div>
+                <small  *ngIf="esOtraErrorObligatorio"
+                style="color: rgb(254, 112, 112);">
+                    *Obligatorio
+                </small>
+                <small  *ngIf="esOtraErrorMinMax"
+                style="color: rgb(254, 112, 112);"
+              >
+                 *minimo 8 caracteres, maximo 30
+              </small> 
             </div>
           </div>
 
       <div class="col-12">
         <label for="username" class="form-label">Email</label>
-        <div class="input-group has-validation">
-          <input type="text" class="form-control" name="email" placeholder="email" [(ngModel)]="email" >
-        <div class="invalid-feedback">
-            Your username is required.
-          </div>
+          <input type="email" class="form-control" name="email" placeholder="email" [(ngModel)]="email" formControlName="email" >
+          <div *ngIf="formEspecialista.controls['email'].errors != null">
+            <small  *ngIf="formEspecialista.controls['email'].errors!['required'] && formEspecialista.controls['email'].touched" style="color: rgb(254, 112, 112);">
+                *Obligatorio
+            </small>
         </div>
       </div>
 
       <div class="col-12">
-        <label for="email" class="form-label">Contraseña</label>
-        <input type="email" class="form-control" name="contrasenia" placeholder="contraseña" [(ngModel)]="contrasenia" >
-        <div class="invalid-feedback">
-          Please enter a valid email address for shipping updates.
+        <label class="form-label">Contraseña</label>
+        <input type="password" class="form-control" name="contrasenia" placeholder="contraseña" [(ngModel)]="contrasenia" formControlName="contrasenia" >
+        <div *ngIf="formEspecialista.controls['contrasenia'].errors != null">
+            <small  *ngIf="formEspecialista.controls['contrasenia'].errors!['required'] && formEspecialista.controls['contrasenia'].touched" style="color: rgb(254, 112, 112);">
+                *Obligatorio
+            </small>
+            <small 
+            *ngIf="!formEspecialista.controls['contrasenia'].errors!['minLength'] && formEspecialista.controls['contrasenia'].touched"
+            style="color: rgb(254, 112, 112);"
+          >
+             *minimo 6 caracteres, maximo 15
+          </small> 
         </div>
       </div>
 
       <div class="col-12">
         <label for="address" class="form-label">Foto</label>
-        <input type="file" class="form-control" id="address" name="foto" placeholder="foto" [(ngModel)]="fotos[0]" >
-        <div class="invalid-feedback">
-          Please enter your shipping address.
+        <input type="file" class="form-control" id="address" name="foto" placeholder="foto" [(ngModel)]="fotos[0]" formControlName="foto" >
+        <div *ngIf="formEspecialista.controls['foto'].errors != null">
+            <small  *ngIf="formEspecialista.controls['foto'].errors!['required'] && formEspecialista.controls['foto'].touched" style="color: rgb(254, 112, 112);">
+                *Obligatorio
+            </small>
         </div>
       </div>
 
@@ -86,8 +142,8 @@
 
     </div>
     <hr class="my-4">
-    <button class="w-100 btn btn-primary btn-lg btn_form" type="submit">Continue to checkout</button>
-    <button class="btn btn-lg btn-outline-light btn-block btn_form" type="submit" >Cancelar</button>
+    <button [disabled]="formEspecialista.invalid || disabled"  (click)="Registrar()" class="w-100 btn btn-primary btn-lg btn_form btn_regist" type="submit">Registrar</button>
+    <button (click)="Cancelar()" class="btn btn-lg btn-outline-light btn-block btn_form" type="submit" >Cancelar</button>
   </form>
 </div>
 
@@ -95,76 +151,127 @@
 
 <div *ngIf="pacienteSelec" style="margin-top: 1rem;text-align: start;" class="div_regist">
     <h4 class="mb-3">Registro</h4>
-    <form >
+    <form [formGroup]="formPaciente" >
 
         <div class="row g-3">
           <div class="col-sm-6">
             <label for="firstName" class="form-label">Nombre</label>
-            <input type="text" class="form-control" name="nombre" placeholder="nombre" [(ngModel)]="nombre" >
-            <div class="invalid-feedback">
-              Valid first name is required.
+            <input type="text" class="form-control" name="nombre" placeholder="nombre" [(ngModel)]="nombre" formControlName="nombre" >
+            <div *ngIf="formPaciente.controls['nombre'].errors != null">
+                <small  *ngIf="formPaciente.controls['nombre'].errors!['required'] && formPaciente.controls['nombre'].touched" style="color: rgb(254, 112, 112);">
+                    *Obligatorio
+                </small>
+                <small 
+                *ngIf="!formPaciente.controls['nombre'].errors!['minLength'] && formPaciente.controls['nombre'].touched"
+                style="color: rgb(254, 112, 112);"
+              >
+                 *minimo 2 caracteres, maximo 15
+              </small> 
             </div>
           </div>
     
           <div class="col-sm-6">
             <label for="lastName" class="form-label">Apellido</label>
-            <input type="text" class="form-control" name="apellido"  placeholder="apellido" [(ngModel)]="apellido" >
-            <div class="invalid-feedback">
-              Valid last name is required.
+            <input type="text" class="form-control" name="apellido"  placeholder="apellido" [(ngModel)]="apellido" formControlName="apellido" >
+            <div *ngIf="formPaciente.controls['apellido'].errors != null">
+                <small  *ngIf="formPaciente.controls['apellido'].errors!['required'] && formPaciente.controls['apellido'].touched" style="color: rgb(254, 112, 112);">
+                    *Obligatorio
+                </small>
+                <small 
+                *ngIf="!formPaciente.controls['apellido'].errors!['minLength'] && formPaciente.controls['apellido'].touched"
+                style="color: rgb(254, 112, 112);"
+              >
+                 *minimo 2 caracteres, maximo 15
+              </small> 
             </div>
           </div>
     
           <div class="col-md-3">
             <label for="cc-cvv" class="form-label">Edad</label>
-            <input type="text" class="form-control" name="edad"placeholder="edad" [(ngModel)]="edad" >
-            <div class="invalid-feedback">
-              Security code required
+            <input type="text" class="form-control" name="edad"placeholder="edad" [(ngModel)]="edad" formControlName="edad" >
+            <div *ngIf="formPaciente.controls['edad'].errors != null" >
+                <small  *ngIf="formPaciente.controls['edad'].errors!['required'] && formPaciente.controls['edad'].touched" style="color: rgb(254, 112, 112);">
+                    *Obligatorio
+                </small>
+                <small 
+                    *ngIf="formPaciente.controls['edad'].errors!['min'] && formPaciente.controls['edad'].touched"
+                   style="color: rgb(254, 112, 112);"
+                    >
+                    *edad minima 18
+                 </small>
             </div>
           </div>
       
             <div class="col-sm-9">
               <label for="lastName" class="form-label">DNI</label>
-              <input type="text" class="form-control"name="dni"  placeholder="dni" [(ngModel)]="dni" >
-              <div class="invalid-feedback">
-                Valid last name is required.
-              </div>
+              <input type="text" class="form-control"name="dni"  placeholder="dni" [(ngModel)]="dni" formControlName="dni" >
+              <div *ngIf="formPaciente.controls['dni'].errors != null" >
+                <small  *ngIf="formPaciente.controls['dni'].errors!['required'] && formPaciente.controls['dni'].touched" style="color: rgb(254, 112, 112);">
+                    *Obligatorio
+                </small>
+                <small 
+                    *ngIf="formPaciente.controls['dni'].errors!['min'] && formPaciente.controls['dni'].touched"
+                   style="color: rgb(254, 112, 112);"
+                    >
+                     *coloque un DNI valido
+                 </small>
+            </div>
             </div>
     
             <div class="col-md-12">
                 <label for="country" class="form-label">Obra Social</label>
-                <select  class="form-select" name="obra" [(ngModel)]="obraSocialElegida">
+                <select  class="form-select" name="obra" [(ngModel)]="obraSocialElegida" formControlName="obraSocial">
                     <option [value]="obra" *ngFor="let obra of obrasSociales">{{obra}}</option>
                 </select>
-                <div class="invalid-feedback">
-                  Please select a valid country.
+                <div *ngIf="formPaciente.controls['obraSocial'].errors != null">
+                    <small  *ngIf="formPaciente.controls['obraSocial'].errors!['required'] && formPaciente.controls['obraSocial'].touched" style="color: rgb(254, 112, 112);">
+                        *Obligatorio
+                    </small>
                 </div>
               </div>
     
           <div class="col-12">
             <label for="username" class="form-label">Email</label>
             <div class="input-group has-validation">
-              <input type="text" class="form-control" name="email"placeholder="email" [(ngModel)]="email" >
-            <div class="invalid-feedback">
-                Your username is required.
-              </div>
+              <input type="email" class="form-control" name="email"placeholder="email" [(ngModel)]="email" formControlName="email" >
+              <div *ngIf="formPaciente.controls['email'].errors != null">
+                <small  *ngIf="formPaciente.controls['email'].errors!['required'] && formPaciente.controls['email'].touched" style="color: rgb(254, 112, 112);">
+                    *Obligatorio
+                </small>
+            </div>
             </div>
           </div>
     
           <div class="col-12">
             <label for="email" class="form-label">Contraseña</label>
-            <input type="email" class="form-control"  name="contrasenia" placeholder="contraseña" [(ngModel)]="contrasenia" >
-            <div class="invalid-feedback">
-              Please enter a valid email address for shipping updates.
+            <input type="password" class="form-control"  name="contrasenia" placeholder="contraseña" [(ngModel)]="contrasenia" formControlName="contrasenia" >
+            <div *ngIf="formPaciente.controls['contrasenia'].errors != null">
+                <small  *ngIf="formPaciente.controls['contrasenia'].errors!['required'] && formPaciente.controls['contrasenia'].touched" style="color: rgb(254, 112, 112);">
+                    *Obligatorio
+                </small>
+                <small 
+                *ngIf="!formPaciente.controls['contrasenia'].errors!['minLength'] && formPaciente.controls['contrasenia'].touched"
+                style="color: rgb(254, 112, 112);"
+              >
+                 *minimo 6 caracteres, maximo 15
+              </small> 
             </div>
           </div>
     
           <div class="col-12">
             <label for="address" class="form-label">Primera Foto</label>
-            <input type="file" class="form-control" name="foto"placeholder="foto" [(ngModel)]="fotos" >
+            <input type="file" class="form-control" name="foto"placeholder="foto" [(ngModel)]="fotos" formControlName="foto1">
             <label for="address" class="form-label">Segunda Foto</label>
-            <input type="file" class="form-control" name="foto"placeholder="foto" [(ngModel)]="fotos" >
-            <div class="invalid-feedback">
-              Please enter your shipping address.
+            <input type="file" class="form-control" name="foto"placeholder="foto" [(ngModel)]="fotos" formControlName="foto2" >
+            <div *ngIf="formPaciente.controls['foto1'].errors != null">
+                <small  *ngIf="formPaciente.controls['foto1'].errors!['required'] && formPaciente.controls['foto1'].touched" style="color: rgb(254, 112, 112);">
+                    *Primer foto Obligatoria
+                </small>
+            </div>
+            <div *ngIf="formPaciente.controls['foto2'].errors != null">
+                <small  *ngIf="formPaciente.controls['foto2'].errors!['required'] && formPaciente.controls['foto2'].touched" style="color: rgb(254, 112, 112);">
+                    *Segunda foto Obligatoria
+                </small>
             </div>
           </div>
           
@@ -173,7 +280,7 @@
 
         </div>
         <hr class="my-4">
-        <button class="w-100 btn btn-primary btn-lg btn_form" type="submit">Continue to checkout</button>
-        <button class="btn btn-lg btn-outline-light btn-block btn_form" type="submit" >Cancelar</button>
+        <button [disabled]="formPaciente.invalid" class="w-100 btn btn-primary btn-lg btn_form btn_regist" type="submit">Registrar</button>
+        <button (click)="Cancelar()" class="btn btn-lg btn-outline-light btn-block btn_form" type="submit" >Cancelar</button>
       </form>
   </div>

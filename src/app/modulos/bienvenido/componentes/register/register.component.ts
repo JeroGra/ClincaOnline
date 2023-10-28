@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup,Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -7,7 +9,93 @@ import { Component } from '@angular/core';
 })
 export class RegisterComponent {
 
-  constructor(){}
+  public formEspecialista : FormGroup
+  public formPaciente : FormGroup
+
+  constructor(private fb : FormBuilder,
+    private ruta : Router){
+    
+    this.formEspecialista = this.fb.group({
+      nombre : ['',[
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(15),
+      ]],
+      apellido : ['',[
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(15),
+      ]],
+      edad : ['',[
+        Validators.required,
+        Validators.min(18),
+      ]],
+      dni : ['',[
+        Validators.required,
+        Validators.min(5000000),
+        Validators.max(99000000),
+      ]],
+      email : ['',[
+        Validators.required,
+
+      ]],
+      contrasenia : ['',[
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(15),
+      ]],
+      foto : ['',[
+        Validators.required,
+      ]],
+      especialidad : ['',[
+        Validators.required,
+      ]],
+      miEspecialidad : ['',[
+
+      ]],
+    })
+
+    this.formPaciente = this.fb.group({
+      nombre : ['',[
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(15),
+      ]],
+      apellido : ['',[
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(15),
+      ]],
+      edad : ['',[
+        Validators.required,
+        Validators.min(18),
+      ]],
+      dni : ['',[
+        Validators.required,
+        Validators.min(5000000),
+        Validators.max(99000000),
+      ]],
+      email : ['',[
+        Validators.required,
+
+      ]],
+      contrasenia : ['',[
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(15),
+      ]],
+      foto1 : ['',[
+        Validators.required,
+      ]],
+      foto2 : ['',[
+        Validators.required,
+      ]],
+      obraSocial : ['',[
+        Validators.required,
+      ]],
+    })
+
+  }
 
   especialistaSelec = false;
   pacienteSelec = false;
@@ -27,6 +115,53 @@ export class RegisterComponent {
   miEspecialidad:string = "";
   fotos:any = []
 
+  esOtraErrorObligatorio = false;
+  esOtraErrorMinMax = false;
+  disabled = false;
+
+  bienvenida(){
+    this.ruta.navigateByUrl("bienvenido/bienvenida")
+  }
+  
+  OtraEsp(event:any){
+
+    if(this.especialidadElegida == 'Otra'){
+        this.disabled = true;
+    }else{
+      this.disabled = false
+      this.esOtraErrorObligatorio = false;
+      this.esOtraErrorMinMax = false;
+      this.miEspecialidad = "";
+    }
+
+  }
+
+  esOtraEsp(event:any){
+    
+    if(this.miEspecialidad === ""){
+      this.esOtraErrorObligatorio = true;
+      this.disabled = true;
+    }else{
+      this.esOtraErrorObligatorio  = false;
+      this.disabled = false;
+      if(this.miEspecialidad.length < 7){
+        this.esOtraErrorMinMax = true;
+        this.disabled = true;
+      }
+      else{
+        this.esOtraErrorMinMax = false;
+        this.disabled = false;
+        if(this.miEspecialidad.length > 29){
+          this.esOtraErrorMinMax = true;
+          this.disabled = true;
+        }
+        else{
+          this.esOtraErrorMinMax = false;
+          this.disabled = false;
+        }
+      }
+    }
+  }
 
   Especialista(){
     this.especialistaSelec = true;
@@ -49,9 +184,18 @@ export class RegisterComponent {
     console.log(rt);
   }
 
-  verificarMailDNI()
-  {
-    
+  verificarMailDNI(){
+
+  }
+
+  Registrar(){
+
+  }
+
+  Cancelar(){
+    this.especialistaSelec = false;
+    this.pacienteSelec = false;
+    this.select = true;
   }
 
 }

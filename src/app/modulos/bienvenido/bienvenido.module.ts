@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BienvenidoRoutingModule } from './bienvenido-routing.module';
 import { BienvenidoComponent } from './bienvenido.component';
 import { LoginComponent } from './componentes/login/login.component';
@@ -19,6 +19,7 @@ import { BienvenidaComponent } from './componentes/bienvenida/bienvenida.compone
     CommonModule,
     BienvenidoRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class BienvenidoModule { }

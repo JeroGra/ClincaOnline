@@ -27,6 +27,16 @@
     transform: scale(0.8);
 }
 
+.btn_regist{
+    border-color: #80ED99;
+    background-color: #80ED99;
+}
+
+.btn_regist:hover{
+    border-color: #80ed99a8;
+    background-color: #80ed99a8;
+}
+
 .btn_esp{
     margin-top: 20px;
     border-color:#80ED99 ;
@@ -36,4 +46,12 @@
 .btn_esp:hover{
     background-color: #80ED99;
     color:#0F2636 ;
+}
+
+.logo{
+    margin-bottom: 2.5%;
+    border-radius: 20%;
+}
+.logo:hover{
+    transform: scale(1.1);
 }
