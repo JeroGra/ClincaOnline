@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encript.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent {
   public formPaciente : FormGroup
 
   constructor(private fb : FormBuilder,
-    private ruta : Router){
+    private ruta : Router,private encriptService :LocalStorageEncriptService){
     
     this.formEspecialista = this.fb.group({
       nombre : ['',[
@@ -189,7 +190,7 @@ export class RegisterComponent {
   }
 
   Registrar(){
-
+    
   }
 
   Cancelar(){

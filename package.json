@@ -20,8 +20,11 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
+    "@intmainreturn/randomizer": "^1.0.1",
+    "encrypt-storage": "^2.12.19",
     "rxfire": "^6.0.3",
     "rxjs": "~7.8.0",
+    "secure-ls": "^1.2.6",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },

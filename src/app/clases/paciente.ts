@@ -10,5 +10,5 @@ export class Paciente {
     contraseña?:string;
     fotos:Array<string> = [];
     cuentaValidadaEmail:boolean = false;
-
+    tipo = "Paciente"
 }

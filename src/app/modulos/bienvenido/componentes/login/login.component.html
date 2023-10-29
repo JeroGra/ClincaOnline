@@ -8,7 +8,7 @@
         <input name="email" type="email" [(ngModel)]="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus >
         <label class="sr-only">Contraseña</label>
         <input name="contrasenia" type="password" [(ngModel)]="contrasenia" id="inputPassword" class="form-control" placeholder="Contraseña" >
-        <button class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold btn_login btn_form" type="submit">Ingresar</button>
+        <button (click)="LogIn()" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold btn_login btn_form" type="submit">Ingresar</button>
         <button (click)="register()" class="btn btn-lg btn-outline-light btn-block btn_form" type="submit">Registrarme</button>
         <button (click)="desplegarUsiarios()" class="btn btn-lg btn-primary btn-block btn_form btn_users">Desplegar usuarios</button>
     </form>

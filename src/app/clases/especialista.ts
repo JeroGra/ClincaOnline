@@ -11,4 +11,5 @@ export class Especialista {
     fotos?:string;
     cuentaValidadaEmail:boolean = false;
     cuentaHabilitada:boolean = false;
+    tipo = "Especialista"
 }
