@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Usuario } from 'src/app/clases/usuario';
+import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encript.service';
 
 @Component({
@@ -9,7 +11,13 @@ import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encr
 })
 export class LoginComponent {
 
-  constructor(private ruta : Router, private encriptService : LocalStorageEncriptService){
+  usuariosBd:Array<Usuario>  = []
+
+  constructor(private ruta : Router, private encriptService : LocalStorageEncriptService, private bd : BaseDatosService){
+
+    this.bd.TraerUsuarios().subscribe((users:any)=>{
+      this.usuariosBd = users as Array<Usuario>
+    })
   }
 
   usuarios = false;
@@ -42,23 +50,12 @@ export class LoginComponent {
 
   LogIn()
   {
-      let user = {
-        id:"adasada123sa",
-        email:"prueba@gmail.com",
-        contrasenia:"sdws123",
-      }
+      this.usuariosBd.forEach((user:Usuario)=>{
 
-      let contra = "s123";
-
-      this.encriptService.EncriptStorage(user);
-      let rtC = this.encriptService.EncriptValue(contra);
-
-      console.log(rtC);
-
-    let rtLocal = this.encriptService.GetEncriptStorage()
-    console.log(rtLocal);
-    let rtCd = this.encriptService.DecriptValue(rtC);
-    console.log(rtCd)
+        let pass = this.encriptService.DecriptValue(user.contrasenia)
+        console.log(user);
+        console.log(pass)
+      })
   }
 
 }

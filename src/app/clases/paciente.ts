@@ -1,14 +1,11 @@
-export class Paciente {
+import { Usuario } from "./usuario";
 
-    id?:string;
-    nombre?:string;
-    apellido?:string;
-    edad?:number;
-    dni?:number;
+export class Paciente extends Usuario {
+
+    
     obraSocial?:any;
-    email?:string;
-    contraseña?:string;
     fotos:Array<string> = [];
     cuentaValidadaEmail:boolean = false;
     tipo = "Paciente"
+
 }

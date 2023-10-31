@@ -1,15 +1,11 @@
-export class Especialista {
+import { Usuario } from "./usuario";
 
-    id?:string;
-    nombre?:string;
-    apellido?:string;
-    edad?:number;
-    dni?:number;
+export class Especialista extends Usuario {
+
+    fotos:Array<string> = [];
     especialidades:any = [];
-    email?:string;
-    contraseña?:string;
-    fotos?:string;
     cuentaValidadaEmail:boolean = false;
     cuentaHabilitada:boolean = false;
     tipo = "Especialista"
+
 }
