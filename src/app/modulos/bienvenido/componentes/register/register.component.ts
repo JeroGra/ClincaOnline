@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup,Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Especialista } from 'src/app/clases/especialista';
 import { Paciente } from 'src/app/clases/paciente';
@@ -51,7 +51,6 @@ export class RegisterComponent {
       ]],
       email : ['',[
         Validators.required,
-
       ]],
       contrasenia : ['',[
         Validators.required,
@@ -91,7 +90,6 @@ export class RegisterComponent {
       ]],
       email : ['',[
         Validators.required,
-
       ]],
       contrasenia : ['',[
         Validators.required,
@@ -156,7 +154,6 @@ export class RegisterComponent {
   esOtraErrorMinMax = false;
   disabled = false;
 
-
   bienvenida(){
     this.ruta.navigateByUrl("bienvenido/bienvenida")
   }
@@ -171,7 +168,6 @@ export class RegisterComponent {
       this.esOtraErrorMinMax = false;
       this.miEspecialidad = "";
     }
-
   }
 
   esOtraEsp(event:any){
