@@ -14,13 +14,14 @@ export class BaseDatosService {
 
   constructor(private firestore : Firestore) { }
 
-  AltaUsuario(user:Usuario){
+  AltaUsuario(user:Paciente | Especialista | Administrador ){
+   
     const coleccion = collection(this.firestore,'usuarios')
     const documento = doc(coleccion);
     const id = documento.id;
 
     user.id = id;
-    let obj = user.toObjetJSON();
+    let obj = JSON.parse(JSON.stringify(user));
 
     return setDoc(documento,obj);
   }
@@ -29,4 +30,6 @@ export class BaseDatosService {
     const coleccion = collection(this.firestore,'usuarios')
     return collectionData(coleccion);
   }
+
+
 }

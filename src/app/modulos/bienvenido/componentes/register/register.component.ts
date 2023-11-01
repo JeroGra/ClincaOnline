@@ -147,10 +147,10 @@ export class RegisterComponent {
   contrasenia:string = "";
   miEspecialidad:string = "";
   fotos:Array<any> = [];
-  imgNames:Array<string> = []
   imgPathUser:Array<any> = []
   foto1 = "";
   foto2 = "";
+  banderaSubida = false;
 
   esOtraErrorObligatorio = false;
   esOtraErrorMinMax = false;
@@ -303,73 +303,40 @@ export class RegisterComponent {
     this.ruta.navigateByUrl('bienvenido/bienvenida');
   }
 
-  SubirImganes(userName:string,user:Especialista | Paciente){
-    let x = 0
-    this.fotos.forEach((file:any)=>{
-      x++;
-      let imgRef = ref(this.storage,`imagenes/usuarios/${userName}_${x}`);
-      uploadBytes(imgRef,file).then((rt:any) => {
-        console.log(rt);
-        this.imgNames.push(rt.metadata.name);
-        console.log(this.imgNames);
-
-        this.TraerImagenes(user);
-
-      }).catch(error => console.log(error))
-    })
-  }
-
-  TraerImagenes(user:Especialista | Paciente){
-
-    this.imgNames.forEach((img:string)=>{
-
-      let imgRef = ref(this.storage,'imagenes/usuarios/'+img);
-      getDownloadURL(imgRef).then((url:any) => {
-        let imagen = {
-          path:url
-        }
-        this.imgPathUser.push(imagen)
-        console.log(this.imgPathUser)
-
-        this.imgPathUser.forEach((img:any)=>{
-          user.fotos.push(img.path);
-         })
-
-        console.log(user)
-
-       /* this.bd.AltaUsuario(user).then(()=>{
-          this.Toast.fire({
-            icon: 'success',
-            title: user.tipo + ' Registrado con Exito!',
-            color:'#80ED99',
-          })
-          
-        }).catch(()=>{
-            this.ruta.navigateByUrl('*');
-        })*/
-
-      })
-    })
+  
+  pushUnique(array:Array<any>,obj:any)
+  {
+    let exist = false;
+    for(let arr of array){
+      
+      if(arr.path == obj.path)
+      {
+        exist = true;
+        break;
+      }
+    }
     
+    if(exist){}else{array.push(obj)}
   }
-
+  
   CrearUsuario(tipo : 'Especialista' | 'Paciente'){
-
-      if(tipo=== "Especialista"){
-        let especialidad;
-        let especialista = new Especialista
+    
+    if(tipo=== "Especialista"){
+      let especialidad;
+      let especialista = new Especialista
         especialista.nombre = this.nombre;
         especialista.apellido = this.apellido;
         especialista.dni = this.dni;
         especialista.edad = this.edad;
         especialista.email = this.email;
         especialista.contrasenia = this.encriptService.EncriptValue(this.contrasenia);
-
+        
         if(this.especialidadElegida === 'Otra'){ especialidad = this.miEspecialidad }else{ especialidad = this.especialidadElegida }
-
+        
         especialista.especialidades.push(especialidad);
+        
+        this.SubirImagenes(especialista)
 
-        this.SubirImganes(especialista.dni.toString(),especialista);
       }else{
 
         let paciente = new Paciente
@@ -380,11 +347,91 @@ export class RegisterComponent {
         paciente.email = this.email;
         paciente.contrasenia = this.encriptService.EncriptValue(this.contrasenia);
         paciente.obraSocial = this.obraSocialElegida;
-
-        this.SubirImganes(paciente.dni.toString(),paciente)
+        
+        this.SubirImagenes(paciente)
       }
+    }
 
+  SubirImagenes(user:Paciente | Especialista){
 
+    let x = 0
+    this.fotos.forEach((file:any)=>{
+      x++;
+      let imgRef = ref(this.storage,`imagenes/usuarios/${user.dni}_${x}`);
+      uploadBytes(imgRef,file).then((rt:any) => {
+        
+        this.TraerImagen(rt.metadata.name,user)
+        
+      }).catch(error => console.log(error))
+    })
   }
 
+  TraerImagen(img:any,user:Especialista | Paciente){
+  
+    if(user.tipo === "Especialista"){
+  
+      let imgRef = ref(this.storage,'imagenes/usuarios/'+img);
+  
+      getDownloadURL(imgRef).then((url:any) => {
+  
+        console.log(url)
+  
+        let imagen : any = {
+          path:url,
+          name:img,
+          dniUser:user.dni
+        }
+  
+        user.fotos.push(imagen);
+  
+        this.bd.AltaUsuario(user).then(()=>{
+          this.Toast.fire({
+            icon: 'success',
+            title: user.tipo + ' Registrado con Exito!',
+            color:'#80ED99',
+          })
+  
+        }).catch(()=>{
+          this.ruta.navigateByUrl('*');
+        })
+      })
+  
+    }else{
+      
+      let imgRef = ref(this.storage,'imagenes/usuarios/'+img);
+      getDownloadURL(imgRef).then((url:any) => {
+  
+        console.log(url)
+  
+        let imagen : any = {
+          path:url,
+          name:img,
+          dniUser:user.dni
+        }
+  
+        this.pushUnique(this.imgPathUser,imagen)
+  
+        if(this.banderaSubida){
+  
+          user.fotos = this.imgPathUser;
+  
+          this.bd.AltaUsuario(user).then(()=>{
+            this.Toast.fire({
+              icon: 'success',
+              title: user.tipo + ' Registrado con Exito!',
+              color:'#80ED99',
+            })
+          }).catch(()=>{
+            this.ruta.navigateByUrl('*');
+          })
+  
+        }else{
+          this.banderaSubida = true;
+        }
+  
+      })
+  
+    }
+  }
+  
 }

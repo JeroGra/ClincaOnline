@@ -42,16 +42,17 @@ export class LoginComponent {
 
   especialista(){
     this.email = "especialista@gmail.com"
+    this.contrasenia = "especialista123"
   }
 
   paciente(){
     this.email = "paciente@gmail.com"
+    this.contrasenia = "paciente123"
   }
 
   LogIn()
   {
       this.usuariosBd.forEach((user:Usuario)=>{
-
         let pass = this.encriptService.DecriptValue(user.contrasenia)
         console.log(user);
         console.log(pass)
