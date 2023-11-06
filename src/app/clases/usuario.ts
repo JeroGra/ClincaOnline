@@ -7,6 +7,7 @@ export class Usuario {
     dni?:number;
     email?:string;
     contrasenia?:string;
+    turnos:Array<any> = []
 
     toObjetJSON(){
         return JSON.parse(JSON.stringify(this));

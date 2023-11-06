@@ -8,11 +8,15 @@ import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { ErrorComponent } from './componentes/error/error.component';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { MiPerfilComponent } from './componentes/mi-perfil/mi-perfil.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ErrorComponent
+    ErrorComponent,
+    MiPerfilComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -21,7 +25,8 @@ import { ErrorComponent } from './componentes/error/error.component';
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    provideAuth(() => getAuth())
   ],
   providers: [],
   bootstrap: [AppComponent]

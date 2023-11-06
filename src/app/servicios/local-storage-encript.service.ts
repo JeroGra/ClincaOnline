@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EncryptStorage } from 'encrypt-storage';
+import { Usuario } from '../clases/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,7 @@ export class LocalStorageEncriptService {
 
     private encryptStorage = new EncryptStorage('secret-key-value', {});
 
-
-
-    EncriptStorage(userLog:any){
+    EncriptStorage(userLog:Usuario){
       
       this.encryptStorage.setMultipleItems([
         [
@@ -20,7 +19,8 @@ export class LocalStorageEncriptService {
           {
             id: userLog.id,
             email: userLog.email,
-            contrasenia: userLog.contrasenia,
+            logeadoDate:Date.now(),
+            logeado:true,
           },
         ],
       ]);

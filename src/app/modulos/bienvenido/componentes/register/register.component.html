@@ -59,6 +59,12 @@
                 >
                 *edad minima 18
              </small>
+             <small 
+             *ngIf="formEspecialista.controls['edad'].errors!['max'] && formEspecialista.controls['edad'].touched"
+            style="color: rgb(254, 112, 112);"
+             >
+             *edad minima 18
+          </small>
         </div>
       </div>
   
@@ -75,6 +81,12 @@
                 >
                  *coloque un DNI valido
              </small>
+             <small 
+             *ngIf="formEspecialista.controls['dni'].errors!['max'] && formEspecialista.controls['dni'].touched"
+            style="color: rgb(254, 112, 112);"
+             >
+              *coloque un DNI valido
+          </small>
         </div>
         </div>
 
@@ -200,6 +212,12 @@
                     >
                     *edad minima 18
                  </small>
+                 <small 
+                 *ngIf="formPaciente.controls['edad'].errors!['max'] && formPaciente.controls['edad'].touched"
+                style="color: rgb(254, 112, 112);"
+                 >
+                 *edad minima 18
+              </small>
             </div>
           </div>
       
@@ -216,6 +234,12 @@
                     >
                      *coloque un DNI valido
                  </small>
+                 <small 
+                 *ngIf="formPaciente.controls['dni'].errors!['max'] && formPaciente.controls['dni'].touched"
+                style="color: rgb(254, 112, 112);"
+                 >
+                  *coloque un DNI valido
+              </small>
             </div>
             </div>
     

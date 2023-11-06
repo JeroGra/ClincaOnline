@@ -1,0 +1,126 @@
+<div style="margin-top: 1rem;text-align: start;"  class="div_regist">
+    <h4 style="text-align: center;" class="mb-3">Registro Administrador</h4>
+    <h6 style="text-align: center;" class="mb-3">Complete todos los campos</h6>
+    <hr class="my-4">
+    <form  [formGroup]="forms" >
+  
+      <div class="row g-3">
+        <div class="col-sm-6">
+          <label class="form-label">Nombre</label>
+          <input type="text" class="form-control" name="nombre" placeholder="nombre" [(ngModel)]="nombre" formControlName="nombre" >
+          <div *ngIf="forms.controls['nombre'].errors != null">
+              <small  *ngIf="forms.controls['nombre'].errors!['required'] && forms.controls['nombre'].touched" style="color: rgb(254, 112, 112);">
+                  *Obligatorio
+              </small>
+              <small 
+              *ngIf="!forms.controls['nombre'].errors!['minLength'] && forms.controls['nombre'].touched"
+              style="color: rgb(254, 112, 112);"
+            >
+               *minimo 2 caracteres, maximo 15
+            </small> 
+          </div>
+        </div>
+  
+        <div class="col-sm-6">
+          <label for="lastName" class="form-label">Apellido</label>
+          <input type="text" class="form-control" name="apellido" placeholder="apellido" [(ngModel)]="apellido" formControlName="apellido" >
+          <div *ngIf="forms.controls['apellido'].errors != null">
+              <small  *ngIf="forms.controls['apellido'].errors!['required'] && forms.controls['apellido'].touched" style="color: rgb(254, 112, 112);">
+                  *Obligatorio
+              </small>
+              <small 
+              *ngIf="!forms.controls['apellido'].errors!['minLength'] && forms.controls['apellido'].touched"
+              style="color: rgb(254, 112, 112);"
+            >
+               *minimo 2 caracteres, maximo 15
+            </small> 
+          </div>
+        </div>
+  
+        <div class="col-md-3">
+          <label for="cc-cvv" class="form-label">Edad</label>
+          <input type="number" class="form-control" name="edad" [(ngModel)]="edad" formControlName="edad" >
+          <div *ngIf="forms.controls['edad'].errors != null" >
+              <small  *ngIf="forms.controls['edad'].errors!['required'] && forms.controls['edad'].touched" style="color: rgb(254, 112, 112);">
+                  *Obligatorio
+              </small>
+              <small 
+                  *ngIf="forms.controls['edad'].errors!['min'] && forms.controls['edad'].touched"
+                 style="color: rgb(254, 112, 112);"
+                  >
+                  *edad minima 18
+               </small>
+               <small 
+               *ngIf="forms.controls['edad'].errors!['max'] && forms.controls['edad'].touched"
+              style="color: rgb(254, 112, 112);"
+               >
+               *edad minima 18
+            </small>
+          </div>
+        </div>
+    
+          <div class="col-sm-9">
+            <label for="lastName" class="form-label">DNI</label>
+            <input type="number" class="form-control" name="dni" [(ngModel)]="dni" formControlName="dni" > 
+            <div *ngIf="forms.controls['dni'].errors != null" >
+              <small  *ngIf="forms.controls['dni'].errors!['required'] && forms.controls['dni'].touched" style="color: rgb(254, 112, 112);">
+                  *Obligatorio
+              </small>
+              <small 
+                  *ngIf="forms.controls['dni'].errors!['min'] && forms.controls['dni'].touched"
+                 style="color: rgb(254, 112, 112);"
+                  >
+                   *coloque un DNI valido
+               </small>
+               <small 
+               *ngIf="forms.controls['dni'].errors!['max'] && forms.controls['dni'].touched"
+              style="color: rgb(254, 112, 112);"
+               >
+                *coloque un DNI valido
+            </small>
+          </div>
+          </div>
+  
+        <div class="col-12">
+          <label for="username" class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" placeholder="email" [(ngModel)]="email" formControlName="email" >
+            <div *ngIf="forms.controls['email'].errors != null">
+              <small  *ngIf="forms.controls['email'].errors!['required'] && forms.controls['email'].touched" style="color: rgb(254, 112, 112);">
+                  *Obligatorio
+              </small>
+          </div>
+        </div>
+  
+        <div class="col-12">
+          <label class="form-label">Contraseña</label>
+          <input type="password" class="form-control" name="contrasenia" placeholder="contraseña" [(ngModel)]="contrasenia" formControlName="contrasenia" >
+          <div *ngIf="forms.controls['contrasenia'].errors != null">
+              <small  *ngIf="forms.controls['contrasenia'].errors!['required'] && forms.controls['contrasenia'].touched" style="color: rgb(254, 112, 112);">
+                  *Obligatorio
+              </small>
+              <small 
+              *ngIf="!forms.controls['contrasenia'].errors!['minLength'] && forms.controls['contrasenia'].touched"
+              style="color: rgb(254, 112, 112);"
+            >
+               *minimo 6 caracteres, maximo 15
+            </small> 
+          </div>
+        </div>
+  
+        <div class="col-12">
+          <label for="address" class="form-label">Foto</label>
+          <input type="file" class="form-control" id="address" name="foto" placeholder="foto" (change)="CargaImagenUno($event)" [(ngModel)]="foto1" formControlName="foto" >
+          <div *ngIf="forms.controls['foto'].errors != null">
+              <small  *ngIf="forms.controls['foto'].errors!['required'] && forms.controls['foto'].touched" style="color: rgb(254, 112, 112);">
+                  *Obligatorio
+              </small>
+          </div>
+        </div>
+      </div>
+      <hr class="my-4">
+      <button [disabled]="forms.invalid"  (click)="Registrar()" class="w-100 btn btn-primary btn-lg btn_form btn_regist" type="submit">Registrar</button>
+      <button (click)="Cancelar()" class="btn btn-lg btn-outline-light btn-block btn_form" type="submit" >Cancelar</button>
+    </form>
+  </div>
+
+  

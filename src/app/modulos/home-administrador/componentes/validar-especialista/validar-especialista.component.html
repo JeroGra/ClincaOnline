@@ -1,0 +1,56 @@
+<div>
+    <div class="container text-center div-tabla">
+        <h2 >Especialistas</h2>
+        <div class="row align-items-start tabla-titulo">
+          <div class="col  border-col">
+            Nombre
+          </div>
+          <div class="col border-col">
+            Apellido
+          </div>
+          <div class="col border-col">
+            Edad
+          </div>
+          <div class="col border-col">
+            Email
+          </div>
+          <div class="col border-col">
+            DNI
+          </div>
+          <div class="col border-col">
+              Estado
+          </div>
+        </div>
+
+        <div class="row align-items-start tabla-content" *ngFor="let esp of especialistas">
+            <div class="col border-col">
+                {{esp.nombre}}
+            </div>
+            <div class="col border-col" >
+                {{esp.apellido}}
+            </div>
+            <div class="col border-col">
+                {{esp.nombre}}
+            </div>
+            <div class="col border-col">
+                {{esp.edad}}
+            </div>
+            <div class="col border-col">
+                {{esp.dni}}
+            </div>
+            <div class="col border-col">
+                <div class="btn-group" role="group" aria-label="Small button group">
+                    <button (click)="Habilitar(esp)" type="button" class="btn btn-outline btn-ha" [ngClass]="(esp.cuentaHabilitada == true)? 'habilitado' : ''"
+                    ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-check-fill" viewBox="0 0 16 16" style="margin-bottom: 1.5rem;" >
+                        <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                      </svg></button>
+                    <button (click)="Inhabilitar(esp)" type="button" class="btn btn-outline btn-in"  [ngClass]="(esp.cuentaHabilitada == true)? '' : 'inhabilitado'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-dash-fill" viewBox="0 0 16 16"  style="margin-bottom: 1.5rem;" >
+                        <path fill-rule="evenodd" d="M11 7.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
+                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                      </svg></button>
+                    </div>
+                </div>
+            </div>
+</div>
+

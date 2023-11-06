@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { getAuth, sendEmailVerification } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Administrador } from 'src/app/clases/administrador';
 import { Especialista } from 'src/app/clases/especialista';
 import { Paciente } from 'src/app/clases/paciente';
 import { Usuario } from 'src/app/clases/usuario';
+import { AuthService } from 'src/app/servicios/auth.service';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encript.service';
 import Swal from 'sweetalert2'
@@ -15,7 +17,8 @@ import Swal from 'sweetalert2'
 })
 export class LoginComponent {
 
-  constructor(private ruta : Router, private encriptService : LocalStorageEncriptService, private bd : BaseDatosService){
+  constructor(private ruta : Router, private encriptService : LocalStorageEncriptService, private bd : BaseDatosService,
+    private auth : AuthService){
   }
 
   private Toast = Swal.mixin({
@@ -35,6 +38,12 @@ export class LoginComponent {
   email:string = "";
   contrasenia:string = "";
 
+  private ToastCargaUser = Swal.mixin({
+    toast: true,
+    showConfirmButton: false,
+    timer: 2500,
+  })
+
   bienvenida(){
     this.ruta.navigateByUrl("bienvenido/bienvenida")
   }
@@ -48,7 +57,8 @@ export class LoginComponent {
   }
 
   admin(){
-    this.email = "admin@gmail.com"
+    this.email = "Jerog000@gmail.com"
+    this.contrasenia = "jero123"
   }
 
   especialista(){
@@ -68,12 +78,30 @@ export class LoginComponent {
         console.log(user);
         console.log(pass)
       })*/
+
+      this.ToastCargaUser.fire({
+        toast : true,
+        title:'',
+        imageUrl:"../../../../../assets/imagenes/carga.gif",
+        imageWidth: 200,
+        imageHeight: 200,
+        color: '#80ED99',
+        background: '#22577A',
+      })
+
       if(this.email !== "" && this.contrasenia !== ""){
+      
+        this.auth.Logear(this.email,this.contrasenia).then((userAuth)=>{
+         
           this.bd.TraerUsuarioPorEmail(this.email).then((obj:any)=>{
-            let usuario = new Usuario
-            usuario = obj as Usuario
-            if(usuario.email === this.email){
-              let contrasenia = this.encriptService.DecriptValue(usuario.contrasenia)
+
+            if(userAuth.user.emailVerified){
+              this.bd.ModificarVerificacionUsuario(obj.id)
+              obj.cuentaValidadaEmail = true;
+            }
+            
+            if(obj.email === this.email){
+              let contrasenia = this.encriptService.DecriptValue(obj.contrasenia)
               if(contrasenia === this.contrasenia){
     
                 let rt = this.TipoUsuarioValidacion(obj);
@@ -84,18 +112,49 @@ export class LoginComponent {
                     title: rt.mensaje,
                     color:'#80ED99',
                   })
-
-                  this.ruta.navigateByUrl('home');
-
+                  this.encriptService.RemoveEncriptStorage();
+                  this.encriptService.EncriptStorage(obj);
+                  if(obj.tipo === "Especialista"){
+                    this.ruta.navigateByUrl('homeEspecialista/miPerfil')
+                  }else if(obj.tipo === "Paciente"){
+                    this.ruta.navigateByUrl('home/miPerfil')
+                  }else if(obj.tipo === "Administrador"){
+                    this.ruta.navigateByUrl('homeAdministrador/miPerfil')
+                  }
                 }else{
                   this.Toast.fire({
                     icon: 'error',
                     title: rt.mensaje,
                     color:'#fb7474',
                   })
-
+  
+                  if(!rt.mailValido){
+  
+                    Swal.fire({
+                      title: 'Email no verificado',
+                      icon: 'info',
+                      showConfirmButton:false,
+                      background:'#22577A',
+                      color:'white',
+                      timer:1000,
+                    }).then((result)=>{
+                      let auth = getAuth()
+                      if(auth.currentUser !== null){
+                      sendEmailVerification(auth.currentUser).then(()=>{
+                        this.Toast.fire({
+                          icon: 'success',
+                          title: 'Enviamos un email de verificación!! Revise su correo',
+                          color:'#80ED99',
+                        })
+                         setTimeout(()=>{
+                            this.encriptService.EncriptStorage(obj);
+                            this.ruta.navigateByUrl('bienvenido/bienvenida');
+                        },2500)
+                      })
+                    }
+                    })
+                  }
                 }
-
               }else{
                 this.Toast.fire({
                   icon: 'warning',
@@ -108,10 +167,18 @@ export class LoginComponent {
             console.log(error)
             this.Toast.fire({
               icon: 'error',
-              title: 'Usuario Inexistente',
+              title: 'Los datos no coinciden con usuarios registrados',
               color:'#fb7474',
             })
           })
+        }).catch((error) => {
+          console.log(error)
+          this.Toast.fire({
+            icon: 'error',
+            title: 'Los datos no coinciden con usuarios registrados',
+            color:'#fb7474',
+          })
+        })
       }else{
         this.Toast.fire({
           icon: 'error',
@@ -166,12 +233,16 @@ export class LoginComponent {
       break;
       case "Administrador":
         let administrador = usuario as Administrador
-        rt.cuentaHabilitada = true;
-        rt.mailValido = true;
-        rt.valido = true;
         rt.usuario = administrador;
-        rt.mensaje = "Bienvenido/a "+administrador.nombre+" "+administrador.apellido;
-        return rt
+        if(administrador.cuentaValidadaEmail){
+          rt.mailValido = true;
+          rt.valido = true;
+          rt.mensaje = "Bienvenido/a "+administrador.nombre+" "+administrador.apellido;
+          return rt
+        }else{
+          rt.mensaje = "Esta cuenta no fue verificada por mail";
+          return rt;
+        }
       break;
       default:
         return rt

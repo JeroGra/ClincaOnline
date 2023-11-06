@@ -8,6 +8,8 @@ import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encript.service';
 import { Storage, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage';
 import Swal from 'sweetalert2'
+import { Auth, createUserWithEmailAndPassword , getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 
 @Component({
@@ -23,7 +25,7 @@ export class RegisterComponent {
 
   constructor(private fb : FormBuilder,
     private ruta : Router,private encriptService :LocalStorageEncriptService,
-    private bd : BaseDatosService, private storage : Storage){
+    private bd : BaseDatosService, private storage : Storage, private auth : AuthService){
     
     this.bd.TraerUsuarios().subscribe((sub:any)=>{
       this.usuarios = sub;
@@ -379,16 +381,41 @@ export class RegisterComponent {
         }
   
         user.fotos.push(imagen);
-  
-        this.bd.AltaUsuario(user).then(()=>{
-          this.Toast.fire({
-            icon: 'success',
-            title: user.tipo + ' Registrado con Exito!',
-            color:'#80ED99',
+
+        this.auth.Registrar(this.email,this.contrasenia).then((userAuth)=>{
+          this.bd.AltaUsuario(user).then(()=>{
+            this.Toast.fire({
+              icon: 'success',
+              title: user.tipo + ' Registrado con Exito!',
+              color:'#80ED99',
+            })
+              console.log(userAuth)
+              let auth = getAuth()
+              if(auth.currentUser !== null){
+                sendEmailVerification(auth.currentUser).then((objRt)=>{
+                  this.Toast.fire({
+                    icon: 'success',
+                    title: 'Enviamos un email de verificación!!',
+                    color:'#80ED99',
+                  })
+                  console.log(objRt);
+                  setTimeout(()=>{
+                    this.encriptService.EncriptStorage(user);
+                    this.ruta.navigateByUrl('bienvenido/login')
+                  },2500)
+                }).catch(error => console.log(error))
+              }else{
+
+              }
+          }).catch(()=>{
+            this.ruta.navigateByUrl('*');
           })
-  
-        }).catch(()=>{
-          this.ruta.navigateByUrl('*');
+        }).catch((error)=>{
+          this.Toast.fire({
+            icon: 'error',
+            title: error,
+            color:'#fb7474',
+          })
         })
       })
   
@@ -411,14 +438,40 @@ export class RegisterComponent {
   
           user.fotos = this.imgPathUser;
   
-          this.bd.AltaUsuario(user).then(()=>{
-            this.Toast.fire({
-              icon: 'success',
-              title: user.tipo + ' Registrado con Exito!',
-              color:'#80ED99',
+          this.auth.Registrar(this.email,this.contrasenia).then((userAuth)=>{
+            this.bd.AltaUsuario(user).then(()=>{
+              this.Toast.fire({
+                icon: 'success',
+                title: user.tipo + ' Registrado con Exito!',
+                color:'#80ED99',
+              })
+                console.log(userAuth)
+                let auth = getAuth()
+                if(auth.currentUser !== null){
+                  sendEmailVerification(auth.currentUser).then((objRt)=>{
+                    this.Toast.fire({
+                      icon: 'success',
+                      title: 'Enviamos un email de verificación!!',
+                      color:'#80ED99',
+                    })
+                    console.log(objRt);
+                    setTimeout(()=>{
+                      this.encriptService.EncriptStorage(user);
+                      this.ruta.navigateByUrl('bienvenido/login')
+                    },2500)
+                  }).catch(error => console.log(error))
+                }else{
+  
+                }
+            }).catch(()=>{
+              this.ruta.navigateByUrl('*');
             })
-          }).catch(()=>{
-            this.ruta.navigateByUrl('*');
+          }).catch((error)=>{
+            this.Toast.fire({
+              icon: 'error',
+              title: error,
+              color:'#fb7474',
+            })
           })
   
         }else{

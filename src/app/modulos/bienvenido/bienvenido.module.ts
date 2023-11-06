@@ -13,7 +13,7 @@ import { BienvenidaComponent } from './componentes/bienvenida/bienvenida.compone
     BienvenidoComponent,
     LoginComponent,
     RegisterComponent,
-    BienvenidaComponent
+    BienvenidaComponent,
   ],
   imports: [
     CommonModule,

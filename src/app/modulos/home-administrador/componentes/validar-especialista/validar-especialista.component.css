@@ -1,0 +1,48 @@
+.div-tabla{
+    background-color: #22577A;
+    margin-top: 5rem;
+    color: #80ED99;
+    border-radius: 20px;
+}
+
+.tabla-titulo{
+    color: #C7F9CC;
+    border: 2px solid #0F2636;
+    border-radius: 20px;
+}
+
+.tabla-content{
+    color: #C7F9CC;
+    border-bottom: #0F2636 solid 1px;
+    border-radius: 20px;
+}
+
+.border-col{
+    border-right: #0F2636 solid 2px;
+}
+
+.tabla-content:hover{
+    background-color: #38A3A5;
+    color: #0F2636;
+}
+
+.btn-in{
+    border-color: rgb(251, 91, 91);
+    margin: 0.1rem;
+    width: 5rem;
+    height: 1.5rem;
+}
+
+.btn-ha{
+    border-color: #80ED99;
+    margin: 0.1rem;
+    width: 5rem;
+    height: 1.5rem;
+}
+
+.habilitado{
+    background-color: #80ED99;
+}
+.inhabilitado{
+    background-color: #ed8080;
+}

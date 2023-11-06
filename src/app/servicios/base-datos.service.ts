@@ -56,5 +56,41 @@ export class BaseDatosService {
     return data
   }
 
+   TraerUsuarioPorTipo(tipo:string){
+    const q = query(collection(this.firestore, 'usuarios'), where("tipo", "==", tipo));
+    return collectionData(q)
+  }
+
+  ModificarUsuario(id:string,usuario:any)
+  {
+    const coleccion = collection(this.firestore,'usuarios')
+    const documento = doc(coleccion,id);
+    let obj = JSON.parse(JSON.stringify(usuario));
+    updateDoc(documento,obj);
+  }
+  
+  ModificarVerificacionUsuario(id:string)
+  {
+    const coleccion = collection(this.firestore,'usuarios')
+    const documento = doc(coleccion,id)
+    updateDoc(documento,{
+      cuentaValidadaEmail:true
+    });
+  }
+
+  ModificarCuentaHabilitada(id:string,habilitada:boolean)
+  {
+    const coleccion = collection(this.firestore,'usuarios')
+    const documento = doc(coleccion,id)
+    updateDoc(documento,{
+      cuentaHabilitada:habilitada
+    });
+  }
+
+  codigoRandom(){
+
+    let codigoArr = ['a','b','c','d',1,3,5,7]
+    return codigoArr.sort(() => Math.random() - 0.5).join("");
+  }
 
 }
