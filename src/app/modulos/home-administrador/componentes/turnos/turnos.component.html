@@ -1,0 +1,175 @@
+<div class="card text-center">
+
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link " aria-disabled="true"  [ngClass]="(selectTurnos == true)? 'active' : 'disabled' ">Turnos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " aria-current="true" [ngClass]="(selectEspecialidad == true)? 'active' : 'disabled' " >Especialidad</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link "  [ngClass]="(selectEspecialista == true)? 'active' : 'disabled' " >Especialista</a>
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="selectTurnos" class="card-body text-center">
+        <h4>Turnos</h4>
+        <div class="container text-center div-tabla-t">
+            <div class="row align-items-start tabla-titulo">
+                <div class="col  border-col">
+                    Dia/Hora
+                </div>
+                <div class="col  border-col">
+                    Dia solicitado
+                </div>
+                <div class="col  border-col">
+                    Especialidad
+                </div>
+                <div class="col  border-col">
+                    Especialista
+                </div>
+                <div class="col  border-col">
+                    Paciente
+                </div>
+                <div class="col  border-col">
+                    
+                </div>
+            </div>
+
+            <div class="row align-items-start tabla-content" *ngFor="let t of turnos">
+                <div class="col border-col">
+                    {{t.mes}}/{{t.dia}} - {{t.horarioInicio}} a {{t.horarioFin}}
+                </div>
+                <div class="col border-col">
+                    {{t.diaDeSolicitud | date : 'MM/dd/yyyy'}}
+                </div>
+                <div class="col border-col">
+                    {{t.especialidad}}
+                </div>
+                <div class="col border-col">
+                    {{t.especialista?.nombre}} {{t.especialista?.apellido}}
+                </div>
+                <div class="col border-col">
+                    {{t.paciente?.nombre}} {{t.paciente?.apellido}}
+                </div>
+                <div class="col border-col" >
+                    <button (click)="SelectTurno(t)"  class="btn-select-t">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16"  style="margin-bottom: 0.2rem">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                              </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="cancelar">
+            <div style="margin-top: 0rem;" class="card-group">
+                <div class="card">
+                    <svg style="margin-left: auto;margin-right: auto;margin-top:1.5rem;" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-clipboard2-fill" viewBox="0 0 16 16">
+                        <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"/>
+                        <path d="M3.5 1h.585A1.498 1.498 0 0 0 4 1.5V2a1.5 1.5 0 0 0 1.5 1.5h5A1.5 1.5 0 0 0 12 2v-.5c0-.175-.03-.344-.085-.5h.585A1.5 1.5 0 0 1 14 2.5v12a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-12A1.5 1.5 0 0 1 3.5 1Z"/>
+                      </svg>
+                  <div class="card-body">
+                    <h5 class="card-title">{{turno.mes}}/{{turno.dia}} - {{turno.horarioInicio}} a {{turno.horarioFin}}</h5>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="{{fotoEsp}}" style="width: 5rem;margin-left: auto;margin-right: auto;" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{espNombreApellido}}</h5>
+                  </div>
+                </div>
+                <div class="card">
+                  <img src="{{fotoPa}}" style="width: 5rem;margin-left: auto;margin-right: auto;" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{paNombreApellido}}</h5>
+                  </div>
+                </div>
+              </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Motivo de Cancelacion</label>
+                <textarea  [(ngModel)]="motivo" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+              <button (click)="CancerlarTurno()" class="btn-cal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16"  style="margin-bottom: 0.2rem">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                  </svg>
+              </button>
+        </div>
+    </div>
+
+    <div *ngIf="selectEspecialidad" class="card-body text-center">
+        <h4>Seleccione Especialidad</h4>
+        <div class="container text-center div-tabla">
+            <div class="row align-items-start tabla-titulo">
+                <div class="col  border-col">
+                    Especialidad
+                </div>
+                <div class="col  border-col">
+                    Seleccionar
+                </div>
+
+                </div>
+                <div class="row align-items-start tabla-content" *ngFor="let esp of especialidades">
+                <div class="col border-col">
+                    {{esp.especialidad}}
+                </div>
+                <div class="col border-col" >
+                    <button  class="btn-select-esp">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                            </svg>
+                    </button>
+                </div>
+                </div>
+        </div>
+    </div>
+
+    <div *ngIf="selectEspecialista" class="card-body text-center">
+        <h4>Seleccione Especialista</h4>
+        <button class="btn-atras">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+        </button>
+        <div class="container text-center div-tabla">
+            <div class="row align-items-start tabla-titulo">
+                <div class="col  border-col">
+                    Nombre
+                </div>
+                <div class="col  border-col">
+                    Apellido
+                </div>
+                <div class="col  border-col">
+                    Dni
+                </div>
+                <div class="col  border-col">
+                    Seleccionar
+                </div>
+
+                </div>
+                <div class="row align-items-start tabla-content" *ngFor="let esp of especialistas">
+                <div class="col border-col">
+                    {{esp.nombre}}
+                </div>
+                <div class="col border-col">
+                    {{esp.apellido}}
+                </div>
+                <div class="col border-col">
+                    {{esp.dni}}
+                </div>
+                <div class="col border-col" >
+                    <button class="btn-select-espe">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                            </svg>
+                    </button>
+                </div>
+                </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,210 @@
+<div  class="text-center" style="padding: 1.5rem;">
+    <div class="card text-center">
+
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                <a class="nav-link " aria-current="true" [ngClass]="(selectEspecialidad == true)? 'active' : 'disabled' " >Especialidad</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link "  [ngClass]="(selectEspecialista == true)? 'active' : 'disabled' " >Especialista</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " aria-disabled="true"  [ngClass]="(selectPaciente == true)? 'active' : 'disabled' ">Paciente</a>
+                    </li>
+                <li class="nav-item">
+                <a class="nav-link " aria-disabled="true"  [ngClass]="(selectDiaHora == true)? 'active' : 'disabled' ">Dia/Hora</a>
+                </li>
+            </ul>
+        </div>
+
+        <div *ngIf="selectEspecialidad" class="card-body text-center">
+            <h4>Seleccione Especialidad</h4>
+            <div class="container text-center div-tabla">
+                <div class="row align-items-start tabla-titulo">
+                    <div class="col  border-col">
+                        Especialidad
+                    </div>
+                    <div class="col  border-col">
+                        Seleccionar
+                    </div>
+
+                    </div>
+                    <div class="row align-items-start tabla-content" *ngFor="let esp of especialidades">
+                    <div class="col border-col">
+                        {{esp.especialidad}}
+                    </div>
+                    <div class="col border-col" >
+                        <button (click)="SelectEspecialdiad(esp.especialidad)" class="btn-select-esp">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                                </svg>
+                        </button>
+                    </div>
+                    </div>
+            </div>
+        </div>
+
+        <div *ngIf="selectEspecialista" class="card-body text-center">
+            <h4>Seleccione Especialista</h4>
+            <button (click)="AtrasEspecialista()" class="btn-atras">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </button>
+            <div class="container text-center div-tabla">
+                <div class="row align-items-start tabla-titulo">
+                    <div class="col  border-col">
+                        Nombre
+                    </div>
+                    <div class="col  border-col">
+                        Apellido
+                    </div>
+                    <div class="col  border-col">
+                        Dni
+                    </div>
+                    <div class="col  border-col">
+                        Seleccionar
+                    </div>
+
+                    </div>
+                    <div class="row align-items-start tabla-content" *ngFor="let esp of especialistasFiltro">
+                    <div class="col border-col">
+                        {{esp.nombre}}
+                    </div>
+                    <div class="col border-col">
+                        {{esp.apellido}}
+                    </div>
+                    <div class="col border-col">
+                        {{esp.dni}}
+                    </div>
+                    <div class="col border-col" >
+                        <button (click)="SelectEspecialista(esp)" class="btn-select-espe">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                                </svg>
+                        </button>
+                    </div>
+                    </div>
+            </div>
+        </div>
+
+        <div *ngIf="selectPaciente" class="card-body text-center">
+            <h4>Seleccione Paciente</h4>
+            <button (click)="AtrasPaciente()" class="btn-atras">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </button>
+            <div class="container text-center div-tabla">
+                <div class="row align-items-start tabla-titulo">
+                    <div class="col  border-col">
+                        Nombre
+                    </div>
+                    <div class="col  border-col">
+                        Apellido
+                    </div>
+                    <div class="col  border-col">
+                        Dni
+                    </div>
+                    <div class="col  border-col">
+                        Seleccionar
+                    </div>
+
+                    </div>
+                    <div class="row align-items-start tabla-content" *ngFor="let pa of pacientes">
+                    <div class="col border-col">
+                        {{pa.nombre}}
+                    </div>
+                    <div class="col border-col">
+                        {{pa.apellido}}
+                    </div>
+                    <div class="col border-col">
+                        {{pa.dni}}
+                    </div>
+                    <div class="col border-col" >
+                        <button (click)="SelectPaciente(pa)" class="btn-select-espe">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                                </svg>
+                        </button>
+                    </div>
+                    </div>
+            </div>
+        </div>
+
+         <div *ngIf="selectDiaHora" class="card-body text-center">
+            <h4>Seleccione Dia y Horario</h4>
+            <button (click)="AtrasDiaHoras()" class="btn-atras">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </button>
+            <form>
+                <div class="col-md-12">
+                    <label for="country" class="form-label">Año {{fecha | date:'yyyy'}} Mes {{fecha | date:'M'}}</label>
+                </div>
+                <div class="col-md-12">
+                <label for="country" class="form-label">Dia del turno</label>
+                <select  class="form-select" name="dia" [(ngModel)]="dia"  (change)="DiaSelect($event)">
+                    <option  [value]="dia" *ngFor="let dia of dias">{{dia}}</option>
+                </select>
+                </div>
+                <div class="col-md-12">
+                    <label for="country" class="form-label">Dia Exacto</label>
+                    <select [disabled]="diaExactoD" class="form-select" name="diaNum" [(ngModel)]="diaNum"  (change)="DiaExactoSelect($event)">
+                        <option  [value]="diaN" *ngFor="let diaN of diasNumero">{{dia}} {{diaN}}</option>
+                    </select>
+                    <small *ngIf="lleno" style="color: rgb(255, 123, 123);">
+                        *Dia con turnos completos
+                    </small>
+                </div>
+                <div class="col-md-12" style="margin-top: 1.5rem;">
+                    <label style="font-weight: bolder;" for="country" class="form-label">Horario Seleccionado {{horario.horaInicio}}hs a {{horario.horaFin}}hs</label>
+                </div>
+                <div class="container text-center div-tabla" style="height: 8rem;margin-top: 0rem;" >
+                    <div class="row align-items-start tabla-titulo" style="margin-top: 0rem;">
+                        <div class="col  border-col">
+                            Hora inicio
+                        </div>
+                        <div class="col  border-col">
+                            Hora fin
+                        </div>
+                        <div class="col  border-col">
+                            Seleccionar
+                        </div>
+                        </div>
+                        <div class="row align-items-start tabla-content" *ngFor="let h of horarios" >
+                        <div class="col border-col">
+                            {{h.horaInicio}}
+                        </div>
+                        <div class="col border-col">
+                            {{h.horaFin}}
+                        </div>
+                        <div class="col border-col" >
+                            <button (click)="SelectHorario(h)" class="btn-select-espe">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                                    </svg>
+                            </button>
+                        </div>
+                        </div>
+                </div>
+                <small *ngIf="tomado"  style="color: rgb(255, 123, 123);">
+                    *horario tomado
+                </small>
+            </form>
+            <hr class="my-4">
+            <div class="col-md-12">
+                <button class="btn-sol" (click)="GenerarTurno()">
+                    Solicitar
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

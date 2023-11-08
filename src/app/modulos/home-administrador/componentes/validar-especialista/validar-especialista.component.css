@@ -3,6 +3,7 @@
     margin-top: 5rem;
     color: #80ED99;
     border-radius: 20px;
+    overflow: scroll;
 }
 
 .tabla-titulo{
@@ -15,6 +16,10 @@
     color: #C7F9CC;
     border-bottom: #0F2636 solid 1px;
     border-radius: 20px;
+}
+
+.div-tabla::-webkit-scrollbar {
+    display: none;
 }
 
 .border-col{

@@ -7,5 +7,6 @@ export class Especialista extends Usuario {
     cuentaValidadaEmail:boolean = false;
     cuentaHabilitada:boolean = false;
     tipo = "Especialista"
+    horarios:Array<any> = []
 
 }

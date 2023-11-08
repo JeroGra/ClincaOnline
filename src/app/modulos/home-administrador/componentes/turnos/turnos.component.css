@@ -1,0 +1,135 @@
+.div-tabla{
+    background-color: #ffffff;
+    margin-top: 5rem;
+    color: #0F2636;
+    border-radius: 20px;
+    font-weight: bolder;
+    height: 20rem;
+    overflow: scroll;
+}
+
+.div-tabla-t{
+    background-color: #ffffff;
+    margin-top: 0rem;
+    color: #0F2636;
+    border-radius: 20px;
+    font-weight: bolder;
+    height: 10rem;
+    overflow: scroll;
+    margin-bottom: 0rem;
+}
+
+.tabla-titulo{
+    color: #0F2636;
+    border: 2px solid #0F2636;
+    border-radius: 20px;
+}
+
+.tabla-content{
+    color: #0F2636;
+    border-bottom: #0F2636 solid 1px;
+    border-radius: 20px;
+
+}
+
+.div-tabla::-webkit-scrollbar {
+    display: none;
+}
+
+.div-tabla-t::-webkit-scrollbar {
+    display: none;
+}
+
+.border-col{
+    border-right: #0F2636 solid 2px;
+}
+
+.tabla-content:hover{
+    background-color: #38A3A5;
+    color: #0F2636;
+}
+
+.btn-select-t{
+    border: 2px solid #0F2636;
+    border-radius: 20px;
+    background-color: #f69797;
+    margin: 0.1rem;
+    width: 8rem;
+    height: 1.9rem;
+}
+
+.btn-select-t:hover{
+    border: 2px solid rgb(255, 255, 255);
+    background-color: #ffffff;
+}
+
+.btn-select-t:active{
+    background-color: rgb(164, 59, 59)
+}
+
+.btn-select-esp{
+    border: 2px solid #0F2636;
+    border-radius: 20px;
+    margin: 0.1rem;
+    width: 20rem;
+    height: 1.9rem;
+}
+
+.btn-select-esp:hover{
+    border: 2px solid rgb(255, 255, 255);
+    background-color: #ffffff;
+}
+
+.btn-select-esp:active{
+    background-color: #0F2636;
+}
+
+.btn-select-espe{
+    border: 2px solid #0F2636;
+    border-radius: 20px;
+    margin: 0.1rem;
+    width: 10rem;
+    height: 1.9rem;
+}
+
+.btn-select-espe:hover{
+    border: 2px solid rgb(255, 255, 255);
+    background-color: #ffffff;
+}
+
+.btn-select-espe:active{
+    background-color: #0F2636;
+}
+
+.btn-atras{
+    border: 2px solid #0F2636;
+    border-radius: 20px;
+    margin: 0.1rem;
+    width: 10rem;
+    height: 1.9rem;
+}
+
+
+.btn-atras:hover{
+    background-color: #ffffff;
+}
+
+.btn-atras:active{
+    background-color: #0F2636;
+}
+
+.btn-cal{
+    border: 2px solid #0F2636;
+    border-radius: 20px;
+    margin: 0.1rem;
+    width: 30rem;
+    height: 2rem;
+}
+
+.btn-cal:hover{
+    background-color: #ffffff;
+}
+
+.btn-cal:active{
+    background-color: #0F2636;
+}

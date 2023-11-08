@@ -3,11 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { HomeEspecialistaRoutingModule } from './home-especialista-routing.module';
 import { HomeEspecialistaComponent } from './home-especialista.component';
+import { TurnosComponent } from './componentes/turnos/turnos.component';
 
 
 @NgModule({
   declarations: [
-    HomeEspecialistaComponent
+    HomeEspecialistaComponent,
+    TurnosComponent
   ],
   imports: [
     CommonModule,

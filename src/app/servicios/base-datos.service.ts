@@ -6,6 +6,7 @@ import { Paciente } from '../clases/paciente';
 import { Administrador } from '../clases/administrador';
 import { Especialista } from '../clases/especialista';
 import { Usuario } from '../clases/usuario';
+import { Turno } from '../clases/turno';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,8 @@ import { Usuario } from '../clases/usuario';
 export class BaseDatosService {
 
   constructor(private firestore : Firestore) { }
+
+  ////USUARIOS
 
   AltaUsuario(user:Paciente | Especialista | Administrador ){
    
@@ -25,7 +28,7 @@ export class BaseDatosService {
 
     return setDoc(documento,obj);
   }
-  
+
   TraerUsuarios(){
     const coleccion = collection(this.firestore,'usuarios')
     return collectionData(coleccion);
@@ -84,6 +87,70 @@ export class BaseDatosService {
     const documento = doc(coleccion,id)
     updateDoc(documento,{
       cuentaHabilitada:habilitada
+    });
+  }
+
+  ModificarUsuarioTurno(id:any,misTurnos:Array<any>)
+  {
+    const coleccion = collection(this.firestore,'usuarios')
+    const documento = doc(coleccion,id)
+    updateDoc(documento,{
+      turnos : misTurnos
+    });
+  }
+
+  ////ESPECIALIDADES
+
+  AltaEspecialidad(esp:string){
+   
+    const coleccion = collection(this.firestore,'especialidades')
+    const documento = doc(coleccion);
+    const id = documento.id;
+
+    let especialidad = {
+      especialidad:esp,
+      id:id
+    }
+
+    return setDoc(documento,especialidad);
+  }
+  
+  TraerEspecialidades(){
+    const coleccion = collection(this.firestore,'especialidades')
+    return collectionData(coleccion);
+  }
+
+  ////TURNOS
+
+  AltaTurno(turno:Turno){
+   
+    const coleccion = collection(this.firestore,'turnos')
+    const documento = doc(coleccion);
+    const id = documento.id;
+    turno.id = documento.id;
+    turno.diaDeSolicitud = Date.now()
+    let obj = JSON.parse(JSON.stringify(turno))
+    return setDoc(documento,obj);
+  }
+  
+  TraerTurnos(){
+    const coleccion = collection(this.firestore,'turnos')
+    return collectionData(coleccion);
+  }
+
+  TraerTurnosSinAceptar(){
+    const q = query(collection(this.firestore, 'turnos'), where("aceptado", "==", false));
+    return collectionData(q)
+  }
+
+  ModificarTurnoCancelado(id:any,motivo:string)
+  {
+    const coleccion = collection(this.firestore,'turnos')
+    const documento = doc(coleccion,id)
+    updateDoc(documento,{
+      cancelado : true,
+      diaDeCancelacion: Date.now(),
+      motivoCancelado : motivo
     });
   }
 

@@ -22,6 +22,9 @@ export class RegisterComponent {
   public formEspecialista : FormGroup
   public formPaciente : FormGroup
   usuarios : Array<Usuario> = []
+  
+  especialidades:Array<string> = ["Enfermeria","Medicina General","Cardiologia","Ginecología","Neurología","Psicología","Cirugía General","Otra"];
+  obrasSociales:Array<string> = ["Unión Personal","Sancor Salud","Swiss Medical","Medicus","Galeno","Osde","Osplad"];
 
   constructor(private fb : FormBuilder,
     private ruta : Router,private encriptService :LocalStorageEncriptService,
@@ -134,8 +137,6 @@ export class RegisterComponent {
   pacienteSelec = false;
   select = true;
 
-  especialidades:Array<string> = ["Enfermeria","Medicina General","Cardiologia","Ginecología","Neurología","Psicología","Cirugía General","Otra"];
-  obrasSociales:Array<string> = ["Unión Personal","Sancor Salud","Swiss Medical","Medicus","Galeno","Osde","Osplad"];
   especialidadElegida:string = "";
   obraSocialElegida:string  = "";
 
@@ -329,7 +330,7 @@ export class RegisterComponent {
         especialista.email = this.email;
         especialista.contrasenia = this.encriptService.EncriptValue(this.contrasenia);
         
-        if(this.especialidadElegida === 'Otra'){ especialidad = this.miEspecialidad }else{ especialidad = this.especialidadElegida }
+        if(this.especialidadElegida === 'Otra'){ especialidad = this.miEspecialidad; this.bd.AltaEspecialidad(this.miEspecialidad) }else{ especialidad = this.especialidadElegida }
         
         especialista.especialidades.push(especialidad);
         

@@ -7,13 +7,16 @@ import { AltaAdminComponent } from './componentes/alta-admin/alta-admin.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ValidarEspecialistaComponent } from './componentes/validar-especialista/validar-especialista.component';
-
+import { TurnosComponent } from './componentes/turnos/turnos.component';
+import { SolicitarTurnoComponent } from './componentes/solicitar-turno/solicitar-turno.component';
 
 @NgModule({
   declarations: [
     HomeAdministradorComponent,
     AltaAdminComponent,
     ValidarEspecialistaComponent,
+    TurnosComponent,
+    SolicitarTurnoComponent,
     
   ],
   imports: [
