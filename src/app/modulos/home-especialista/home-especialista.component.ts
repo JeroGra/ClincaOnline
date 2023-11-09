@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-especialista',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./home-especialista.component.css']
 })
 export class HomeEspecialistaComponent {
+  
+  constructor (private ruta : Router){}
 
+  logOut(){
+    this.ruta.navigateByUrl('bienvenido/bienvenida')
+  }
 }

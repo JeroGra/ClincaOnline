@@ -99,6 +99,15 @@ export class BaseDatosService {
     });
   }
 
+  
+  ModificarUsuarioHorarios(id:any,misHorarios:any)
+  {
+    const coleccion = collection(this.firestore,'usuarios')
+    const documento = doc(coleccion,id)
+    updateDoc(documento,{
+      horarios:misHorarios
+    });
+  }
   ////ESPECIALIDADES
 
   AltaEspecialidad(esp:string){

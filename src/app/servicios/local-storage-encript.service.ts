@@ -19,6 +19,7 @@ export class LocalStorageEncriptService {
           {
             id: userLog.id,
             email: userLog.email,
+            user:userLog,
             logeadoDate:Date.now(),
             logeado:true,
           },

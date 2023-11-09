@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-administrador',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./home-administrador.component.css']
 })
 export class HomeAdministradorComponent {
+
+  constructor (private ruta : Router){}
+
+  logOut(){
+    this.ruta.navigateByUrl('bienvenido/bienvenida')
+  }
 
 }

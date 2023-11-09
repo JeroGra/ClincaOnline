@@ -7,6 +7,31 @@ export class Especialista extends Usuario {
     cuentaValidadaEmail:boolean = false;
     cuentaHabilitada:boolean = false;
     tipo = "Especialista"
-    horarios:Array<any> = []
+    horarios:any = {
+        lunes:{
+            inicio:null,
+            fin:null,
+          },
+          martes:{
+            inicio:null,
+            fin:null,
+          },
+          miercoles:{
+            inicio:null,
+            fin:null,
+          },
+          jueves:{
+            inicio:null,
+            fin:null,
+          },
+          viernes:{
+            inicio:null,
+            fin:null,
+          },
+          sabado:{
+            inicio:null,
+            fin:null,
+          }
+    }
 
 }

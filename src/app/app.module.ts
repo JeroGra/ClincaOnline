@@ -10,12 +10,14 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { ErrorComponent } from './componentes/error/error.component';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { MiPerfilComponent } from './componentes/mi-perfil/mi-perfil.component';
+import { FechaPipe } from './pipes/fecha.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorComponent,
     MiPerfilComponent,
+    FechaPipe,
 
   ],
   imports: [
