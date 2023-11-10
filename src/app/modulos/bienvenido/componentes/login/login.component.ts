@@ -37,6 +37,12 @@ export class LoginComponent {
   usuarios = false;
   email:string = "";
   contrasenia:string = "";
+  urlAdm = "https://firebasestorage.googleapis.com/v0/b/clinicaonline-a3637.appspot.com/o/imagenes%2Fusuarios%2F42489444_1?alt=media&token=c55b441e-805d-444e-bfd6-ad164b542bfa"
+  urlEsp = "https://firebasestorage.googleapis.com/v0/b/clinicaonline-a3637.appspot.com/o/imagenes%2Fusuarios%2F22222222_1?alt=media&token=4a24ec93-23de-4ed3-af42-9e9596927b1e"
+  urlEsp2 = ""
+  urlPa = "https://firebasestorage.googleapis.com/v0/b/clinicaonline-a3637.appspot.com/o/imagenes%2Fusuarios%2F11111111_1?alt=media&token=3eac7146-7ac8-4c31-ab31-6b55b2975e1c"
+  urlPa2  = ""
+  urlPa3 = ""
 
   private ToastCargaUser = Swal.mixin({
     toast: true,
@@ -66,7 +72,21 @@ export class LoginComponent {
     this.contrasenia = "especialista123"
   }
 
+  especialista2(){
+    this.email = "especialista@gmail.com"
+    this.contrasenia = "especialista123"
+  }
+
   paciente(){
+    this.email = "paciente@gmail.com"
+    this.contrasenia = "paciente123"
+  }
+
+  paciente2(){
+    this.email = "paciente@gmail.com"
+    this.contrasenia = "paciente123"
+  }
+  paciente3(){
     this.email = "paciente@gmail.com"
     this.contrasenia = "paciente123"
   }

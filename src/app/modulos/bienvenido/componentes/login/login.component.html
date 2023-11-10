@@ -13,8 +13,9 @@
         <button (click)="desplegarUsiarios()" class="btn btn-lg btn-primary btn-block btn_form btn_users">Desplegar usuarios</button>
     </form>
 </div>
-<div *ngIf="usuarios" id="div_users">
-    <button (click)="admin()" class="bt_user btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold btn_login btn_form" ><img class="img_user" src="../../../../../assets/imagenes/admin.png">Admin</button>
-    <button (click)="especialista()" class="bt_user btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold btn_login btn_form" ><img class="img_user" src="../../../../../assets/imagenes/especialista.png">Especialista</button>
-    <button (click)="paciente()" class="bt_user btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold btn_login btn_form" ><img class="img_user" src="../../../../../assets/imagenes/paciente.png">Paciente</button>
-</div>
+<button *ngIf="usuarios" (click)="admin()" style="margin-left: 18%;" class="bt_user rounded-circle btn  me-sm-3 fw-bold " ><img class="img_user rounded-circle" src="{{urlAdm}}"></button>
+<button *ngIf="usuarios" (click)="especialista()" class="bt_user rounded-circle btn  me-sm-3 fw-bold " ><img class="img_user rounded-circle" src="{{urlEsp}}"></button>
+<button *ngIf="usuarios" (click)="especialista2()" class="bt_user rounded-circle btn  me-sm-3 fw-bold " ><img class="img_user rounded-circle" src="../../../../../assets/imagenes/especialista.png"></button>
+<button *ngIf="usuarios" (click)="paciente()" class="bt_user  rounded-circle btn  me-sm-3 fw-bold " ><img class="img_user rounded-circle" src="{{urlPa}}"></button>
+<button *ngIf="usuarios" (click)="paciente2()" class="bt_user  rounded-circle btn  me-sm-3 fw-bold " ><img class="img_user rounded-circle" src="../../../../../assets/imagenes/paciente.png"></button>
+<button *ngIf="usuarios" (click)="paciente2()" class="bt_user  rounded-circle btn  me-sm-3 fw-bold " ><img class="img_user rounded-circle" src="../../../../../assets/imagenes/paciente.png"></button>

@@ -20,6 +20,7 @@ export class MiPerfilComponent {
   imgUserDos = "";
   miPerf = true;
   misHoras = false;
+  dia = "Lunes";
 
   esLunes = true;
   esMartes = false;
@@ -58,6 +59,8 @@ export class MiPerfilComponent {
     }
   }
 
+  misHorarios:any;
+
   constructor(private log : LocalStorageEncriptService, private bd : BaseDatosService){
    this.objLog = this.log.GetEncriptStorage();
     this.bd.TraerUsuarioPorEmail(this.objLog.email).then((user)=>{
@@ -70,6 +73,7 @@ export class MiPerfilComponent {
       }else if(this.user.tipo === "Especialista"){
         this.esEspecialista = true;
         this.esUser = true;
+        this.misHorarios = this.objLog.user.hoarios
       }else{
         this.esPaciente = true;
         this.esUser = true;
@@ -93,7 +97,7 @@ export class MiPerfilComponent {
        }
     })
   } 
-
+    
   private Toast = Swal.mixin({
     toast: true,
     position: 'top',
@@ -118,51 +122,110 @@ export class MiPerfilComponent {
   }
 
   Lunes(){
-
-  }
+    this.esLunes = true;
+    this.esMartes = false;
+    this.esMiercoles = false;
+    this.esJueves = false;
+    this.esViernes = false;
+    this.esSabado = false;
+    this.dia = "Lunes";
+  } 
 
   Martes(){
-    
+    this.esLunes = false;
+    this.esMartes = true;
+    this.esMiercoles = false;
+    this.esJueves = false;
+    this.esViernes = false;
+    this.esSabado = false;
+    this.dia = "Martes";
   }
 
   Miercoles(){
-
+    this.esLunes = false;
+    this.esMartes = false;
+    this.esMiercoles = true;
+    this.esJueves = false;
+    this.esViernes = false;
+    this.esSabado = false;
+    this.dia = "Miercoles";
   }
 
   Jueves(){
-
+    this.esLunes = false;
+    this.esMartes = false;
+    this.esMiercoles = false;
+    this.esJueves = true;
+    this.esViernes = false;
+    this.esSabado = false;
+    this.dia = "Jueves";
   }
 
   Viernes(){
-
+    this.esLunes = false;
+    this.esMartes = false;
+    this.esMiercoles = false;
+    this.esJueves = false;
+    this.esViernes = true;
+    this.esSabado = false;
+    this.dia = "Viernes";
   }
 
   Sabado(){
-
+    this.esLunes = false;
+    this.esMartes = false;
+    this.esMiercoles = false;
+    this.esJueves = false;
+    this.esViernes = false;
+    this.esSabado = true;
+    this.dia = "Sabado";
   }
 
   SetHoras(){
 
     if(this.horaDe !== undefined && this.horaHasta !== undefined ){
 
+      let id = this.objLog.id
+
       if(this.esLunes){
-        let id = this.objLog.id
         this.objLog.user.horarios.lunes =  this.objHorarios.lunes;
         this.objHorarios.lunes.inicio = this.horaDe;
         this.objHorarios.lunes.fin = this.horaHasta;
-        this.bd.ModificarUsuarioHorarios(id,this.objLog.user.horarios);
-        this.Toast.fire({
-          icon: 'success',
-          title: 'Horario del Lunes Actualizado',
-          color:'#80ED99',
-        })
+      } else if(this.esMartes){
+        this.objLog.user.horarios.martes =  this.objHorarios.martes;
+        this.objHorarios.martes.inicio = this.horaDe;
+        this.objHorarios.martes.fin = this.horaHasta;
+      }else if (this.esMiercoles){
+        this.objLog.user.horarios.miercoles =  this.objHorarios.miercoles;
+        this.objHorarios.miercoles.inicio = this.horaDe;
+        this.objHorarios.miercoles.fin = this.horaHasta;
+      }else if (this.esJueves){
+        this.objLog.user.horarios.jueves =  this.objHorarios.jueves;
+        this.objHorarios.jueves.inicio = this.horaDe;
+        this.objHorarios.jueves.fin = this.horaHasta;
+      }else if (this.esViernes){
+        this.objLog.user.horarios.viernes =  this.objHorarios.viernes;
+        this.objHorarios.viernes.inicio = this.horaDe;
+        this.objHorarios.viernes.fin = this.horaHasta;
+      } else if(this.esSabado){
+        this.objLog.user.horarios.sabado =  this.objHorarios.sabado;
+        this.objHorarios.sabado.inicio = this.horaDe;
+        this.objHorarios.sabado.fin = this.horaHasta;
       }
+
+      this.bd.ModificarUsuarioHorarios(id,this.objLog.user.horarios);
+      this.Toast.fire({
+        icon: 'success',
+        title: 'Horario del Lunes Actualizado',
+        color:'#80ED99',
+      })
+
     }else{
       this.Toast.fire({
         icon: 'error',
         title: 'Coloque los horarios',
         color:'#fb7474',
-      })
+      })      
     }
   }
 

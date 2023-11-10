@@ -396,6 +396,48 @@ export class SolicitarTurnoComponent {
     }
   }
 
+  TablaTurnos(){
+    let inicio = 0;
+    let fin = 0;
+    switch(this.dia){
+      case'Lunes':
+        inicio = parseInt(this.especialista.horarios.lunes.inicio);
+        fin = parseInt(this.especialista.horarios.lunes.fin);
+      break;
+      case'Martes':
+      inicio = parseInt(this.especialista.horarios.martes.inicio);
+      fin = parseInt(this.especialista.horarios.martes.fin);
+      break;
+      case'Miercoles':
+      inicio = parseInt(this.especialista.horarios.miercoles.inicio);
+      fin = parseInt(this.especialista.horarios.miercoles.fin);
+      break;
+      case'Jueves':
+      inicio = parseInt(this.especialista.horarios.jueves.inicio);
+      fin = parseInt(this.especialista.horarios.jueves.fin);
+      break;
+      case'Viernes':
+      inicio = parseInt(this.especialista.horarios.viernes.inicio);
+      fin = parseInt(this.especialista.horarios.viernes.fin);
+      break;
+      case'Sabado':
+      inicio = parseInt(this.especialista.horarios.sabado.inicio);
+      fin = parseInt(this.especialista.horarios.sabado.fin);
+      break;
+    }
 
+    let arrHorarios = []
+
+    for(;inicio <= fin;inicio++){
+      let horarios = {
+        inicio : inicio,
+        fin : inicio + 0.8
+      }
+      arrHorarios.push(horarios)
+    }
+
+    console.log(arrHorarios)
+
+  }
 
 }

@@ -55,28 +55,29 @@
           <div class="card text-center ">
             <div class="card-header">
               <ul class="nav nav-pills card-header-pills ">
-                <li class="nav-item">
+                <li (click)="Lunes()" class="nav-item" [ngClass]="(esLunes == true)? 'active' : ''" >
                   <a class="nav-link"> Lunes </a>
                 </li>
-                <li class="nav-item">
+                <li (click)="Martes()" class="nav-item" [ngClass]="(esMartes == true)? 'active' : ''" >
                   <a  class="nav-link" > Martes </a>
                 </li>
-                <li class="nav-item">
+                <li (click)="Miercoles()" class="nav-item" [ngClass]="(esMiercoles == true)? 'active' : ''" >
                   <a  class="nav-link" > Miercoles </a>
                 </li>
-                <li class="nav-item">
+                <li (click)="Jueves()" class="nav-item" [ngClass]="(esJueves == true)? 'active' : ''" >
                   <a  class="nav-link" > Jueves </a>
                 </li>
-                <li class="nav-item">
+                <li (click)="Viernes()" class="nav-item" [ngClass]="(esViernes == true)? 'active' : ''" >
                   <a  class="nav-link" > Viernes </a>
                 </li>
-                <li class="nav-item">
+                <li (click)="Sabado()" class="nav-item" [ngClass]="(esSabado == true)? 'active' : ''" >
                   <a  class="nav-link" > Sabados </a>
                 </li>
               </ul>
             </div>
           <h6>Franja Horaria</h6>
           <div class="row g-3 mb-5 mt-0">
+            {{dia}} de {{misHorarios.lunes.inicio}} a {{misHorarios.lunes.fin}}
           <div class="col-sm-6">
             <label class="form-label">De</label>
             <input type="time" class="form-control" name="de" [(ngModel)]="horaDe">
@@ -86,7 +87,7 @@
             <input type="time" class="form-control" name="hasta"  [(ngModel)]="horaHasta">
           </div>
           <button (click)="SetHoras()" style="margin-left: auto; margin-right: auto;" class="col-sm-10 rounded-pill btn btn-outline-primary">
-              Subir Horarios Lunes
+              Subir Horarios {{dia}}
           </button>
           </div>
         </div>
