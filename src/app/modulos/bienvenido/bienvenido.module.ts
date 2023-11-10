@@ -6,6 +6,7 @@ import { BienvenidoComponent } from './bienvenido.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { RegisterComponent } from './componentes/register/register.component';
 import { BienvenidaComponent } from './componentes/bienvenida/bienvenida.component';
+import { DColorBtnDirective } from './directivas/d-color-btn.directive';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { BienvenidaComponent } from './componentes/bienvenida/bienvenida.compone
     LoginComponent,
     RegisterComponent,
     BienvenidaComponent,
+    DColorBtnDirective,
   ],
   imports: [
     CommonModule,

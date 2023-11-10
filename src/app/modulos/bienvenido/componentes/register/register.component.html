@@ -90,7 +90,7 @@
         </div>
         </div>
 
-        <div class="col-md-12">
+       <!-- <div class="col-md-12">
             <label for="country" class="form-label">Especialidad Principal</label>
             <select  class="form-select" name="especialidad" [(ngModel)]="especialidadElegida" formControlName="especialidad" (ngModelChange)="OtraEsp($event)" >
                 <option  [value]="especialidad" *ngFor="let especialidad of especialidades">{{especialidad}}</option>
@@ -114,7 +114,7 @@
                  *minimo 8 caracteres, maximo 30
               </small> 
             </div>
-          </div>
+          </div>-->
 
       <div class="col-12">
         <label for="username" class="form-label">Email</label>
@@ -153,6 +153,41 @@
       </div>
     </div>
     <hr class="my-4">
+
+    <div class="col-12 text-center">
+      <label  for="address"  class="form-label">Especialidades</label>
+
+          <button [ngClass]="(esp.elegida === true)? 'btn_actv' : ' ' " (click)="EspSelect(esp.especialidad,esp)" class="btn btn-lg btn-outline-light btn-block btn_form " *ngFor="let esp of especialidades" >
+            {{esp.especialidad}}
+          </button>
+          <button [disabled]="espOtra" (click)="OtraEsp()" class="btn btn-lg btn-outline-light btn-block btn_form " >
+            Otra
+          </button>
+    </div>
+
+    <div class="col-12 text-center">
+      <label  for="address"  class="form-label">Especialdiades Elegidas: </label>
+    </div>
+    <label  for="address"  class="form-label" *ngFor="let esp of especialidadesElegidas"> - {{esp}} - </label>
+    <hr class="my-4">
+    <p *ngIf="especialidadElegida === 'Otra' "> Coloque su especialidad si es otra</p>
+            <input (ngModelChange)="esOtraEsp($event)" *ngIf="especialidadElegida === 'Otra' " type="text" class="form-control" name="miEspecialidad" id="miEspecialidad" placeholder="especialidad"  [(ngModel)]="miEspecialidad" formControlName="miEspecialidad" >
+            <div>
+                <small  *ngIf="esOtraErrorObligatorio"
+                style="color: rgb(254, 112, 112);">
+                    *Obligatorio
+                </small>
+                <small  *ngIf="esOtraErrorMinMax"
+                style="color: rgb(254, 112, 112);"
+              >
+                 *minimo 8 caracteres, maximo 30
+              </small> 
+            </div>
+    <button  [disabled]="espOtra" *ngIf="!disabled && especialidadElegida === 'Otra'" (click)="OtraEspSubir()" class="btn btn-lg btn-outline-light btn-block btn_form " >
+      Elegir
+    </button>
+    <hr class="my-4">
+
     <button [disabled]="formEspecialista.invalid || disabled"  (click)="Registrar()" class="w-100 btn btn-primary btn-lg btn_form btn_regist" type="submit">Registrar</button>
     <button (click)="Cancelar()" class="btn btn-lg btn-outline-light btn-block btn_form" type="submit" >Cancelar</button>
   </form>

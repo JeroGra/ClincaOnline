@@ -23,7 +23,7 @@ export class RegisterComponent {
   public formPaciente : FormGroup
   usuarios : Array<Usuario> = []
   
-  especialidades:Array<string> = ["Enfermeria","Medicina General","Cardiologia","Ginecología","Neurología","Psicología","Cirugía General","Otra"];
+  especialidades:Array<any> = [];
   obrasSociales:Array<string> = ["Unión Personal","Sancor Salud","Swiss Medical","Medicus","Galeno","Osde","Osplad"];
 
   constructor(private fb : FormBuilder,
@@ -33,6 +33,19 @@ export class RegisterComponent {
     this.bd.TraerUsuarios().subscribe((sub:any)=>{
       this.usuarios = sub;
     });
+
+    this.bd.TraerEspecialidades().subscribe((esp:any)=>{
+       let e = esp as Array<any>
+        this.especialidades = []
+       e.forEach(element => {
+        let esp = {
+          especialidad:element.especialidad,
+          elegida:false
+        }
+        this.especialidades.push(esp)
+       });
+       
+    })
 
     this.formEspecialista = this.fb.group({
       nombre : ['',[
@@ -65,9 +78,9 @@ export class RegisterComponent {
       foto : ['',[
         Validators.required,
       ]],
-      especialidad : ['',[
+     /* especialidad : ['',[
         Validators.required,
-      ]],
+      ]],*/
       miEspecialidad : ['',[
 
       ]],
@@ -140,6 +153,7 @@ export class RegisterComponent {
   especialidadElegida:string = "";
   obraSocialElegida:string  = "";
 
+  especialidadesElegidas : Array<string> = []
   nombre:string = "";
   apellido:string = "";
   edad:number = 0;
@@ -152,7 +166,7 @@ export class RegisterComponent {
   foto1 = "";
   foto2 = "";
   banderaSubida = false;
-
+  espOtra = false;
   esOtraErrorObligatorio = false;
   esOtraErrorMinMax = false;
   disabled = false;
@@ -161,7 +175,7 @@ export class RegisterComponent {
     this.ruta.navigateByUrl("bienvenido/bienvenida")
   }
   
-  OtraEsp(event:any){
+ /*OtraEsp(event:any){
 
     if(this.especialidadElegida == 'Otra'){
         this.disabled = true;
@@ -171,7 +185,7 @@ export class RegisterComponent {
       this.esOtraErrorMinMax = false;
       this.miEspecialidad = "";
     }
-  }
+  }*/
 
   esOtraEsp(event:any){
     
@@ -200,6 +214,40 @@ export class RegisterComponent {
     }
   }
 
+  OtraEsp(){
+    if( this.especialidadElegida === "Otra"){
+      this.especialidadElegida = ""
+      this.disabled = false;
+    }else{
+      this.especialidadElegida = "Otra"
+      this.disabled = true;
+    }
+  }
+
+  OtraEspSubir(){
+    this.especialidadesElegidas.push(this.miEspecialidad)
+    this.espOtra = true;
+  }
+
+  EspSelect(esp:string,espe:any){
+    let equals = false
+
+    for(let x = 0;x<this.especialidadesElegidas.length;x++){
+      if(this.especialidadesElegidas[x] === esp){
+        equals = true;
+        this.especialidadesElegidas = this.especialidadesElegidas.filter((i) => i !== esp)
+        break;
+      }
+    }
+    
+  if(equals){ 
+    espe.elegida = false;
+    }else{
+      this.especialidadesElegidas.push(esp)
+      espe.elegida = true;
+    }
+  }
+
   CargaImagenUno($event:any){
     const file = $event?.target.files[0]
     this.fotos.push(file);
@@ -221,9 +269,6 @@ export class RegisterComponent {
     setTimeout(()=>{},1000);
   }
 
-  EspecialidadSelec(){
-    console.log(this.especialidadElegida)
-  }
 
   ObraSelec(){
     let rt = document.getElementById('obra');
@@ -321,7 +366,7 @@ export class RegisterComponent {
   CrearUsuario(tipo : 'Especialista' | 'Paciente'){
     
     if(tipo=== "Especialista"){
-      let especialidad;
+      
       let especialista = new Especialista
         especialista.nombre = this.nombre;
         especialista.apellido = this.apellido;
@@ -329,12 +374,19 @@ export class RegisterComponent {
         especialista.edad = this.edad;
         especialista.email = this.email;
         especialista.contrasenia = this.encriptService.EncriptValue(this.contrasenia);
-        
-        if(this.especialidadElegida === 'Otra'){ especialidad = this.miEspecialidad; this.bd.AltaEspecialidad(this.miEspecialidad) }else{ especialidad = this.especialidadElegida }
-        
-        especialista.especialidades.push(especialidad);
-        
-        this.SubirImagenes(especialista)
+
+        if(this.especialidadesElegidas.length >= 1){
+          especialista.especialidades = this.especialidadesElegidas
+         if(this.especialidadElegida === 'Otra'){this.bd.AltaEspecialidad(this.miEspecialidad) }
+          
+          this.SubirImagenes(especialista)
+        }else{
+          this.Toast.fire({
+            icon: 'error',
+            title: "Eliga minimo una Especialidad",
+            color:'#fb7474',
+          })
+        }
 
       }else{
 

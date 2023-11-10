@@ -4,10 +4,10 @@
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                <a class="nav-link " aria-current="true" [ngClass]="(selectEspecialidad == true)? 'active' : 'disabled' " >Especialidad</a>
+                <a class="nav-link "  [ngClass]="(selectEspecialista == true)? 'active' : 'disabled' " >Especialista</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link "  [ngClass]="(selectEspecialista == true)? 'active' : 'disabled' " >Especialista</a>
+                <a class="nav-link " aria-current="true" [ngClass]="(selectEspecialidad == true)? 'active' : 'disabled' " >Especialidad</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link " aria-disabled="true"  [ngClass]="(selectPaciente == true)? 'active' : 'disabled' ">Paciente</a>
@@ -20,6 +20,11 @@
 
         <div *ngIf="selectEspecialidad" class="card-body text-center">
             <h4>Seleccione Especialidad</h4>
+            <button (click)="AtrasEspecialidad()" class="btn-atras">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </button>
             <div class="container text-center div-tabla">
                 <div class="row align-items-start tabla-titulo">
                     <div class="col  border-col">
@@ -30,12 +35,12 @@
                     </div>
 
                     </div>
-                    <div class="row align-items-start tabla-content" *ngFor="let esp of especialidades">
+                    <div class="row align-items-start tabla-content" *ngFor="let esp of especialidadesFiltro">
                     <div class="col border-col">
-                        {{esp.especialidad}}
+                        {{esp}}
                     </div>
                     <div class="col border-col" >
-                        <button (click)="SelectEspecialdiad(esp.especialidad)" class="btn-select-esp">
+                        <button (click)="SelectEspecialdiad(esp)" class="btn-select-esp">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                 <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
@@ -48,11 +53,7 @@
 
         <div *ngIf="selectEspecialista" class="card-body text-center">
             <h4>Seleccione Especialista</h4>
-            <button (click)="AtrasEspecialista()" class="btn-atras">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
-                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                </svg>
-            </button>
+         
             <div class="container text-center div-tabla">
                 <div class="row align-items-start tabla-titulo">
                     <div class="col  border-col">

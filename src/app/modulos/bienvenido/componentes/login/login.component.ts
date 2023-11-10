@@ -39,7 +39,7 @@ export class LoginComponent {
   contrasenia:string = "";
   urlAdm = "https://firebasestorage.googleapis.com/v0/b/clinicaonline-a3637.appspot.com/o/imagenes%2Fusuarios%2F42489444_1?alt=media&token=c55b441e-805d-444e-bfd6-ad164b542bfa"
   urlEsp = "https://firebasestorage.googleapis.com/v0/b/clinicaonline-a3637.appspot.com/o/imagenes%2Fusuarios%2F22222222_1?alt=media&token=4a24ec93-23de-4ed3-af42-9e9596927b1e"
-  urlEsp2 = ""
+  urlEsp2 = "https://firebasestorage.googleapis.com/v0/b/clinicaonline-a3637.appspot.com/o/imagenes%2Fusuarios%2F40000000_1?alt=media&token=df3ddd0a-24a9-4681-a871-24abcabd5c9a"
   urlPa = "https://firebasestorage.googleapis.com/v0/b/clinicaonline-a3637.appspot.com/o/imagenes%2Fusuarios%2F11111111_1?alt=media&token=3eac7146-7ac8-4c31-ab31-6b55b2975e1c"
   urlPa2  = ""
   urlPa3 = ""
@@ -73,8 +73,8 @@ export class LoginComponent {
   }
 
   especialista2(){
-    this.email = "especialista@gmail.com"
-    this.contrasenia = "especialista123"
+    this.email = "maximus@gmail.com"
+    this.contrasenia = "maximus123"
   }
 
   paciente(){

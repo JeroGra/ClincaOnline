@@ -19,6 +19,7 @@ export class SolicitarTurnoComponent {
   especialidades:Array<any> = [];
   especialistas:Array<Especialista> = [];
   especialistasFiltro:Array<Especialista> = [];
+  especialidadesFiltro:Array<Especialista> = [];
   pacientes:Array<Paciente> = [];
   dias = ['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado']
   horarios = [
@@ -73,6 +74,7 @@ export class SolicitarTurnoComponent {
     })
     this.bd.TraerUsuarioPorTipo('Especialista').subscribe((esp)=>{
       this.especialistas = esp as Array<Especialista>
+      this.SetEspecialistaVerify()
     })
     this.bd.TraerUsuarioPorTipo('Paciente').subscribe((pa)=>{
       let pacien = pa as Array<Paciente>
@@ -83,10 +85,13 @@ export class SolicitarTurnoComponent {
         }
       })
     })
+
+   
+
   }
 
-  selectEspecialidad = true;
-  selectEspecialista = false;
+  selectEspecialista = true;
+  selectEspecialidad = false;
   selectDiaHora = false;
   selectPaciente = false;
   diaExactoD = true;
@@ -116,40 +121,34 @@ export class SolicitarTurnoComponent {
     }
   })
 
-  SelectEspecialdiad(esp:string){
+  SelectEspecialdiad(esp:any){
     this.especialdiad = esp;
     this.selectEspecialidad = false;
-    this.SetEspecialistaEspecialdiad();
-    this.selectEspecialista = true;
+    this.selectPaciente = true;
   }
 
-  SetEspecialistaEspecialdiad(){
+  SetEspecialistaVerify(){
     this.especialistasFiltro = []
     this.especialistas.forEach((esp:Especialista)=>{
         if(esp.cuentaHabilitada === true && esp.cuentaValidadaEmail === true){
-          if(this.EspecialidadCompare(esp.especialidades)){
               this.especialistasFiltro.push(esp);
-          }
         }
     })
   }
 
-  EspecialidadCompare(especialdiades:Array<any>){
-    let rt = false
-    for(let esp of especialdiades){
-        if(esp === this.especialdiad){
-            rt = true;
-            break;
-        }
-    }
-
-    return rt;
+  setEspecialidadesEspecialista(){
+    this.especialidadesFiltro = []
+    this.especialista.especialidades.forEach((element:any) => {
+      this.especialidadesFiltro.push(element)
+    });
   }
+
 
   SelectEspecialista(esp:Especialista){
     this.especialista = esp
     console.log(this.especialista)
-    this.selectPaciente = true;
+    this.setEspecialidadesEspecialista()
+    this.selectEspecialidad = true;
     setTimeout(()=>{
       this.selectEspecialista = false;
     },500)
@@ -210,14 +209,14 @@ export class SolicitarTurnoComponent {
 
 
 
-  AtrasEspecialista(){
-    this.selectEspecialista = false;
-    this.selectEspecialidad = true;
+  AtrasEspecialidad(){
+    this.selectEspecialista = true;
+    this.selectEspecialidad = false;
   }
 
   AtrasPaciente(){
     this.selectPaciente = false;
-    this.selectEspecialista = true;
+    this.selectEspecialidad = true;
   }
 
   AtrasDiaHoras(){

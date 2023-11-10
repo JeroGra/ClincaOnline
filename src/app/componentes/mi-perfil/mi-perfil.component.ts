@@ -73,7 +73,7 @@ export class MiPerfilComponent {
       }else if(this.user.tipo === "Especialista"){
         this.esEspecialista = true;
         this.esUser = true;
-        this.misHorarios = this.objLog.user.hoarios
+        this.misHorarios = this.user.horarios
       }else{
         this.esPaciente = true;
         this.esUser = true;
@@ -183,37 +183,38 @@ export class MiPerfilComponent {
 
   SetHoras(){
 
+
     if(this.horaDe !== undefined && this.horaHasta !== undefined ){
 
-      let id = this.objLog.id
+      let id = this.user.id
 
       if(this.esLunes){
-        this.objLog.user.horarios.lunes =  this.objHorarios.lunes;
+        this.user.horarios.lunes =  this.objHorarios.lunes;
         this.objHorarios.lunes.inicio = this.horaDe;
         this.objHorarios.lunes.fin = this.horaHasta;
       } else if(this.esMartes){
-        this.objLog.user.horarios.martes =  this.objHorarios.martes;
+        this.user.horarios.martes =  this.objHorarios.martes;
         this.objHorarios.martes.inicio = this.horaDe;
         this.objHorarios.martes.fin = this.horaHasta;
       }else if (this.esMiercoles){
-        this.objLog.user.horarios.miercoles =  this.objHorarios.miercoles;
+        this.user.horarios.miercoles =  this.objHorarios.miercoles;
         this.objHorarios.miercoles.inicio = this.horaDe;
         this.objHorarios.miercoles.fin = this.horaHasta;
       }else if (this.esJueves){
-        this.objLog.user.horarios.jueves =  this.objHorarios.jueves;
+        this.user.horarios.jueves =  this.objHorarios.jueves;
         this.objHorarios.jueves.inicio = this.horaDe;
         this.objHorarios.jueves.fin = this.horaHasta;
       }else if (this.esViernes){
-        this.objLog.user.horarios.viernes =  this.objHorarios.viernes;
+        this.user.horarios.viernes =  this.objHorarios.viernes;
         this.objHorarios.viernes.inicio = this.horaDe;
         this.objHorarios.viernes.fin = this.horaHasta;
       } else if(this.esSabado){
-        this.objLog.user.horarios.sabado =  this.objHorarios.sabado;
+        this.user.horarios.sabado =  this.objHorarios.sabado;
         this.objHorarios.sabado.inicio = this.horaDe;
         this.objHorarios.sabado.fin = this.horaHasta;
       }
 
-      this.bd.ModificarUsuarioHorarios(id,this.objLog.user.horarios);
+      this.bd.ModificarUsuarioHorarios(id,this.user.horarios);
       this.Toast.fire({
         icon: 'success',
         title: 'Horario del Lunes Actualizado',

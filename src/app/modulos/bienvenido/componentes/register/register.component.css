@@ -57,3 +57,7 @@
 .logo:hover{
     transform: scale(1.1);
 }
+
+.btn_actv{
+    background-color: #80ED99;
+}
