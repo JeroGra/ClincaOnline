@@ -133,3 +133,35 @@
 .btn-cal:active{
     background-color: #0F2636;
 }
+
+.btn-select-esp{
+    border: 2px solid #0F2636;
+    border-radius: 20px;
+    width: 20rem;
+    height: 10rem;
+}
+
+.btn-select-esp:hover{
+    border: 2px solid rgb(255, 255, 255);
+    background-color: #80ED99;
+}
+
+.btn-select-esp:active{
+    background-color: #0F2636;
+}
+
+.btn-select-espe{
+    border: 2px solid #0F2636;
+    margin: 0.1rem;
+    width: 10rem;
+    height: 10rem;
+}
+
+.btn-select-espe:hover{
+    border: 2px solid rgb(255, 255, 255);
+    background-color: #80ED99;
+}
+
+.btn-select-espe:active{
+    background-color: #0F2636;
+}

@@ -17,6 +17,7 @@ export class TurnosComponent {
   especialidades:Array<any> = [];
   especialistas:Array<Especialista> = [];
   turnos:Array<Turno> = [];
+  turnosFijosBd:Array<Turno> = [];
 
   constructor(private bd : BaseDatosService, private ruta :Router){
     this.bd.TraerEspecialidades().subscribe((esp)=>{
@@ -30,10 +31,12 @@ export class TurnosComponent {
       t.forEach((turno)=>{
           if(turno.cancelado === false){
             this.turnos.push(turno);
+            this.turnosFijosBd.push(turno);
           }
       })
     })
   }
+  
 
   private Toast = Swal.mixin({
     toast: true,
@@ -61,29 +64,51 @@ export class TurnosComponent {
   motivo = ""
 
   ChangeToSelectEspecialista(){
-
+    this.selectTurnos = false;
+    this.selectEspecialidad = false;
+    this.selectEspecialista = true;
   }
 
   ChangeToSelectEspecialdiad(){
-
+    this.selectTurnos = false;
+    this.selectEspecialidad = true;
+    this.selectEspecialista = false;
   }
 
   ChangeToSelectTurno(){
+    this.selectTurnos = true;
+    this.selectEspecialidad = false;
+    this.selectEspecialista = false;
+  }
 
+  Reset(){
+    this.turnos = this.turnosFijosBd;
   }
 
   SelectEspecialdiad(esp:any){
+    this.turnos = this.turnosFijosBd;
     let tu : Array<Turno> = []
-    this.turnos.forEach((t)=>{
-
-    })
+      for(let turno of this.turnos){
+          if(esp === turno.especialidad){
+            tu.push(turno);
+          }
+      }
+    this.turnos = tu;
+    this.ChangeToSelectTurno();
   }
 
-  SelectEspecialista(esp:any){
+  SelectEspecialista(esp:Especialista){
+    this.turnos = this.turnosFijosBd;
     let tu : Array<Turno> = []
-    this.turnos.forEach((t)=>{
-
-    })
+    for(let t of esp.turnos){
+      for(let turno of this.turnos){
+          if(t.id === turno.id){
+            tu.push(turno);
+          }
+      }
+    }
+    this.turnos = tu;
+    this.ChangeToSelectTurno();
   }
 
   SelectTurno(turno:Turno){
