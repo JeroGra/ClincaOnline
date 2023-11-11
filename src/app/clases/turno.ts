@@ -10,10 +10,10 @@ export class Turno {
     aceptado?:boolean = false
     finalizado?:boolean = false
     cancelado?:boolean = false
+    anio?:string
     mes?:string
     dia?:string
     horarioInicio?:string
-    horarioFin?:string
     resenia?:{
         puntuacion?:number,
         comentario?:string

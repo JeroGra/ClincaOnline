@@ -92,6 +92,7 @@ export class BaseDatosService {
 
   ModificarUsuarioTurno(id:any,misTurnos:Array<any>)
   {
+    console.log(misTurnos)
     const coleccion = collection(this.firestore,'usuarios')
     const documento = doc(coleccion,id)
     updateDoc(documento,{
@@ -118,7 +119,8 @@ export class BaseDatosService {
 
     let especialidad = {
       especialidad:esp,
-      id:id
+      id:id,
+      foto:'https://firebasestorage.googleapis.com/v0/b/clinicaonline-a3637.appspot.com/o/imagenes%2Fespecialidades%2Fdefault.png?alt=media&token=29f17d4b-7882-4049-b90a-463cb72a69fe'
     }
 
     return setDoc(documento,especialidad);
@@ -139,6 +141,8 @@ export class BaseDatosService {
     turno.id = documento.id;
     turno.diaDeSolicitud = Date.now()
     let obj = JSON.parse(JSON.stringify(turno))
+    obj.especialista.turnos = null;
+    obj.paciente.turnos = null;
     return setDoc(documento,obj);
   }
   

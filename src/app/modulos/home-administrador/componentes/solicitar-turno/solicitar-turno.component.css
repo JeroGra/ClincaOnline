@@ -37,14 +37,13 @@
 .btn-select-esp{
     border: 2px solid #0F2636;
     border-radius: 20px;
-    margin: 0.1rem;
     width: 20rem;
-    height: 1.9rem;
+    height: 10rem;
 }
 
 .btn-select-esp:hover{
     border: 2px solid rgb(255, 255, 255);
-    background-color: #ffffff;
+    background-color: #80ED99;
 }
 
 .btn-select-esp:active{
@@ -53,15 +52,14 @@
 
 .btn-select-espe{
     border: 2px solid #0F2636;
-    border-radius: 20px;
     margin: 0.1rem;
     width: 10rem;
-    height: 1.9rem;
+    height: 10rem;
 }
 
 .btn-select-espe:hover{
     border: 2px solid rgb(255, 255, 255);
-    background-color: #ffffff;
+    background-color: #80ED99;
 }
 
 .btn-select-espe:active{
@@ -74,6 +72,7 @@
     margin: 0.1rem;
     width: 10rem;
     height: 1.9rem;
+    margin-bottom: 1.5rem;
 }
 
 
@@ -89,12 +88,13 @@
     border: 2px solid #0F2636;
     border-radius: 20px;
     margin: 0.1rem;
-    width: 30rem;
-    height: 2rem;
+    width: 12rem;
+    height: 12rem;
 }
 
 .btn-sol:hover{
-    background-color: #ffffff;
+    background-color: #80ED99;
+    border: 2px solid #ffffff;
 }
 
 .btn-sol:active{

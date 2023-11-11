@@ -4,7 +4,7 @@ export class Paciente extends Usuario {
 
     
     obraSocial?:any;
-    fotos:Array<string> = [];
+    fotos:Array<any> = [];
     cuentaValidadaEmail:boolean = false;
     tipo = "Paciente"
 

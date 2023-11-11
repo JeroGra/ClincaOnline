@@ -15,62 +15,20 @@ import Swal from 'sweetalert2';
 })
 export class SolicitarTurnoComponent {
 
-
   especialidades:Array<any> = [];
   especialistas:Array<Especialista> = [];
   especialistasFiltro:Array<Especialista> = [];
-  especialidadesFiltro:Array<Especialista> = [];
+  especialidadesFiltro:Array<any> = [];
   pacientes:Array<Paciente> = [];
-  dias = ['Lunes','Martes','Miercoles','Jueves','Viernes','Sabado']
-  horarios = [
-    {
-      horaInicio:'9:00',
-      horaFin:'10:00'
-    },
-    {
-      horaInicio:'10:10',
-      horaFin:'11:10'
-    },
-    {
-      horaInicio:'11:20',
-      horaFin:'12:20'
-    },
-    {
-      horaInicio:'12:30',
-      horaFin:'13:30'
-    },
-    {
-      horaInicio:'14:00',
-      horaFin:'15:00'
-    },
-    {
-      horaInicio:'15:10',
-      horaFin:'16:10'
-    },
-    {
-      horaInicio:'16:20',
-      horaFin:'17:20'
-    },
-    {
-      horaInicio:'17:30',
-      horaFin:'18:30'
-    },
-    {
-      horaInicio:'18:40',
-      horaFin:'19:40'
-    },
-]
   fecha = Date.now();
   datePipe = new DatePipe('en-Ar')
   mes = this.datePipe.transform(this.fecha,'M')
   anio = this.datePipe.transform(this.fecha,'yyyy')
-  diasNumero : Array<any> = [];
-  tomado = false;
-  lleno = false;
+  horarios : Array<any> = []
 
   constructor(private bd : BaseDatosService, private ruta :Router){
-    this.bd.TraerEspecialidades().subscribe((esp)=>{
-      this.especialidades = esp as Array<any>
+    this.bd.TraerEspecialidades().subscribe((espe)=>{
+      this.especialidades = espe as Array<any>
     })
     this.bd.TraerUsuarioPorTipo('Especialista').subscribe((esp)=>{
       this.especialistas = esp as Array<Especialista>
@@ -85,28 +43,15 @@ export class SolicitarTurnoComponent {
         }
       })
     })
-
-   
-
   }
 
   selectEspecialista = true;
   selectEspecialidad = false;
   selectDiaHora = false;
   selectPaciente = false;
-  diaExactoD = true;
-  horaSelect = true;
-  dia = "";
-  diaNum = "";
-  horario = {
-    horaInicio:'',
-    horaFin:''
-  }
-
   especialdiad = "";
   especialista = new Especialista
   paciente = new Paciente
-
 
   private Toast = Swal.mixin({
     toast: true,
@@ -130,6 +75,7 @@ export class SolicitarTurnoComponent {
   SetEspecialistaVerify(){
     this.especialistasFiltro = []
     this.especialistas.forEach((esp:Especialista)=>{
+  
         if(esp.cuentaHabilitada === true && esp.cuentaValidadaEmail === true){
               this.especialistasFiltro.push(esp);
         }
@@ -138,11 +84,14 @@ export class SolicitarTurnoComponent {
 
   setEspecialidadesEspecialista(){
     this.especialidadesFiltro = []
-    this.especialista.especialidades.forEach((element:any) => {
-      this.especialidadesFiltro.push(element)
-    });
+    for(let e of  this.especialista.especialidades){
+      for(let x of this.especialidades){
+        if(e == x.especialidad){
+          this.especialidadesFiltro.push(x)
+        }
+      }
+    }
   }
-
 
   SelectEspecialista(esp:Especialista){
     this.especialista = esp
@@ -152,6 +101,7 @@ export class SolicitarTurnoComponent {
     setTimeout(()=>{
       this.selectEspecialista = false;
     },500)
+    this.SetHorariosTurnos()
   }
 
   SelectPaciente(pa:Paciente){
@@ -162,52 +112,110 @@ export class SolicitarTurnoComponent {
     },500)
   }
 
-  DiaSelect($event:any){
-
-
+  SetHorariosTurnos(){
+    this.horarios = []
     let diasMes = new Date(parseInt(this.anio as string),parseInt(this.mes as string),0).getDate()
-    let miDia = "";
-    let mes = []
-    let day = parseInt(this.datePipe.transform(Date.now(),'dd') as string)
-    for(day;day <= diasMes; day++){
-      mes.push(new Date(parseInt(this.anio as string),parseInt(this.mes as string)-1,day))
+    let fechas = []
+
+    for(let x = 1; x <= diasMes; x++){
+      fechas.push(new Date(parseInt(this.anio as string),parseInt(this.mes as string)-1,x))
     }
 
-    switch(this.dia){
-      case'Lunes':
-      miDia = "Monday";
-      break;
-      case'Martes':
-      miDia = 'Tuesday';
-      break;
-      case'Miercoles':
-      miDia = 'Wednesday';
-      break;
-      case'Jueves':
-      miDia = 'Thursday';
-      break;
-      case'Viernes':
-      miDia = 'Friday';
-      break;
-      case'Sabado':
-      miDia = 'Saturday';
-      break;
+    let dx = 0;
+    let dy = 0;
+    let objTurno = {
+      dia:'',
+      hora:0
     }
 
-    this.diasNumero = []
+    if(this.especialista.horarios.lunes.inicio !== null){
+      dx = parseInt(this.especialista.horarios.lunes.inicio);
+      dy = parseInt(this.especialista.horarios.lunes.fin);
+      objTurno.dia = "Monday";
+      this.SetHoras(dx,dy,fechas,objTurno, this.horarios)
+    }
 
-    mes.forEach(dia => {
-      if(this.datePipe.transform(dia,'EEEE')=== miDia)
-      {
-        let diaMes = this.datePipe.transform(dia,'dd')
-        this.diasNumero.push(diaMes)
-      }
-    });
+    if(this.especialista.horarios.martes.inicio !== null){
+      dx = parseInt(this.especialista.horarios.martes.inicio);
+      dy = parseInt(this.especialista.horarios.martes.fin);
+      objTurno.dia = "Tuesday";
+      this.SetHoras(dx,dy,fechas,objTurno, this.horarios)
+    }
 
-    this.diaExactoD = false;
+    if(this.especialista.horarios.miercoles.inicio !== null){
+      dx = parseInt(this.especialista.horarios.miercoles.inicio);
+      dy = parseInt(this.especialista.horarios.miercoles.fin);
+      objTurno.dia = "Wednesday";
+      this.SetHoras(dx,dy,fechas,objTurno, this.horarios)
+    }
+
+    if(this.especialista.horarios.jueves.inicio !== null){
+      dx = parseInt(this.especialista.horarios.jueves.inicio);
+      dy = parseInt(this.especialista.horarios.jueves.fin);
+      objTurno.dia = "Thursday";
+      this.SetHoras(dx,dy,fechas,objTurno, this.horarios)
+    }
+
+    if(this.especialista.horarios.viernes.inicio !== null){
+      dx = parseInt(this.especialista.horarios.viernes.inicio);
+      dy = parseInt(this.especialista.horarios.viernes.fin);
+      objTurno.dia = "Friday";
+      this.SetHoras(dx,dy,fechas,objTurno, this.horarios)
+    }
+
+    if(this.especialista.horarios.sabado.inicio !== null){
+      dx = parseInt(this.especialista.horarios.sabado.inicio);
+      dy = parseInt(this.especialista.horarios.sabado.fin);
+      objTurno.dia = "Saturday";
+      this.SetHoras(dx,dy,fechas,objTurno, this.horarios)
+    }
   }
 
+  SetHoras(dx:number,dy:number,fechas:Array<any>,objTurno:any,horarios:Array<any>){
+    for(;dx <= dy;dx++){
+      for(let f of fechas){
+        if(this.datePipe.transform(f,"EEEE") === objTurno.dia){
+          let objH = {
+            fecha:f,
+            hora:''
+          }
+          if(dx >= 12){
+            if(dx == 12){objH.hora = 12 + ":00 PM"}
+            if(dx == 13){objH.hora = 1 + ":00 PM"}
+            if(dx == 14){objH.hora = 2 + ":00 PM"}
+            if(dx == 15){objH.hora = 3 + ":00 PM"}
+            if(dx == 16){objH.hora = 4 + ":00 PM"}
+            if(dx == 17){objH.hora = 5 + ":00 PM"}
+            if(dx == 18){objH.hora = 6 + ":00 PM"}
+            if(dx == 19){objH.hora = 7 + ":00 PM"}
+            if(dx == 20){objH.hora = 8 + ":00 PM"}
+            if(dx == 21){objH.hora = 9 + ":00 PM"}
+            if(dx == 22){objH.hora = 10 + ":00 PM"}
+            if(dx == 23){objH.hora = 11 + ":00 PM"}
+          }else{
+            if(dx == 0){objH.hora = 12 + ":00 AM"}else{objH.hora = dx + ":00 AM"}
+          }
+            horarios.push(objH)
+        }
+      }
+    }
 
+    if(this.especialista.turnos.length > 0){
+      for(let t of this.especialista.turnos){
+        for(let h of horarios)
+        if(t.anio == this.datePipe.transform(h.fecha,"yyyy")){
+          if(t.mes == this.datePipe.transform(h.fecha,"MM")){
+              if(t.dia == this.datePipe.transform(h.fecha,"dd") && t.horarioInicio == h.hora){
+                if(!t.cancelado){
+                  this.horarios = this.horarios.filter((i) => i !== h);
+                  break;
+                }
+              }
+          }
+        }
+      }
+    }
+  }
 
   AtrasEspecialidad(){
     this.selectEspecialista = true;
@@ -224,219 +232,40 @@ export class SolicitarTurnoComponent {
     this.selectDiaHora = false;
   }
 
-  DiaExactoSelect($event:any){
-    this.horaSelect = false;
-   // this.EvaluarTurnoDia();
-  }
+  GenerarTurno(fecha:any){
+    let turno = new Turno
 
-  SelectHorario(h:any){
-    this.EvaluarTurnoHorario()
-    console.log(h)
-    this.horario = h
-  }
+    turno.especialidad = this.especialdiad
+    turno.especialista = this.especialista
+    turno.horarioInicio = fecha.hora
+    turno.paciente = this.paciente
+    turno.anio = this.datePipe.transform(fecha.fecha,'yyyy') as string
+    turno.mes = this.datePipe.transform(fecha.fecha,'MM') as string
+    turno.dia = this.datePipe.transform(fecha.fecha,'dd') as string
 
-
-  EvaluarTurnoHorario(){
-    let tomado = false
-
-    for(let turno of this.especialista.turnos){
-      console.log(turno)
-      if(turno.mes === this.mes && turno.dia === this.diaNum){
-        console.log(turno.mes)
-        console.log(turno.dia)
-          if(turno.horarioInicio === this.horario.horaInicio)
-          {
-            if(!turno.cancelado)
-            {
-              console.log(turno.horarioInicio)
-              tomado = true;
-            }
-            break;
-          }
-      }
-    }
-    console.log(tomado)
-    if(tomado){this.tomado = true}
-
-    return tomado
-  }
-
-  EvaluarTurnoDia(){
-    let diaLleno = true
-    for(let horario of this.horarios){
-
-      for(let turno of this.especialista.turnos){
-        console.log(turno)
-        if(turno.mes === this.mes && turno.dia === this.diaNum){
-          console.log(turno.mes)
-          console.log(turno.dia)
-            if(turno.horarioInicio !== horario.horaInicio)
-            {
-              if(turno.cancelado){
-                console.log(turno.horarioInicio)
-                diaLleno = false;
-                break;
-              }
-            }
-        }
-      }
-
-      if(!diaLleno){
-        break;
-      }
-    }
-
-    if(this.especialista.turnos.length === 0){diaLleno = false}
-
-    console.log(diaLleno)
-    if(diaLleno){this.lleno = true}else{this.lleno = false}
-
-    return diaLleno
-  }
-
-  EvaluarPacienteTurno(){
-    let tomado = false
-
-    for(let turno of this.paciente.turnos){
-      console.log(turno)
-      if(turno.mes === this.mes && turno.dia === this.diaNum){
-        console.log(turno.mes)
-        console.log(turno.dia)
-          if(turno.horarioInicio === this.horario.horaInicio)
-          {
-            console.log(turno.horarioInicio)
-            tomado = true;
-            break;
-          }
-      }
-    }
-    console.log(tomado)
-    if(tomado){this.tomado = true}else{this.tomado = false}
-
-    return tomado
-  }
-
-  GenerarTurno(){
-
-    if(this.diaNum != ""){
-      if(this.horario.horaInicio != ""){
-        //!this.EvaluarTurnoDia()
-        if(true){
-          if(!this.EvaluarTurnoHorario()){
-            if(!this.EvaluarPacienteTurno()){
-              let turno = new Turno
-              turno.dia = this.diaNum as string
-              turno.especialidad = this.especialdiad
-              turno.especialista = this.especialista
-              turno.horarioInicio = this.horario.horaInicio as string
-              turno.horarioFin = this.horario.horaFin as string
-              turno.paciente = this.paciente
-              turno.mes = this.mes as string
-          
-
-
-              this.bd.AltaTurno(turno).then(()=>{
-
-                turno.especialista = undefined;
-                turno.paciente = undefined;
-                this.paciente.turnos.push(JSON.parse(JSON.stringify(turno)))
-                this.especialista.turnos.push(JSON.parse(JSON.stringify(turno)))
-                this.bd.ModificarUsuarioTurno(this.especialista.id,this.especialista.turnos)
-                this.bd.ModificarUsuarioTurno(this.paciente.id,this.paciente.turnos)
-                this.Toast.fire({
-                  icon: 'success',
-                  title: 'Turno Solicitado',
-                  color:'#80ED99',
-                })
-                this.ruta.navigateByUrl('homeAdministrador/miPerfil');
-              })
-              .catch(()=>{
-                this.Toast.fire({
-                  icon: 'error',
-                  title: 'Error al generar el turno, vuelve a intentarlo',
-                  color:'#fb7474',
-                })
-                this.ruta.navigateByUrl('homeAdministrador/miPerfil');
-              })       
-            }else{
-              this.Toast.fire({
-                icon: 'error',
-                title: 'El turno ya fue solicitado por el Paciente',
-                color:'#fb7474',
-              })
-            }
-          }else{
-            this.Toast.fire({
-              icon: 'error',
-              title: 'horario tomado',
-              color:'#fb7474',
-            })
-          }
-        }else{
-          this.Toast.fire({
-            icon: 'error',
-            title: 'Dia con horarios tomados',
-            color:'#fb7474',
-          })
-        }
-      }else{
-        this.Toast.fire({
-          icon: 'error',
-          title: 'Falta Seleccionar horario',
-          color:'#fb7474',
-        })
-      }
-    }else{
+    this.bd.AltaTurno(turno).then(()=>{
+      turno.especialista = undefined;
+      turno.paciente = undefined;
+      this.paciente.turnos.push(JSON.parse(JSON.stringify(turno)))
+      this.especialista.turnos.push(JSON.parse(JSON.stringify(turno)))
+      this.bd.ModificarUsuarioTurno(this.especialista.id,this.especialista.turnos)
+      this.bd.ModificarUsuarioTurno(this.paciente.id,this.paciente.turnos)
+      this.Toast.fire({
+        icon: 'success',
+        title: 'Turno Solicitado',
+        color:'#80ED99',
+      })
+      this.ruta.navigateByUrl('homeAdministrador/miPerfil');
+    })
+    .catch(()=>{
       this.Toast.fire({
         icon: 'error',
-        title: 'Falta selecionar dia',
+        title: 'Error al generar el turno, vuelve a intentarlo',
         color:'#fb7474',
       })
-    }
+      this.ruta.navigateByUrl('homeAdministrador/miPerfil');
+    })       
   }
 
-  TablaTurnos(){
-    let inicio = 0;
-    let fin = 0;
-    switch(this.dia){
-      case'Lunes':
-        inicio = parseInt(this.especialista.horarios.lunes.inicio);
-        fin = parseInt(this.especialista.horarios.lunes.fin);
-      break;
-      case'Martes':
-      inicio = parseInt(this.especialista.horarios.martes.inicio);
-      fin = parseInt(this.especialista.horarios.martes.fin);
-      break;
-      case'Miercoles':
-      inicio = parseInt(this.especialista.horarios.miercoles.inicio);
-      fin = parseInt(this.especialista.horarios.miercoles.fin);
-      break;
-      case'Jueves':
-      inicio = parseInt(this.especialista.horarios.jueves.inicio);
-      fin = parseInt(this.especialista.horarios.jueves.fin);
-      break;
-      case'Viernes':
-      inicio = parseInt(this.especialista.horarios.viernes.inicio);
-      fin = parseInt(this.especialista.horarios.viernes.fin);
-      break;
-      case'Sabado':
-      inicio = parseInt(this.especialista.horarios.sabado.inicio);
-      fin = parseInt(this.especialista.horarios.sabado.fin);
-      break;
-    }
-
-    let arrHorarios = []
-
-    for(;inicio <= fin;inicio++){
-      let horarios = {
-        inicio : inicio,
-        fin : inicio + 0.8
-      }
-      arrHorarios.push(horarios)
-    }
-
-    console.log(arrHorarios)
-
-  }
 
 }

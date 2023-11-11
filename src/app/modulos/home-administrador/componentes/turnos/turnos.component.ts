@@ -110,40 +110,38 @@ export class TurnosComponent {
     if(this.motivo.length >= 25){
 
 
-      this.turno.especialista?.turnos.forEach((t:Turno)=>{
-        if(t.mes == this.turno.mes && this.turno.dia == t.dia)
-        {
-          t.cancelado = true;
-          t.diaDeCancelacion = Date.now();
-          t.motivoCancelado = this.motivo;
-          t.id = this.turno.id
-        }
+      this.bd.TraerUsuarioPorId( this.turno.especialista?.id as string).then((esp:any)=>{
+         esp.turnos.forEach((t:Turno)=>{
+          if(t.mes == this.turno.mes && this.turno.dia == t.dia)
+          {
+            t.cancelado = true;
+            t.diaDeCancelacion = Date.now();
+            t.motivoCancelado = this.motivo;
+            t.id = this.turno.id
+          }
+        })
+        this.bd.ModificarUsuarioTurno(this.turno.especialista?.id as string, esp.turnos as Array<any>);
+        this.bd.TraerUsuarioPorId( this.turno.paciente?.id as string).then((pa:any)=>{
+          pa.turnos.forEach((t:Turno)=>{
+            if(t.mes == this.turno.mes && this.turno.dia == t.dia)
+            {
+              t.cancelado = true;
+              t.diaDeCancelacion = Date.now();
+              t.motivoCancelado = this.motivo;
+              t.id = this.turno.id
+            }
+          })
+          this.bd.ModificarUsuarioTurno(this.turno.paciente?.id as string, pa.turnos as Array<any>);  
+          this.bd.ModificarTurnoCancelado(this.turno.id,this.motivo)
+          this.Toast.fire({
+            icon: 'success',
+            title: 'Turno Cancelado',
+            color:'#80ED99',
+          })
+          this.ruta.navigateByUrl('homeAdministrador/miPerfil');
+        })
       })
-      let turnosEsp : Array<any> = this.turno.especialista?.turnos as Array<any>
-      this.turno.paciente?.turnos.forEach((t:Turno)=>{
-        if(t.mes == this.turno.mes && this.turno.dia == t.dia)
-        {
-          t.cancelado = true;
-          t.diaDeCancelacion = Date.now();
-          t.motivoCancelado = this.motivo;
-          t.id = this.turno.id
-        }
-      })
-      let turnosPa : Array<any> = this.turno.paciente?.turnos as Array<any>
-
-      this.bd.ModificarTurnoCancelado(this.turno.id,this.motivo)
-      this.bd.ModificarUsuarioTurno(this.turno.especialista?.id,turnosEsp);
-      this.bd.ModificarUsuarioTurno(this.turno.paciente?.id,turnosPa);  
-
-      this.Toast.fire({
-        icon: 'success',
-        title: 'Turno Cancelado',
-        color:'#80ED99',
-      })
-
-      window.location.reload()
-
-    }else{
+     }else{
       if(this.motivo = ""){
         this.Toast.fire({
           icon: 'error',
