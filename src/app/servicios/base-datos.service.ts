@@ -167,6 +167,26 @@ export class BaseDatosService {
     });
   }
 
+  ModificarTurnoAceptar(id:any)
+  {
+    const coleccion = collection(this.firestore,'turnos')
+    const documento = doc(coleccion,id)
+    updateDoc(documento,{
+      aceptado : true,
+    });
+  }
+
+  ModificarTurnoFinalizado(id:any,resenia:string)
+  {
+    const coleccion = collection(this.firestore,'turnos')
+    const documento = doc(coleccion,id)
+    updateDoc(documento,{
+      finalizado : true,
+      diaDeFinalizacion: Date.now(),
+      resenia : resenia
+    });
+  }
+
   codigoRandom(){
 
     let codigoArr = ['a','b','c','d',1,3,5,7]
