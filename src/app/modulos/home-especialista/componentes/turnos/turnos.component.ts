@@ -142,8 +142,37 @@ export class TurnosComponent {
     this.selectPaciente = false;
   }
 
+  SelectEspecialdiad(esp:any){
+    this.turnos = this.turnosFijosBd;
+    let tu : Array<Turno> = []
+      for(let turno of this.turnos){
+          if(esp === turno.especialidad){
+            tu.push(turno);
+          }
+      }
+    this.turnos = tu;
+    if(this.aceptarT || this.rechazarT  ){ this.TurnosAceptarRechazar();}else if(this.cancelarT || this.finalizarT){this.TurnosCancelarFinalizar();}else if(this.reseniaT){this.TurnosResenia()}
+    this.ChangeToSelectTurno();
+  }
+
+  SelectPaciente(pa:Paciente){
+    this.turnos = this.turnosFijosBd;
+    let tu : Array<Turno> = []
+    for(let t of pa.turnos){
+      for(let turno of this.turnos){
+          if(t.id === turno.id){
+            tu.push(turno);
+          }
+      }
+    }
+    this.turnos = tu;
+    if(this.aceptarT || this.rechazarT  ){ this.TurnosAceptarRechazar();}else if(this.cancelarT || this.finalizarT){this.TurnosCancelarFinalizar();}else if(this.reseniaT){this.TurnosResenia()}
+    this.ChangeToSelectTurno();
+  }
+
   Reset(){
     this.turnos = this.turnosFijosBd;
+    if(this.aceptarT || this.rechazarT  ){ this.TurnosAceptarRechazar();}else if(this.cancelarT || this.finalizarT){this.TurnosCancelarFinalizar();}else if(this.reseniaT){this.TurnosResenia()}
   }
 
   ChangeAceptarT(){
@@ -205,6 +234,7 @@ export class TurnosComponent {
     this.cancelarT = false;
     this.finalizarT = false;
     this.reseniaT = true;
+    this.TurnosResenia()
 
     this.OpcionesFalse()
 
@@ -242,7 +272,19 @@ export class TurnosComponent {
         turnosCancelarFinalizar.push(t);
       }
     }
-    this.turnosFiltro = turnosCancelarFinalizar
+    this.turnosFiltro = turnosCancelarFinalizar;
+  }
+
+  
+  TurnosResenia(){
+    let turnosResenia = []
+    this.turnosFiltro = []
+    for(let t of this.turnos){
+      if(t.aceptado === true && t.cancelado === false && t.finalizado === true){
+        turnosResenia.push(t);
+      }
+    }
+    this.turnosFiltro = turnosResenia;
   }
 
   SelectTurno(turno:Turno){
@@ -417,7 +459,7 @@ export class TurnosComponent {
          title: 'Turno Aceptado',
          color:'#80ED99',
        })
-       this.ruta.navigateByUrl('homeEspecialista/turnos');
+       this.ruta.navigateByUrl('homeEspecialista/miPerfil');
      })
    })
   }

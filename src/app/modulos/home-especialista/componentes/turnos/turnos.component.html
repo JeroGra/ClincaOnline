@@ -24,7 +24,7 @@
         </button>
 
 
-        <div class="card text-center">
+        <div  *ngIf="selectTurnos" class="card text-center">
     
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs">
@@ -104,7 +104,7 @@
                         <div class="col border-col">
                             {{t.anio}}-{{t.mes}}-{{t.dia}} {{t.horarioInicio}} 
                         </div>
-                        <div *ngIf="t.aceptado" class="col border-col">
+                        <div *ngIf="t.aceptado && t.finalizado === false" class="col border-col">
                              Aceptado
                         </div>
                         <div *ngIf="t.cancelado" class="col border-col">
@@ -209,11 +209,56 @@
                        </button>
                    </div>
 
+                   <div *ngIf="resenia" class="row" style="margin-top: 0.5rem;">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Reseña Profecional</h5>
+                          <p class="card-text">{{turno.resenia}}</p>
+                          <p>Finalizado el {{turno.diaDeFinalizacion | date : 'yyyy/MM/dd'}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Comentario Paciente y Calificacion</h5>
+                          <p *ngIf="turno.resultadoEncuesta !== '' " class="card-text">Encuesta : {{turno.resultadoEncuesta}}</p>
+                          <p *ngIf="turno.calificacionAtencion !== '' " class="card-text">Calificacion/Comentario : {{turno.calificacionAtencion}}</p>
+                          <p *ngIf="turno.resultadoEncuesta === '' " class="card-text">Sin Encuesta</p>
+                          <p *ngIf="turno.calificacionAtencion === '' " class="card-text">No Calificado</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                     
                 </div>
             </div>
 
         </div>
 
+        <div *ngIf="selectEspecialidad" class="card-body text-center">
+            <h4>Seleccione Especialidad</h4>
+            <div class="list-group ">
+                <div class="list-group-item" *ngFor="let esp of especialidades">
+                    <p style="font-weight: bolder;">{{esp.especialidad}}</p>
+                    <button (click)="SelectEspecialdiad(esp.especialidad)"  class="btn-select-esp  rounded-1">
+                        <img style="width: 6rem;height: 6rem;" src="{{esp.foto}}">
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <div *ngIf="selectPaciente" class="card-body text-center">
+            <h4>Seleccione Especialista</h4>
+            <div *ngIf="selectPaciente" class="card-body text-center">
+                <h4>Seleccione Especialista</h4>
+                <button (click)="SelectPaciente(pa)" *ngFor="let pa of pacientes"  class="btn-select-espe rounded-1">
+                    <img style="width: 6rem;height: 6rem;" src="{{pa.fotos[0].path}}">
+                </button>
+           </div>
+            
+        </div>
 
 </div>

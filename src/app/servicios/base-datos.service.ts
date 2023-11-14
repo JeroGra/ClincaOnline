@@ -187,6 +187,22 @@ export class BaseDatosService {
     });
   }
 
+  ModificarTurnoEncuesta(id:any,encuesta:string){
+    const coleccion = collection(this.firestore,'turnos')
+    const documento = doc(coleccion,id)
+    updateDoc(documento,{
+      resultadoEncuesta : encuesta
+    });
+  }
+
+  ModificarTurnoCalificacion(id:any,calificacion:string){
+    const coleccion = collection(this.firestore,'turnos')
+    const documento = doc(coleccion,id)
+    updateDoc(documento,{
+      calificacionAtencion : calificacion
+    });
+  }
+
   codigoRandom(){
 
     let codigoArr = ['a','b','c','d',1,3,5,7]

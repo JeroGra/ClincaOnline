@@ -1,1 +1,363 @@
-<p>turnos works!</p>
+<div class="card text-center">
+
+    
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link " (click)="ChangeToSelectTurno()"   [ngClass]="(selectTurnos == true)? 'active' : '' ">Turnos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " (click)="ChangeToSelectEspecialdiad()"  [ngClass]="(selectEspecialidad == true)? 'active' : '' " >Especialidad</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " (click)="ChangeToSelectEspecialista()"  [ngClass]="(selectEspecialista == true)? 'active' : '' " >Especialistas</a>
+            </li>
+        </ul>
+    </div>
+
+    <div *ngIf="selectTurnos" class="card-body text-center">
+        <button (click)="Reset()" class="rounded-pill btn btn-light border border-black" style="width: 10rem;height: 1.5rem;margin-bottom: 1rem;">
+            <svg style="margin-bottom: 2rem;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+              </svg>
+        </button>
+
+
+        <div  *ngIf="selectTurnos" class="card text-center">
+    
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link " (click)="ChangeCancelarT()"  [ngClass]="(cancelarT == true)? 'active' : '' " >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-clipboard-x" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M6.146 7.146a.5.5 0 0 1 .708 0L8 8.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 9l1.147 1.146a.5.5 0 0 1-.708.708L8 9.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 9 6.146 7.854a.5.5 0 0 1 0-.708z"/>
+                                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                                  </svg>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " (click)="ChangeReseniaT()"   [ngClass]="(reseniaT == true)? 'active' : '' ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M5 1.5A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5v-1Zm5 0a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1Z"/>
+                                    <path d="M3 1.5h1v1H3a1 1 0 0 0-1 1V14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5a1 1 0 0 0-1-1h-1v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2Z"/>
+                                    <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.31 8 6.982Z"/>
+                                  </svg>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link "  (click)="ChangeEncuestaT()"  [ngClass]="(encuestaT == true)? 'active' : '' " >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-clipboard-pulse" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                                    <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
+                                    <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link "  (click)="ChangeCalificarT()" [ngClass]="(calificarT == true)? 'active' : '' " >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-clipboard-minus" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                  </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <h4>Turnos</h4>
+                <div class="container text-center div-tabla-t">
+                    <div class="row align-items-start tabla-titulo">
+                        <div class="col  border-col">
+                            fecha del Turno
+                        </div>
+                        <div class="col  border-col">
+                            Estado
+                        </div>
+                        <div class="col  border-col">
+                            Dia solicitado
+                        </div>
+                        <div class="col  border-col">
+                            Especialidad
+                        </div>
+                        <div class="col  border-col">
+                            Especialista
+                        </div>
+                        <div class="col  border-col">
+                            Paciente
+                        </div>
+                        <div class="col  border-col">
+                            
+                        </div>
+                    </div>
+        
+                    <div class="row align-items-start tabla-content" *ngFor="let t of turnosFiltro">
+                        <div class="col border-col">
+                            {{t.anio}}-{{t.mes}}-{{t.dia}} {{t.horarioInicio}} 
+                        </div>
+                        <div *ngIf="t.aceptado && t.finalizado === false" class="col border-col">
+                             Aceptado
+                        </div>
+                        <div *ngIf="t.cancelado" class="col border-col">
+                            Cancelado/rechazado
+                        </div>
+                        <div *ngIf="t.finalizado" class="col border-col">
+                            Finalizado
+                        </div>
+                        <div *ngIf="t.aceptado === false && t.cancelado === false && t.finalizado === false" class="col border-col">
+                            Solicitado
+                        </div>
+                        <div *ngIf="t.aceptado === true && t.cancelado === false && t.finalizado === false" class="col border-col">
+                            Tomado
+                        </div>
+                        <div class="col border-col">
+                            {{t.diaDeSolicitud | date : 'dd/MM/yyyy'}}
+                        </div>
+                        <div class="col border-col">
+                            {{t.especialidad}}
+                        </div>
+                        <div class="col border-col">
+                            {{t.especialista?.nombre}} {{t.especialista?.apellido}}
+                        </div>
+                        <div class="col border-col">
+                            {{t.paciente?.nombre}} {{t.paciente?.apellido}}
+                        </div>
+                        <div class="col border-col" >
+                            <button (click)="SelectTurno(t)"  class="btn-select-t">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16"  style="margin-bottom: 0.2rem">
+                                        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                                      </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div >
+                    <div style="margin-top: 0rem;" class="card-group">
+                        <div class="card">
+                            <svg style="margin-left: auto;margin-right: auto;margin-top:1.5rem;" xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-clipboard2-fill" viewBox="0 0 16 16">
+                                <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z"/>
+                                <path d="M3.5 1h.585A1.498 1.498 0 0 0 4 1.5V2a1.5 1.5 0 0 0 1.5 1.5h5A1.5 1.5 0 0 0 12 2v-.5c0-.175-.03-.344-.085-.5h.585A1.5 1.5 0 0 1 14 2.5v12a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-12A1.5 1.5 0 0 1 3.5 1Z"/>
+                              </svg>
+                          <div class="card-body">
+                            <h5 class="card-title">{{turno.mes}}/{{turno.dia}} - {{turno.horarioInicio}}</h5>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <img src="{{fotoEsp}}" style="width: 5rem;margin-left: auto;margin-right: auto;" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title">{{espNombre}}</h5>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <img src="{{fotoE}}" style="width: 5rem;margin-left: auto;margin-right: auto;" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title">{{eNombreApellido}}</h5>
+                          </div>
+                        </div>
+                      </div>
+                
+                    <div  *ngIf="cancelar">
+                        <div class="mb-3">
+                           <label for="exampleFormControlTextarea1" class="form-label">Motivo de Cancelacion</label>
+                           <textarea  [(ngModel)]="motivo" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <button (click)="CancerlarTurno()" class="btn-acc">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16"  style="margin-bottom: 0.2rem">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                            </svg>
+                       </button>
+                   </div>
+
+                   <div  *ngIf="calificar">
+                    <div class="mb-3">
+                       <label for="exampleFormControlTextarea1" class="form-label">Deje un comentario sobre la atencion obtenida por el profesional</label>
+                       <textarea  [(ngModel)]="motivo" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <button (click)="CalificarTurno()" class="btn-acc">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16"  style="margin-bottom: 0.2rem">
+                            <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>                        </svg>
+                   </button>
+               </div>
+
+                   <div *ngIf="encuesta">
+                        <div *ngIf="encuestaRF" class="card" style="width: 100%;">
+                            <div *ngIf="turno.resultadoEncuesta !== '' " class="card-header">
+                            Encuesta del turno
+                            </div>
+                            <ul *ngIf="turno.resultadoEncuesta !== '' " class="list-group list-group-flush text-center ">
+                            <li class="list-group-item" style="font-weight: bolder;margin:0.5rem;margin-left: auto;margin-right: auto;" >Calificacion : {{turno.resultadoEncuesta}}</li>
+                            </ul>
+                            <div *ngIf="turno.resultadoEncuesta === '' " class="card-header">
+                                Encuesta del turno no realizada
+                            </div>
+                            <ul *ngIf="turno.resultadoEncuesta === '' " class="list-group list-group-flush text-center">
+                                <button (click)="EvaluarPregunta('0','')" class="rounded-pill btn btn-light border border-black" style="width: 17rem;height: 2rem;margin:0.5rem;margin-left: auto;margin-right: auto;" >Realizar</button>
+                            </ul>
+                        </div>
+                        <div *ngIf="pregunta1" class="card" style="width: 100%;">
+                            <div class="card-header" style="font-weight: bolder;">
+                                ¿Le resulto facil navegar en la aplicacion?
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <button (click)="EvaluarPregunta('1','Excelente')" class="rounded-pill btn btn-light border border-black  btn-enc-ex" style="width: 17rem;height:  2.5rem;margin:0.5rem;margin-left: auto;margin-right: auto;padding: 0.1rem;" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-grin" viewBox="0 0 16 16">
+                                        <path d="M12.946 11.398A6.002 6.002 0 0 1 2.108 9.14c-.114-.595.426-1.068 1.028-.997C4.405 8.289 6.48 8.5 8 8.5s3.595-.21 4.864-.358c.602-.07 1.142.402 1.028.998a5.953 5.953 0 0 1-.946 2.258Zm-.078-2.25C11.588 9.295 9.539 9.5 8 9.5c-1.54 0-3.589-.205-4.868-.352.11.468.286.91.517 1.317A36.797 36.797 0 0 0 8 10.75a36.796 36.796 0 0 0 4.351-.285c.231-.407.407-.85.517-1.317Zm-1.36 2.416c-1.02.1-2.255.186-3.508.186-1.253 0-2.488-.086-3.507-.186A4.985 4.985 0 0 0 8 13a4.986 4.986 0 0 0 3.507-1.436ZM6.488 7c.114-.294.179-.636.179-1 0-1.105-.597-2-1.334-2C4.597 4 4 4.895 4 6c0 .364.065.706.178 1 .23-.598.662-1 1.155-1 .494 0 .925.402 1.155 1ZM12 6c0 .364-.065.706-.178 1-.23-.598-.662-1-1.155-1-.494 0-.925.402-1.155 1a2.793 2.793 0 0 1-.179-1c0-1.105.597-2 1.334-2C11.403 4 12 4.895 12 6Z"/>
+                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16Zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14Z"/>
+                                    </svg></button>
+                                <button (click)="EvaluarPregunta('1','Bien')" class="rounded-pill btn btn-light border border-black  btn-enc-b" style="width: 17rem;height: 2.5rem;margin:0.5rem;margin-left: auto;margin-right: auto;padding: 0.1rem;" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+                                    </svg></button>
+                                <button (click)="EvaluarPregunta('1','Mal')" class="rounded-pill btn btn-light border border-black  btn-enc-m" style="width: 17rem;height:  2.5rem;margin:0.5rem;margin-left: auto;margin-right: auto;padding: 0.1rem;" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-angry" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zm6.991-8.38a.5.5 0 1 1 .448.894l-1.009.504c.176.27.285.64.285 1.049 0 .828-.448 1.5-1 1.5s-1-.672-1-1.5c0-.247.04-.48.11-.686a.502.502 0 0 1 .166-.761l2-1zm-6.552 0a.5.5 0 0 0-.448.894l1.009.504A1.94 1.94 0 0 0 5 6.5C5 7.328 5.448 8 6 8s1-.672 1-1.5c0-.247-.04-.48-.11-.686a.502.502 0 0 0-.166-.761l-2-1z"/>
+                                    </svg></button>
+                            </ul>
+                        </div>
+                        <div *ngIf="pregunta2" class="card" style="width: 100%;">
+                            <div class="card-header" style="font-weight: bolder;">
+                                ¿Le resulto facil solicitar el turno?
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <button (click)="EvaluarPregunta('2','Excelente')" class="rounded-pill btn btn-light border border-black  btn-enc-ex" style="width: 17rem;height:  2.5rem;margin:0.5rem;margin-left: auto;margin-right: auto;padding: 0.1rem;" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-grin" viewBox="0 0 16 16">
+                                        <path d="M12.946 11.398A6.002 6.002 0 0 1 2.108 9.14c-.114-.595.426-1.068 1.028-.997C4.405 8.289 6.48 8.5 8 8.5s3.595-.21 4.864-.358c.602-.07 1.142.402 1.028.998a5.953 5.953 0 0 1-.946 2.258Zm-.078-2.25C11.588 9.295 9.539 9.5 8 9.5c-1.54 0-3.589-.205-4.868-.352.11.468.286.91.517 1.317A36.797 36.797 0 0 0 8 10.75a36.796 36.796 0 0 0 4.351-.285c.231-.407.407-.85.517-1.317Zm-1.36 2.416c-1.02.1-2.255.186-3.508.186-1.253 0-2.488-.086-3.507-.186A4.985 4.985 0 0 0 8 13a4.986 4.986 0 0 0 3.507-1.436ZM6.488 7c.114-.294.179-.636.179-1 0-1.105-.597-2-1.334-2C4.597 4 4 4.895 4 6c0 .364.065.706.178 1 .23-.598.662-1 1.155-1 .494 0 .925.402 1.155 1ZM12 6c0 .364-.065.706-.178 1-.23-.598-.662-1-1.155-1-.494 0-.925.402-1.155 1a2.793 2.793 0 0 1-.179-1c0-1.105.597-2 1.334-2C11.403 4 12 4.895 12 6Z"/>
+                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16Zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14Z"/>
+                                    </svg></button>
+                                <button (click)="EvaluarPregunta('2','Bien')" class="rounded-pill btn btn-light border border-black  btn-enc-b" style="width: 17rem;height: 2.5rem;margin:0.5rem;margin-left: auto;margin-right: auto;padding: 0.1rem;" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+                                    </svg></button>
+                                <button (click)="EvaluarPregunta('2','Mal')" class="rounded-pill btn btn-light border border-black  btn-enc-m" style="width: 17rem;height:  2.5rem;margin:0.5rem;margin-left: auto;margin-right: auto;padding: 0.1rem;" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-angry" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zm6.991-8.38a.5.5 0 1 1 .448.894l-1.009.504c.176.27.285.64.285 1.049 0 .828-.448 1.5-1 1.5s-1-.672-1-1.5c0-.247.04-.48.11-.686a.502.502 0 0 1 .166-.761l2-1zm-6.552 0a.5.5 0 0 0-.448.894l1.009.504A1.94 1.94 0 0 0 5 6.5C5 7.328 5.448 8 6 8s1-.672 1-1.5c0-.247-.04-.48-.11-.686a.502.502 0 0 0-.166-.761l-2-1z"/>
+                                    </svg></button>
+                            </ul>
+                        </div>
+                        <div *ngIf="pregunta3" class="card" style="width: 100%;">
+                            <div class="card-header" style="font-weight: bolder;">
+                                ¿Considera que obtubo una buena atencion?
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <button (click)="EvaluarPregunta('3','Excelente')" class="rounded-pill btn btn-light border border-black  btn-enc-ex" style="width: 17rem;height:  2.5rem;margin:0.5rem;margin-left: auto;margin-right: auto;padding: 0.1rem;" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-grin" viewBox="0 0 16 16">
+                                        <path d="M12.946 11.398A6.002 6.002 0 0 1 2.108 9.14c-.114-.595.426-1.068 1.028-.997C4.405 8.289 6.48 8.5 8 8.5s3.595-.21 4.864-.358c.602-.07 1.142.402 1.028.998a5.953 5.953 0 0 1-.946 2.258Zm-.078-2.25C11.588 9.295 9.539 9.5 8 9.5c-1.54 0-3.589-.205-4.868-.352.11.468.286.91.517 1.317A36.797 36.797 0 0 0 8 10.75a36.796 36.796 0 0 0 4.351-.285c.231-.407.407-.85.517-1.317Zm-1.36 2.416c-1.02.1-2.255.186-3.508.186-1.253 0-2.488-.086-3.507-.186A4.985 4.985 0 0 0 8 13a4.986 4.986 0 0 0 3.507-1.436ZM6.488 7c.114-.294.179-.636.179-1 0-1.105-.597-2-1.334-2C4.597 4 4 4.895 4 6c0 .364.065.706.178 1 .23-.598.662-1 1.155-1 .494 0 .925.402 1.155 1ZM12 6c0 .364-.065.706-.178 1-.23-.598-.662-1-1.155-1-.494 0-.925.402-1.155 1a2.793 2.793 0 0 1-.179-1c0-1.105.597-2 1.334-2C11.403 4 12 4.895 12 6Z"/>
+                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16Zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14Z"/>
+                                    </svg></button>
+                                <button (click)="EvaluarPregunta('3','Bien')" class="rounded-pill btn btn-light border border-black  btn-enc-b" style="width: 17rem;height: 2.5rem;margin:0.5rem;margin-left: auto;margin-right: auto;padding: 0.1rem;" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+                                    </svg></button>
+                                <button (click)="EvaluarPregunta('3','Mal')" class="rounded-pill btn btn-light border border-black  btn-enc-m" style="width: 17rem;height:  2.5rem;margin:0.5rem;margin-left: auto;margin-right: auto;padding: 0.1rem;" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-angry" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zm6.991-8.38a.5.5 0 1 1 .448.894l-1.009.504c.176.27.285.64.285 1.049 0 .828-.448 1.5-1 1.5s-1-.672-1-1.5c0-.247.04-.48.11-.686a.502.502 0 0 1 .166-.761l2-1zm-6.552 0a.5.5 0 0 0-.448.894l1.009.504A1.94 1.94 0 0 0 5 6.5C5 7.328 5.448 8 6 8s1-.672 1-1.5c0-.247-.04-.48-.11-.686a.502.502 0 0 0-.166-.761l-2-1z"/>
+                                    </svg></button>
+                            </ul>
+                        </div>
+                        <div *ngIf="pregunta4" class="card" style="width: 100%;">
+                            <div class="card-header" style="font-weight: bolder;">
+                                ¿Le resulto comodo ver las reseñas de su turno en la aplicacion?
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <button (click)="EvaluarPregunta('4','Excelente')" class="rounded-pill btn btn-light border border-black  btn-enc-ex" style="width: 17rem;height:  2.5rem;margin:0.5rem;margin-left: auto;margin-right: auto;padding: 0.1rem;" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-grin" viewBox="0 0 16 16">
+                                        <path d="M12.946 11.398A6.002 6.002 0 0 1 2.108 9.14c-.114-.595.426-1.068 1.028-.997C4.405 8.289 6.48 8.5 8 8.5s3.595-.21 4.864-.358c.602-.07 1.142.402 1.028.998a5.953 5.953 0 0 1-.946 2.258Zm-.078-2.25C11.588 9.295 9.539 9.5 8 9.5c-1.54 0-3.589-.205-4.868-.352.11.468.286.91.517 1.317A36.797 36.797 0 0 0 8 10.75a36.796 36.796 0 0 0 4.351-.285c.231-.407.407-.85.517-1.317Zm-1.36 2.416c-1.02.1-2.255.186-3.508.186-1.253 0-2.488-.086-3.507-.186A4.985 4.985 0 0 0 8 13a4.986 4.986 0 0 0 3.507-1.436ZM6.488 7c.114-.294.179-.636.179-1 0-1.105-.597-2-1.334-2C4.597 4 4 4.895 4 6c0 .364.065.706.178 1 .23-.598.662-1 1.155-1 .494 0 .925.402 1.155 1ZM12 6c0 .364-.065.706-.178 1-.23-.598-.662-1-1.155-1-.494 0-.925.402-1.155 1a2.793 2.793 0 0 1-.179-1c0-1.105.597-2 1.334-2C11.403 4 12 4.895 12 6Z"/>
+                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16Zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14Z"/>
+                                    </svg></button>
+                                <button (click)="EvaluarPregunta('4','Bien')" class="rounded-pill btn btn-light border border-black  btn-enc-b" style="width: 17rem;height: 2.5rem;margin:0.5rem;margin-left: auto;margin-right: auto;padding: 0.1rem;" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+                                    </svg></button>
+                                <button (click)="EvaluarPregunta('4','Mal')" class="rounded-pill btn btn-light border border-black  btn-enc-m" style="width: 17rem;height:  2.5rem;margin:0.5rem;margin-left: auto;margin-right: auto;padding: 0.1rem;" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-angry" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zm6.991-8.38a.5.5 0 1 1 .448.894l-1.009.504c.176.27.285.64.285 1.049 0 .828-.448 1.5-1 1.5s-1-.672-1-1.5c0-.247.04-.48.11-.686a.502.502 0 0 1 .166-.761l2-1zm-6.552 0a.5.5 0 0 0-.448.894l1.009.504A1.94 1.94 0 0 0 5 6.5C5 7.328 5.448 8 6 8s1-.672 1-1.5c0-.247-.04-.48-.11-.686a.502.502 0 0 0-.166-.761l-2-1z"/>
+                                    </svg></button>
+                            </ul>
+                        </div>
+                        <div *ngIf="pregunta5" class="card" style="width: 100%;">
+                            <div class="card-header" style="font-weight: bolder;">
+                                ¿Como paciente considera muy comoda esta aplicacion?
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <button (click)="EvaluarPregunta('5','Excelente')" class="rounded-pill btn btn-light border border-black  btn-enc-ex" style="width: 17rem;height:  2.5rem;margin:0.5rem;margin-left: auto;margin-right: auto;padding: 0.1rem;" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-grin" viewBox="0 0 16 16">
+                                        <path d="M12.946 11.398A6.002 6.002 0 0 1 2.108 9.14c-.114-.595.426-1.068 1.028-.997C4.405 8.289 6.48 8.5 8 8.5s3.595-.21 4.864-.358c.602-.07 1.142.402 1.028.998a5.953 5.953 0 0 1-.946 2.258Zm-.078-2.25C11.588 9.295 9.539 9.5 8 9.5c-1.54 0-3.589-.205-4.868-.352.11.468.286.91.517 1.317A36.797 36.797 0 0 0 8 10.75a36.796 36.796 0 0 0 4.351-.285c.231-.407.407-.85.517-1.317Zm-1.36 2.416c-1.02.1-2.255.186-3.508.186-1.253 0-2.488-.086-3.507-.186A4.985 4.985 0 0 0 8 13a4.986 4.986 0 0 0 3.507-1.436ZM6.488 7c.114-.294.179-.636.179-1 0-1.105-.597-2-1.334-2C4.597 4 4 4.895 4 6c0 .364.065.706.178 1 .23-.598.662-1 1.155-1 .494 0 .925.402 1.155 1ZM12 6c0 .364-.065.706-.178 1-.23-.598-.662-1-1.155-1-.494 0-.925.402-1.155 1a2.793 2.793 0 0 1-.179-1c0-1.105.597-2 1.334-2C11.403 4 12 4.895 12 6Z"/>
+                                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16Zm0-1A7 7 0 1 1 8 1a7 7 0 0 1 0 14Z"/>
+                                    </svg></button>
+                                <button (click)="EvaluarPregunta('5','Bien')" class="rounded-pill btn btn-light border border-black  btn-enc-b" style="width: 17rem;height: 2.5rem;margin:0.5rem;margin-left: auto;margin-right: auto;padding: 0.1rem;" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-smile" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z"/>
+                                    </svg></button>
+                                <button (click)="EvaluarPregunta('5','Mal')" class="rounded-pill btn btn-light border border-black  btn-enc-m" style="width: 17rem;height:  2.5rem;margin:0.5rem;margin-left: auto;margin-right: auto;padding: 0.1rem;" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-emoji-angry" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zm6.991-8.38a.5.5 0 1 1 .448.894l-1.009.504c.176.27.285.64.285 1.049 0 .828-.448 1.5-1 1.5s-1-.672-1-1.5c0-.247.04-.48.11-.686a.502.502 0 0 1 .166-.761l2-1zm-6.552 0a.5.5 0 0 0-.448.894l1.009.504A1.94 1.94 0 0 0 5 6.5C5 7.328 5.448 8 6 8s1-.672 1-1.5c0-.247-.04-.48-.11-.686a.502.502 0 0 0-.166-.761l-2-1z"/>
+                                    </svg></button>
+                            </ul>
+                        </div>
+                   </div>
+                   
+
+                   <div *ngIf="resenia" class="row" style="margin-top: 0.5rem;">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Reseña Profecional</h5>
+                          <p class="card-text">{{turno.resenia}}</p>
+                          <p>Finalizado el {{turno.diaDeFinalizacion | date : 'yyyy/MM/dd'}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">Comentario Paciente y Calificacion</h5>
+                          <p *ngIf="turno.resultadoEncuesta !== '' " class="card-text">Encuesta : {{turno.resultadoEncuesta}}</p>
+                          <p *ngIf="turno.calificacionAtencion !== '' " class="card-text">Calificacion/Comentario : {{turno.calificacionAtencion}}</p>
+                          <p *ngIf="turno.resultadoEncuesta === '' " class="card-text">Sin Encuesta</p>
+                          <p *ngIf="turno.calificacionAtencion === '' " class="card-text">No Calificado</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                    
+                </div>
+            </div>
+
+        </div>
+
+        <div *ngIf="selectEspecialidad" class="card-body text-center">
+            <h4>Seleccione Especialidad</h4>
+            <div class="list-group ">
+                <div class="list-group-item" *ngFor="let esp of especialidades">
+                    <p style="font-weight: bolder;">{{esp.especialidad}}</p>
+                    <button (click)="SelectEspecialdiad(esp.especialidad)"  class="btn-select-esp  rounded-1">
+                        <img style="width: 6rem;height: 6rem;" src="{{esp.foto}}">
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <div *ngIf="selectEspecialista" class="card-body text-center">
+            <h4>Seleccione Especialista</h4>
+            <div *ngIf="selectEspecialista" class="card-body text-center">
+                <h4>Seleccione Especialista</h4>
+                <button (click)="SelectEspecialista(esp)" *ngFor="let esp of especialistas"  class="btn-select-espe rounded-1">
+                    <img style="width: 6rem;height: 6rem;" src="{{esp.fotos[0].path}}">
+                </button>
+           </div>
+            
+        </div>
+
+</div>

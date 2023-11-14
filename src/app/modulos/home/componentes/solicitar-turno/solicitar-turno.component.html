@@ -1,1 +1,60 @@
-<p>solicitar-turno works!</p>
+<div  class="text-center" style="padding: 1.5rem;">
+    <div class="card text-center">
+
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                <a class="nav-link "  [ngClass]="(selectEspecialista == true)? 'active' : 'disabled' " >Especialista</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link " aria-current="true" [ngClass]="(selectEspecialidad == true)? 'active' : 'disabled' " >Especialidad</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " aria-disabled="true"  [ngClass]="(selectPaciente == true)? 'active' : 'disabled' ">Paciente</a>
+                    </li>
+                <li class="nav-item">
+                <a class="nav-link " aria-disabled="true"  [ngClass]="(selectDiaHora == true)? 'active' : 'disabled' ">Dia/Hora</a>
+                </li>
+            </ul>
+        </div>
+
+        <div *ngIf="selectEspecialidad" class="card-body text-center">
+            <h4>Seleccione Especialidad</h4>
+            <button (click)="AtrasEspecialidad()" class="btn-atras">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </button>
+            <div class="list-group ">
+                <div class="list-group-item" *ngFor="let esp of especialidadesFiltro">
+                    <p style="font-weight: bolder;">{{esp.especialidad}}</p>
+                    <button  (click)="SelectEspecialdiad(esp.especialidad)" class="btn-select-esp  rounded-1">
+                        <img style="width: 6rem;height: 6rem;" src="{{esp.foto}}">
+                    </button>
+                </div>
+            </div>
+        </div>
+            </div>
+
+            <div *ngIf="selectEspecialista" class="card-body text-center">
+                 <h4>Seleccione Especialista</h4>
+                        <button *ngFor="let esp of especialistasFiltro" (click)="SelectEspecialista(esp)" class="btn-select-espe rounded-1">
+                          <img style="width: 6rem;height: 6rem;" src="{{esp.fotos[0].path}}">
+                        </button>
+            </div>
+
+         <div *ngIf="selectDiaHora" class="card-body text-center">
+            <h4>Seleccione Dia y Horario</h4>
+            <button (click)="AtrasDiaHoras()" class="btn-atras">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+            </button>
+            <div>
+                <button *ngFor="let fecha of this.horarios" (click)="GenerarTurno(fecha)" class="btn-sol rounded-1">
+                    <p>{{fecha.fecha | date: "yyyy-MM-dd"}} {{fecha.hora}}</p>
+                </button>
+            </div>        
+    </div>
+</div>
+

@@ -16,7 +16,7 @@ export class Turno {
     horarioInicio?:string
     resenia?:string = ""
     calificacionAtencion?:string = ""
-    resultadoEncuesta?:number = 0
+    resultadoEncuesta?:string = ""
     diaDeSolicitud?:any = null
     diaDeCancelacion?:any = null
     diaDeFinalizacion?:any = null
