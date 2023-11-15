@@ -9,5 +9,6 @@ ClinicaOnline busca facilitarle el trabajo a los profesionales , y a los pacient
 # Como Ingresar y Registrarme
 
 Lo primero que veremos al ingresar al link de la app web sera: 
-![image](https://github.com/JeroGra/ClincaOnline/assets/97103645/2a01f490-4750-4974-adea-90c5c575532c)
+
+![b](https://github.com/JeroGra/ClincaOnline/assets/97103645/48352fea-150c-4316-84e4-a2cc941b4100)
 
