@@ -83,6 +83,79 @@ Cancelar un turno tambien es muy sencillo y imtuitivo, a demas de que podemos fi
 ![vact](https://github.com/JeroGra/ClincaOnline/assets/97103645/db565640-f430-4a69-abaa-cdbd40d8af18)
 
 
+# Vista Especialista
+
+inicio/Perfil: 
+
+![ve](https://github.com/JeroGra/ClincaOnline/assets/97103645/eb21d0cc-969b-45ca-9d49-bdf72d1547f5)
+
+Como vemos no cambia mucho respecto a los demas tipos de usuarios, solo que encontraremos un boton con un iconod e reloj para seleccionar la franja horaria de trabajo del especialista:
+
+![veh](https://github.com/JeroGra/ClincaOnline/assets/97103645/13d8a939-2549-4a8a-9ec8-f1342c53f797)
+
+Podremos seleccionar la franja horaria de trabajo del especialista de cada dia exepto la de los domingos que no se considera dia habil en
+nuestra ClinicaOnline. Con esta franja horaria podremos generar los turnos con horarios aproximados dentro de la franja horaria seleccionada de dicho dia.
+
+Luego en la barra superior de la app web tendremos el icono de la libreta/turno que si lo pulsamos nos llevara a la administracion de turnos del especialista:
+
+![vet](https://github.com/JeroGra/ClincaOnline/assets/97103645/2b8442e2-0d4f-4c6b-b5d2-fc03a7bf8f93)
 
 
+![vet1](https://github.com/JeroGra/ClincaOnline/assets/97103645/e9e9fd9c-da18-4fba-9532-9f76256b0106)
+
+Esta administracion de turnos podremos filtrar los turnos por las especialidades del especialista y por los pacientes que tienen relacion con los turnos de dicho especialista, a su vez depende del estado del turno podremos realizar acciones:
+
+- Aceptar turnos que esten solicitados:
+
+  ![ta](https://github.com/JeroGra/ClincaOnline/assets/97103645/13b1baed-a819-432a-8372-823cebc5507f)
+
+  nos mostrara los turnos solicitaso para seleccionarlos, ver el detalle del turno y aceptarlo si asi lo deseamos.
+
+- Rechazar turnos que esten solicitados:
+
+  ![tr](https://github.com/JeroGra/ClincaOnline/assets/97103645/145b59b9-b928-4228-9621-e992277cf305)
+
+  nos mostrara los turnos solicitaso para seleccionarlos, ver el detalle del turno y rechazarlo si asi lo deseamos.
+
+- Cancelar turnos que esten aceptados:
+
+  ![tc](https://github.com/JeroGra/ClincaOnline/assets/97103645/1a753e27-b50f-4ce4-b4db-57290963d228)
+
+  nos mostrara los turnos aceptados para seleccionarlos, ver el detalle del turno y cancelarlo si asi lo deseamos.
+
+- Finalizar turnos que esten aceptados:
+
+  ![tf](https://github.com/JeroGra/ClincaOnline/assets/97103645/c3712774-426a-463e-87b7-c67f710a7be9)
+
+    nos mostrara los turnos aceptados para seleccionarlos, ver el detalle del turno y finalizarlos si asi lo deseamos.
+
+- Ver turnos finalizados junto al detalle de la resenia realizada por el prfesional:
+
+  ![tff](https://github.com/JeroGra/ClincaOnline/assets/97103645/d2ea06d2-4959-4076-9c51-45b59593aa4b)
+
+  nos mostrara turnos finalizados para seleccionarlos y ver su reseña, su comentario realizado por el paciente y encuesta del paciente
+  (eso se vera cuando el paciente lo realize).
+
+  ![vetff](https://github.com/JeroGra/ClincaOnline/assets/97103645/734efef1-4d93-4193-a8cd-4846dcc631c4)
+
+
+# Vista Paciente
+
+inicio/prefil:
+
+![vp](https://github.com/JeroGra/ClincaOnline/assets/97103645/214efdcd-904b-405f-bed9-f25ae98f6a60)
+
+Turnos:
+
+![vpt](https://github.com/JeroGra/ClincaOnline/assets/97103645/2c3c40d1-9517-42b7-ad6d-41689b558fcf)
+
+El icono con una libreta/turno con un mas nos lleva a solicitar un turno.
+El icono con una libreta/turno con un grafico de barras nos lleva a ver nuestros turnos solicitados y finalizados para realizar acciones:
+
+![vptt](https://github.com/JeroGra/ClincaOnline/assets/97103645/12672935-1809-414c-9ea2-7dfc2ce10101)
+
+- El turno con una crux o X nos permite cancelarlo al igual que un especialista o administrador.
+- El turno con un corazon nos permite ver la reseña realizada por el profesional de un turno finalizado.
+- El turno con un simbolo de correcto nos permite realizar la encuesta para un turno.
+- La libretita con una lapicera nos permite dejar un comentario sobre la atencion del especialista de un turno finalizado.
 
