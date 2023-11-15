@@ -1,6 +1,6 @@
-# ClinicaOnline
+# ClinicaOnline ![logo_32x32](https://github.com/JeroGra/ClincaOnline/assets/97103645/31b771f4-6886-4cca-93f6-db3136f3492a)
 
-![logo_32x32](https://github.com/JeroGra/ClincaOnline/assets/97103645/31b771f4-6886-4cca-93f6-db3136f3492a)
+
 
 Link: (https://clinicaonline-a3637.web.app)
 Proyecto generado con [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1. Se utilizo servicios de firebase como firestore, storage, athenticator y hosting.
