@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterContentInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Especialista } from 'src/app/clases/especialista';
 import { Paciente } from 'src/app/clases/paciente';
@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   templateUrl: './turnos.component.html',
   styleUrls: ['./turnos.component.css']
 })
-export class TurnosComponent {
+export class TurnosComponent  implements AfterContentInit {
 
   especialidades:Array<any> = [];
   pacientes:Array<Paciente> = [];
@@ -26,6 +26,10 @@ export class TurnosComponent {
   turnosFiltro:Array<Turno> = [];
 
   constructor(private bd : BaseDatosService, private ruta :Router, private log : LocalStorageEncriptService){
+   
+  }
+  
+  ngAfterContentInit() {
     let logObj = this.log.GetEncriptStorage()
 
     this.bd.TraerUsuarioPorId(logObj.id).then((obj:any)=>{
@@ -85,7 +89,6 @@ export class TurnosComponent {
       console.log(this.pacientes)
     })
   }
-  
 
   private Toast = Swal.mixin({
     toast: true,

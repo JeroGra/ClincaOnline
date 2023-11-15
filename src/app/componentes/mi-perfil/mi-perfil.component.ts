@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterContentInit, Component } from '@angular/core';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encript.service';
 import Swal from 'sweetalert2';
@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
   templateUrl: './mi-perfil.component.html',
   styleUrls: ['./mi-perfil.component.css']
 })
-export class MiPerfilComponent {
+export class MiPerfilComponent  implements AfterContentInit {
 
   objLog:any
   user:any;
@@ -62,7 +62,12 @@ export class MiPerfilComponent {
   misHorarios:any;
 
   constructor(private log : LocalStorageEncriptService, private bd : BaseDatosService){
-   this.objLog = this.log.GetEncriptStorage();
+ 
+  } 
+    
+
+  ngAfterContentInit() {
+    this.objLog = this.log.GetEncriptStorage();
     this.bd.TraerUsuarioPorEmail(this.objLog.email).then((user)=>{
       this.user = user;
       this.imagenes = this.user.fotos;
@@ -96,8 +101,8 @@ export class MiPerfilComponent {
          }
        }
     })
-  } 
-    
+  }
+
   private Toast = Swal.mixin({
     toast: true,
     position: 'top',

@@ -41,8 +41,8 @@ export class LoginComponent {
   urlEsp = "https://firebasestorage.googleapis.com/v0/b/clinicaonline-a3637.appspot.com/o/imagenes%2Fusuarios%2F22222222_1?alt=media&token=4a24ec93-23de-4ed3-af42-9e9596927b1e"
   urlEsp2 = "https://firebasestorage.googleapis.com/v0/b/clinicaonline-a3637.appspot.com/o/imagenes%2Fusuarios%2F40000000_1?alt=media&token=df3ddd0a-24a9-4681-a871-24abcabd5c9a"
   urlPa = "https://firebasestorage.googleapis.com/v0/b/clinicaonline-a3637.appspot.com/o/imagenes%2Fusuarios%2F11111111_1?alt=media&token=3eac7146-7ac8-4c31-ab31-6b55b2975e1c"
-  urlPa2  = ""
-  urlPa3 = ""
+  urlPa2  = "https://firebasestorage.googleapis.com/v0/b/clinicaonline-a3637.appspot.com/o/imagenes%2Fusuarios%2F9822222_2?alt=media&token=c5e1b5dd-326f-47dc-bf5e-02a7632d7a4d"
+  urlPa3 = "https://firebasestorage.googleapis.com/v0/b/clinicaonline-a3637.appspot.com/o/imagenes%2Fusuarios%2F43009343_1?alt=media&token=04b86705-2514-4639-a78c-e99bcb6593b5"
 
   private ToastCargaUser = Swal.mixin({
     toast: true,
@@ -83,12 +83,12 @@ export class LoginComponent {
   }
 
   paciente2(){
-    this.email = "paciente@gmail.com"
-    this.contrasenia = "paciente123"
+    this.email = "pepe@gmail.com"
+    this.contrasenia = "pepe222"
   }
   paciente3(){
-    this.email = "paciente@gmail.com"
-    this.contrasenia = "paciente123"
+    this.email = "ana0@gmail.com"
+    this.contrasenia = "ana000"
   }
 
   LogIn()

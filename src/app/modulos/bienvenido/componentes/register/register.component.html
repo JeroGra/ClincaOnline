@@ -1,3 +1,4 @@
+
 <div *ngIf="select" class="div_regist">
     <img (click)="bienvenida()" class="logo mb-4" src="../../../../../assets/imagenes/logo.png" alt="" width="72" height="72">
     <h4>Seleccione perfil a registrar</h4>
@@ -187,10 +188,27 @@
       Elegir
     </button>
     <hr class="my-4">
-
-    <button [disabled]="formEspecialista.invalid || disabled"  (click)="Registrar()" class="w-100 btn btn-primary btn-lg btn_form btn_regist" type="submit">Registrar</button>
-    <button (click)="Cancelar()" class="btn btn-lg btn-outline-light btn-block btn_form" type="submit" >Cancelar</button>
   </form>
+  
+  <div *ngIf="robot" style="margin-top: 0.5rem;margin-bottom: 0.5rem;" class="col-12">
+    <div class="card" style="width: 18rem;margin-left: auto;margin-right: auto;">
+      <img [src]="captchaActual.img" style="width: 12rem;margin-left: auto;margin-right: auto;" class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title">Verifica que no soy un robot</h5>
+        <input type="text" class="form-control" name="micaptcha" [(ngModel)]="micaptcha" >
+        <button style="border-color: black;color: black;" class="btn btn-lg btn-outline-light btn-block btn_form" (click)="VerificarCaptcha()">Verificar</button>
+      </div>
+    </div>
+  </div>
+  
+  <div style="text-align: center;"
+  *ngIf="!robot"
+  >
+  Identidad verificada
+</div>
+<hr class="my-4">
+<button [disabled]="formEspecialista.invalid || disabled || robot === true"  (click)="Registrar()" class="w-100 btn btn-primary btn-lg btn_form btn_regist" type="submit">Registrar</button>
+<button (click)="Cancelar()" class="btn btn-lg btn-outline-light btn-block btn_form" type="submit" >Cancelar</button>
 </div>
 
 <!--PACIENTE-->
@@ -334,13 +352,30 @@
                 </small>
             </div>
           </div>
-          
+
           <img>
           <img>
 
         </div>
         <hr class="my-4">
-        <button (click)="Registrar()" [disabled]="formPaciente.invalid" class="w-100 btn btn-primary btn-lg btn_form btn_regist" type="submit">Registrar</button>
-        <button (click)="Cancelar()" class="btn btn-lg btn-outline-light btn-block btn_form" type="submit" >Cancelar</button>
       </form>
+      <div *ngIf="robot" style="margin-top: 0.5rem;margin-bottom: 0.5rem;" class="col-12">
+        <div class="card" style="width: 18rem;margin-left: auto;margin-right: auto;">
+          <img [src]="captchaActual.img" style="width: 12rem;margin-left: auto;margin-right: auto;" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">Verifica que no soy un robot</h5>
+            <input type="text" class="form-control" name="micaptcha" [(ngModel)]="micaptcha" >
+            <button style="border-color: black;color: black;" class="btn btn-lg btn-outline-light btn-block btn_form" (click)="VerificarCaptcha()">Verificar</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center;"
+      *ngIf="!robot"
+      >
+      Identidad verificada
+      </div>
+      <hr class="my-4">
+      <button (click)="Registrar()" [disabled]="formPaciente.invalid || robot === true" class="w-100 btn btn-primary btn-lg btn_form btn_regist" type="submit">Registrar</button>
+      <button (click)="Cancelar()" class="btn btn-lg btn-outline-light btn-block btn_form" type="submit" >Cancelar</button>
   </div>

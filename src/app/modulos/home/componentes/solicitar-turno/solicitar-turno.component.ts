@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { AfterContentInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Especialista } from 'src/app/clases/especialista';
 import { Paciente } from 'src/app/clases/paciente';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   templateUrl: './solicitar-turno.component.html',
   styleUrls: ['./solicitar-turno.component.css']
 })
-export class SolicitarTurnoComponent {
+export class SolicitarTurnoComponent  implements AfterContentInit {
 
   especialidades:Array<any> = [];
   especialistas:Array<Especialista> = [];
@@ -28,6 +28,10 @@ export class SolicitarTurnoComponent {
   horarios : Array<any> = []
 
   constructor(private bd : BaseDatosService, private ruta :Router,private log : LocalStorageEncriptService){
+   
+  }
+
+  ngAfterContentInit() {
     let logObj = this.log.GetEncriptStorage()
 
     this.bd.TraerUsuarioPorId(logObj.id).then((obj:any)=>{

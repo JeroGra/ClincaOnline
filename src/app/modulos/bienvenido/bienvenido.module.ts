@@ -9,6 +9,7 @@ import { BienvenidaComponent } from './componentes/bienvenida/bienvenida.compone
 import { DColorBtnDirective } from './directivas/d-color-btn.directive';
 
 
+
 @NgModule({
   declarations: [
     BienvenidoComponent,
@@ -16,12 +17,13 @@ import { DColorBtnDirective } from './directivas/d-color-btn.directive';
     RegisterComponent,
     BienvenidaComponent,
     DColorBtnDirective,
+
   ],
   imports: [
     CommonModule,
     BienvenidoRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-  ]
+  ],
 })
 export class BienvenidoModule { }

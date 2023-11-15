@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup,Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup,NgForm,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Especialista } from 'src/app/clases/especialista';
 import { Paciente } from 'src/app/clases/paciente';
@@ -10,7 +10,7 @@ import { Storage, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage
 import Swal from 'sweetalert2'
 import { Auth, createUserWithEmailAndPassword , getAuth, sendEmailVerification, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
 import { AuthService } from 'src/app/servicios/auth.service';
-
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +28,8 @@ export class RegisterComponent {
 
   constructor(private fb : FormBuilder,
     private ruta : Router,private encriptService :LocalStorageEncriptService,
-    private bd : BaseDatosService, private storage : Storage, private auth : AuthService){
+    private bd : BaseDatosService, private storage : Storage, private auth : AuthService,
+  ){
     
     this.bd.TraerUsuarios().subscribe((sub:any)=>{
       this.usuarios = sub;
@@ -125,6 +126,8 @@ export class RegisterComponent {
       ]],
     })
 
+    this.GetCaptcha()
+
   }
 
    private Toast = Swal.mixin({
@@ -170,6 +173,42 @@ export class RegisterComponent {
   esOtraErrorObligatorio = false;
   esOtraErrorMinMax = false;
   disabled = false;
+
+  robot = true;
+
+  captchas = [{img:"../../../../../assets/imagenes/c1.png",clave:"s22xz"},
+  {img:"../../../../../assets/imagenes/c2.png",clave:"x4j2v"},
+  {img:"../../../../../assets/imagenes/c3.png",clave:"78qa9"},
+  {img:"../../../../../assets/imagenes/c4.png",clave:"rr52s"},]
+  captchaActual:any
+  micaptcha = ""
+
+  VerificarCaptcha(){
+    console.log(this.micaptcha)
+    if(this.micaptcha === this.captchaActual.clave){
+      this.robot = false;
+      this.Toast.fire({
+        icon: 'success',
+        title: 'No eres un robot!',
+        color:'#80ED99',
+      })
+    }else{
+
+      this.Toast.fire({
+        icon: 'error',
+        title: "Codigo Captcha Invalido",
+        color:'#fb7474',
+      })
+      this.GetCaptcha()
+    }
+  }
+
+  GetCaptcha(){
+    let captchaSorted = Math.floor(Math.random() * this.captchas.length);
+    this.captchaActual = this.captchas[captchaSorted];
+    this.micaptcha = "";
+  }
+
 
   bienvenida(){
     this.ruta.navigateByUrl("bienvenido/bienvenida")
