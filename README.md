@@ -136,7 +136,7 @@ Esta administracion de turnos podremos filtrar los turnos por las especialidades
   nos mostrara turnos finalizados para seleccionarlos y ver su reseña, su comentario realizado por el paciente y encuesta del paciente
   (eso se vera cuando el paciente lo realize).
 
-  ![vetff](https://github.com/JeroGra/ClincaOnline/assets/97103645/734efef1-4d93-4193-a8cd-4846dcc631c4)
+![vetff](https://github.com/JeroGra/ClincaOnline/assets/97103645/bd2922a8-9edf-48f9-8484-3cff59a858db)
 
 
 # Vista Paciente
