@@ -7,6 +7,7 @@ import { Administrador } from '../clases/administrador';
 import { Especialista } from '../clases/especialista';
 import { Usuario } from '../clases/usuario';
 import { Turno } from '../clases/turno';
+import { HistoriaClinica } from '../clases/historia-clinica';
 
 @Injectable({
   providedIn: 'root'
@@ -202,6 +203,34 @@ export class BaseDatosService {
       calificacionAtencion : calificacion
     });
   }
+
+    ////HISTORIA CLINICA
+
+    AltaHistoriaClinica(historia:HistoriaClinica){ 
+      const coleccion = collection(this.firestore,'historiasClinicas')
+      const documento = doc(coleccion);
+      const id = documento.id;
+      historia.id = documento.id;
+      historia.fechaDeCreacion = Date.now()
+      let obj = JSON.parse(JSON.stringify(historia))
+      return setDoc(documento,obj);
+    }
+
+    TraerHistoriasClinicas(){
+      const coleccion = collection(this.firestore,'historiasClinicas')
+      return collectionData(coleccion);
+    }
+  
+    TraerHistoriasClinicasPorIdUsuario(id:string,user : "Especialista" | "Paciente"){
+
+      let q = query(collection(this.firestore, 'historiasClinicas'), where("idPaciente", "==", id));
+
+      if(user === "Especialista"){
+        q = query(collection(this.firestore, 'historiasClinicas'), where("idEspecialista", "==", id));
+      }
+      
+      return collectionData(q)
+    }
 
   codigoRandom(){
 

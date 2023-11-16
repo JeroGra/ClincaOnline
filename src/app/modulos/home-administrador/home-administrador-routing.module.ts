@@ -6,6 +6,7 @@ import { AltaAdminComponent } from './componentes/alta-admin/alta-admin.componen
 import { ValidarEspecialistaComponent } from './componentes/validar-especialista/validar-especialista.component';
 import { TurnosComponent } from './componentes/turnos/turnos.component';
 import { SolicitarTurnoComponent } from './componentes/solicitar-turno/solicitar-turno.component';
+import { AhistoriaClinicaComponent } from './componentes/ahistoria-clinica/ahistoria-clinica.component';
 
 const routes: Routes = [{ path: '', component: HomeAdministradorComponent,
 children:[
@@ -14,6 +15,7 @@ children:[
   {path:'solicitarTurno', component:SolicitarTurnoComponent },
   {path:'altaAdmin', component:AltaAdminComponent },
   {path:'validarEspecialista', component:ValidarEspecialistaComponent },
+  {path:'historiaClinica', component:AhistoriaClinicaComponent },
 ] }];
 
 @NgModule({

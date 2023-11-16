@@ -9,6 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ValidarEspecialistaComponent } from './componentes/validar-especialista/validar-especialista.component';
 import { TurnosComponent } from './componentes/turnos/turnos.component';
 import { SolicitarTurnoComponent } from './componentes/solicitar-turno/solicitar-turno.component';
+import { AhistoriaClinicaComponent } from './componentes/ahistoria-clinica/ahistoria-clinica.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SolicitarTurnoComponent } from './componentes/solicitar-turno/solicitar
     ValidarEspecialistaComponent,
     TurnosComponent,
     SolicitarTurnoComponent,
+    AhistoriaClinicaComponent,
     
   ],
   imports: [

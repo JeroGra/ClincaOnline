@@ -414,10 +414,10 @@ export class TurnosComponent  implements AfterContentInit {
           
           this.Toast.fire({
             icon: 'success',
-            title: 'Turno Finalizado',
+            title: 'Turno Finalizado Porfavor complete el historial clinico',
             color:'#80ED99',
           })
-          this.ruta.navigateByUrl('homeEspecialista/miPerfil');
+          this.ruta.navigateByUrl('homeEspecialista/historiaClinica');
         })
       })
      }else{

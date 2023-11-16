@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { SolicitarTurnoComponent } from './componentes/solicitar-turno/solicitar-turno.component';
 import { TurnosComponent } from './componentes/turnos/turnos.component';
+import { PhistoriaClinicaComponent } from './componentes/phistoria-clinica/phistoria-clinica.component';
 
 
 
@@ -13,6 +14,7 @@ import { TurnosComponent } from './componentes/turnos/turnos.component';
     HomeComponent,
     SolicitarTurnoComponent,
     TurnosComponent,
+    PhistoriaClinicaComponent,
   ],
   imports: [
     CommonModule,

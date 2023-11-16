@@ -1,0 +1,79 @@
+.btn-select-p{
+    border: 2px solid #0F2636;
+    margin: 0.1rem;
+    width: 10rem;
+    height: 10rem;
+}
+
+.btn-select-p:hover{
+    border: 2px solid rgb(255, 255, 255);
+    background-color: #80ED99;
+}
+
+.btn-select-p:active{
+    background-color: #0F2636;
+}
+
+.btn-agregar-hc{
+    border: 2px solid #0F2636;
+    margin-left: 38%;
+    width: 20rem;
+    height: 5rem;
+}
+.btn-agregar-hc:hover{
+    border: 2px solid rgb(255, 255, 255);
+    background-color: #80ED99;
+}
+
+.btn-agregar-hc:active{
+    background-color: #0F2636;
+}
+
+.btn-subir-historia{
+    border: 2px solid #0F2636;
+    width: 20rem;
+    height: 3.5rem;
+}
+
+.btn-subir-historia:hover{
+    border: 2px solid rgb(255, 255, 255);
+    background-color: #80ED99;
+}
+
+.btn-subir-historia:active{
+    background-color: #0F2636;
+}
+
+.btn-select-t{
+    border: 2px solid #0F2636;
+    background-color: #80ED99;
+    margin: 0.1rem;
+    width: 8rem;
+    height: 4rem;
+}
+
+.btn-select-t:hover{
+    border: 2px solid #80ED99;
+    background-color: #ffffff;
+}
+.btn-select-t:active{
+    background-color: #0F2636;
+    color: #80ED99;
+}
+
+.btn-atras{
+    border: 2px solid #0F2636;
+    border-radius: 20px;
+    margin: 0.1rem;
+    width: 10rem;
+    height: 1.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn-atras:hover{
+    background-color: #ffffff;
+}
+
+.btn-atras:active{
+    background-color: #0F2636;
+}

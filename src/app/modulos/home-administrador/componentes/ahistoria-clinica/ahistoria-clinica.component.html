@@ -1,0 +1,65 @@
+
+<div *ngIf="selectEspecialista" class="card-body text-center">
+    <h4>Seleccione Especialista</h4>
+   <div>
+    <button *ngFor="let esp of this.especialistas" (click)="SelectEspecialista(esp)"  class="btn-select-p rounded-1">
+        <img style="width: 8rem;height: 8rem;" src="{{esp.fotos[0].path}}">
+        <p>{{esp.nombre}} {{esp.apellido}}</p>
+    </button>
+   </div>
+</div>
+
+<div *ngIf="selectPaciente" class="card-body text-center">
+    <h4>Seleccione Paciente</h4>
+   <div>
+    
+    <button *ngFor="let pa of pacientes" (click)="SelectPaciente(pa)"  class="btn-select-p rounded-1">
+        <img style="width: 8rem;height: 8rem;" src="{{pa.fotos[0].path}}">
+        <p>{{pa.nombre}} {{pa.apellido}}</p>
+    </button>
+   </div>
+</div>
+
+<div *ngIf="mostrarH" class="card" style="width: 100%;">
+    <button (click)="AtrasH()" class="btn-atras">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16" style="margin-bottom: 0.2rem">
+            <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+        </svg>
+    </button>
+    <img style="width: 15rem; margin-left: 42.5%;margin-right: auto;" src="{{paciente.fotos[0].path}}" class="card-img-center " alt="...">
+    <div class="card-body">
+      <h5 class="card-title text-center">{{paciente.nombre | uppercase  }} {{paciente.apellido  | uppercase }}</h5>
+      <h4  class="card-title text-center">Historias Clinicas</h4>
+    </div >
+    <div  class="container text-center div-tabla-t" style="overflow: scroll; width: 100%;height: 10rem;">
+        <div class="row align-items-start tabla-titulo">
+            <div class="col  border-col">
+               Historia Clinica Emitida
+            </div>
+        </div>
+
+        <div class="row align-items-start tabla-content" *ngFor="let hc of historiaClinicaPaciente">
+            <div class="col border-col" >
+                <button (click)="SelectHistoria(hc)"  class="btn-select-t">
+                    {{hc.fechaDeCreacion | date : "yyyy/MM/dd"}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="verHistoria" class="card" style="width: 100%;">
+        <div class="card-body">
+          <h5 class="card-title">Historia CLinica del {{historiaClinica.fechaDeCreacion | date : 'yyyy/MM/dd'}}</h5>
+          <p class="card-text">Altura {{historiaClinica.altura}} cm</p>
+          <p class="card-text">Peso {{historiaClinica.peso}} kg</p>
+          <p class="card-text">Temperatura {{historiaClinica.temperatura}} C°</p>
+          <p class="card-text">Presión arterial sistólica {{historiaClinica.presion}}</p>
+          <hr>
+          <h6 class="card-title">Diagnostico</h6>
+          <p class="card-text">{{historiaClinica.diagnostico.clave}} {{historiaClinica.diagnostico.valor}}</p>
+        </div>
+        <div class="card-footer">
+        </div>
+    </div>
+
+    </div>

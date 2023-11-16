@@ -251,9 +251,8 @@
         </div>
     
         <div *ngIf="selectPaciente" class="card-body text-center">
-            <h4>Seleccione Especialista</h4>
+            <h4>Seleccione Paciente</h4>
             <div *ngIf="selectPaciente" class="card-body text-center">
-                <h4>Seleccione Especialista</h4>
                 <button (click)="SelectPaciente(pa)" *ngFor="let pa of pacientes"  class="btn-select-espe rounded-1">
                     <img style="width: 6rem;height: 6rem;" src="{{pa.fotos[0].path}}">
                 </button>
