@@ -7,6 +7,7 @@ import { Turno } from 'src/app/clases/turno';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encript.service';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-solicitar-turno',
@@ -27,24 +28,32 @@ export class SolicitarTurnoComponent  implements AfterContentInit {
   anio = this.datePipe.transform(this.fecha,'yyyy')
   horarios : Array<any> = []
 
-  constructor(private bd : BaseDatosService, private ruta :Router,private log : LocalStorageEncriptService){
+  constructor(private bd : BaseDatosService, private ruta :Router,private log : LocalStorageEncriptService,private spinner: NgxSpinnerService){
    
   }
 
   ngAfterContentInit() {
+    
+    this.spinner.show();
+
     let logObj = this.log.GetEncriptStorage()
 
     this.bd.TraerUsuarioPorId(logObj.id).then((obj:any)=>{
       this.paciente = obj;
+      this.bd.TraerEspecialidades().subscribe((espe)=>{
+        this.especialidades = espe as Array<any>
+      })
+      this.bd.TraerUsuarioPorTipo('Especialista').subscribe((esp)=>{
+        this.especialistas = esp as Array<Especialista>
+        this.SetEspecialistaVerify()
+      })
     })
 
-    this.bd.TraerEspecialidades().subscribe((espe)=>{
-      this.especialidades = espe as Array<any>
-    })
-    this.bd.TraerUsuarioPorTipo('Especialista').subscribe((esp)=>{
-      this.especialistas = esp as Array<Especialista>
-      this.SetEspecialistaVerify()
-    })
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1500);
+
   }
 
   selectEspecialista = true;
@@ -230,6 +239,8 @@ export class SolicitarTurnoComponent  implements AfterContentInit {
     turno.anio = this.datePipe.transform(fecha.fecha,'yyyy') as string
     turno.mes = this.datePipe.transform(fecha.fecha,'MM') as string
     turno.dia = this.datePipe.transform(fecha.fecha,'dd') as string
+    turno.uidEspe = this.especialista.id;
+    turno.uidPa = this.paciente.id;
 
     this.bd.AltaTurno(turno).then(()=>{
       turno.especialista = undefined;

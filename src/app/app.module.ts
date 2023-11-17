@@ -11,6 +11,8 @@ import { ErrorComponent } from './componentes/error/error.component';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { MiPerfilComponent } from './componentes/mi-perfil/mi-perfil.component';
 import { FechaPipe } from './pipes/fecha.pipe';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,13 @@ import { FechaPipe } from './pipes/fecha.pipe';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     provideAuth(() => getAuth())
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

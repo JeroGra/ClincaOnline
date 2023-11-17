@@ -2,6 +2,7 @@ import { AfterContentInit, Component } from '@angular/core';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encript.service';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-mi-perfil',
@@ -61,12 +62,17 @@ export class MiPerfilComponent  implements AfterContentInit {
 
   misHorarios:any;
 
-  constructor(private log : LocalStorageEncriptService, private bd : BaseDatosService){
+  constructor(private log : LocalStorageEncriptService, private bd : BaseDatosService,private spinner: NgxSpinnerService){
  
   } 
     
 
   ngAfterContentInit() {
+
+    this.spinner.show();
+    
+
+
     this.objLog = this.log.GetEncriptStorage();
     this.bd.TraerUsuarioPorEmail(this.objLog.email).then((user)=>{
       this.user = user;
@@ -101,6 +107,12 @@ export class MiPerfilComponent  implements AfterContentInit {
          }
        }
     })
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1500);
+
   }
 
   private Toast = Swal.mixin({

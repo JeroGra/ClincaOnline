@@ -1,19 +1,19 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { AfterContentInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Especialista } from 'src/app/clases/especialista';
 import { Paciente } from 'src/app/clases/paciente';
 import { Turno } from 'src/app/clases/turno';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import Swal from 'sweetalert2';
-
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-solicitar-turno',
   templateUrl: './solicitar-turno.component.html',
   styleUrls: ['./solicitar-turno.component.css']
 })
-export class SolicitarTurnoComponent {
+export class SolicitarTurnoComponent  implements AfterContentInit {
 
   especialidades:Array<any> = [];
   especialistas:Array<Especialista> = [];
@@ -26,7 +26,14 @@ export class SolicitarTurnoComponent {
   anio = this.datePipe.transform(this.fecha,'yyyy')
   horarios : Array<any> = []
 
-  constructor(private bd : BaseDatosService, private ruta :Router){
+  constructor(private bd : BaseDatosService, private ruta :Router,private spinner: NgxSpinnerService){
+
+  }
+
+  ngAfterContentInit() {
+
+    this.spinner.show();
+
     this.bd.TraerEspecialidades().subscribe((espe)=>{
       this.especialidades = espe as Array<any>
     })
@@ -43,6 +50,11 @@ export class SolicitarTurnoComponent {
         }
       })
     })
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1500);
   }
 
   selectEspecialista = true;
@@ -242,6 +254,8 @@ export class SolicitarTurnoComponent {
     turno.anio = this.datePipe.transform(fecha.fecha,'yyyy') as string
     turno.mes = this.datePipe.transform(fecha.fecha,'MM') as string
     turno.dia = this.datePipe.transform(fecha.fecha,'dd') as string
+    turno.uidEspe = this.especialista.id;
+    turno.uidPa = this.paciente.id;
 
     this.bd.AltaTurno(turno).then(()=>{
       turno.especialista = undefined;

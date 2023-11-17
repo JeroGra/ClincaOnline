@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterContentInit, Component } from '@angular/core';
 import { Especialista } from 'src/app/clases/especialista';
 import { HistoriaClinica } from 'src/app/clases/historia-clinica';
 import { Paciente } from 'src/app/clases/paciente';
@@ -11,7 +11,7 @@ import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encr
   templateUrl: './ahistoria-clinica.component.html',
   styleUrls: ['./ahistoria-clinica.component.css']
 })
-export class AhistoriaClinicaComponent {
+export class AhistoriaClinicaComponent implements AfterContentInit {
 
   especialistas:Array<Especialista> = [];
   pacientes:Array<Paciente> = [];
@@ -28,12 +28,7 @@ export class AhistoriaClinicaComponent {
 
   constructor(private bd : BaseDatosService, private log : LocalStorageEncriptService){
 
-    let logObj = this.log.GetEncriptStorage()
 
-
-    this.bd.TraerUsuarioPorTipo("Especialista").subscribe((obj:any)=>{
-      this.especialistas = obj;
-    })
 
   }
 
@@ -52,17 +47,24 @@ export class AhistoriaClinicaComponent {
     this.bd.TraerUsuarioPorTipo('Paciente').subscribe((pa)=>{
       this.pacientes = pa as Array<Paciente>
       let arr : Array<any> = []
+      let equal = false;
       for(let turno of this.turnos){
-
         for(let pa of  this.pacientes){
-          if(pa.id === turno.paciente?.id){
-
+          if(pa.id === turno.paciente?.id && turno.finalizado === true){
             if(arr.length > 0){
+              equal = false 
               for(let p of  arr){
-                if(p.id !== pa.id){
-                  arr.push(pa)
+                if(p.id === pa.id){
+                 // arr.push(pa)
+                  equal = true;
+                  break;
                 }
               }
+
+              if(!equal){
+                arr.push(pa)
+              }
+
             }else{
               arr.push(pa)
             }
@@ -74,6 +76,23 @@ export class AhistoriaClinicaComponent {
     })
   }
 
+  TraerTurnosEspId()
+  {
+    this.bd.TraerTurnosPorIdUsuario(this.especialista.id as string,"Especialista").subscribe((t:any)=>{
+      this.turnos = t
+  })
+  }
+  
+  ngAfterContentInit() {
+
+    let logObj = this.log.GetEncriptStorage()
+
+
+    this.bd.TraerUsuarioPorTipo("Especialista").subscribe((obj:any)=>{
+      this.especialistas = obj;
+    })
+
+  }
 
   TraerHistoriaClinicaPaciente(){
     this.historiaClinicaPaciente = []

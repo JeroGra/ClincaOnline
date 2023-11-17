@@ -157,6 +157,26 @@ export class BaseDatosService {
     return collectionData(q)
   }
 
+  async TraerTurnoPorId(id:string){
+    let data:any;
+    const q = query(collection(this.firestore, 'turnos'), where("id", "==", id));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      data = JSON.parse(JSON.stringify(doc.data()))
+    });
+
+    return data
+  }
+
+  
+  TraerTurnosPorIdUsuario(id:string,user : "Paciente" | "Especialista"){
+    let q = query(collection(this.firestore, 'turnos'), where("uidEspe", "==", id));
+    if(user === "Paciente"){
+      q = query(collection(this.firestore, 'turnos'), where("uidPa", "==", id));
+    }   
+    return collectionData(q)
+  }
+
   ModificarTurnoCancelado(id:any,motivo:string)
   {
     const coleccion = collection(this.firestore,'turnos')

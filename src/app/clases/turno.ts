@@ -4,6 +4,8 @@ import { Paciente } from "./paciente"
 export class Turno {
 
     id?:string
+    uidEspe?:string;
+    uidPa?:string;
     especialidad?:string
     especialista?:Especialista
     paciente?:Paciente

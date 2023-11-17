@@ -10,6 +10,8 @@ import { ValidarEspecialistaComponent } from './componentes/validar-especialista
 import { TurnosComponent } from './componentes/turnos/turnos.component';
 import { SolicitarTurnoComponent } from './componentes/solicitar-turno/solicitar-turno.component';
 import { AhistoriaClinicaComponent } from './componentes/ahistoria-clinica/ahistoria-clinica.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { AhistoriaClinicaComponent } from './componentes/ahistoria-clinica/ahist
     HomeAdministradorRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
   ],
 })
 export class HomeAdministradorModule { }

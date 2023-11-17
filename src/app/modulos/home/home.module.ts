@@ -6,7 +6,8 @@ import { HomeComponent } from './home.component';
 import { SolicitarTurnoComponent } from './componentes/solicitar-turno/solicitar-turno.component';
 import { TurnosComponent } from './componentes/turnos/turnos.component';
 import { PhistoriaClinicaComponent } from './componentes/phistoria-clinica/phistoria-clinica.component';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
+import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { PhistoriaClinicaComponent } from './componentes/phistoria-clinica/phist
     CommonModule,
     HomeRoutingModule,
     FormsModule,
+    NgxSpinnerModule,
   ]
 })
 export class HomeModule { }

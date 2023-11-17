@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterContentInit, Component } from '@angular/core';
 import { Especialista } from 'src/app/clases/especialista';
 import { HistoriaClinica } from 'src/app/clases/historia-clinica';
 import { Paciente } from 'src/app/clases/paciente';
@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   templateUrl: './ehistoria-clinica.component.html',
   styleUrls: ['./ehistoria-clinica.component.css']
 })
-export class EhistoriaClinicaComponent {
+export class EhistoriaClinicaComponent implements AfterContentInit {
 
   pacientes:Array<Paciente> = [];
   paciente = new Paciente
@@ -33,47 +33,36 @@ export class EhistoriaClinicaComponent {
   claves = ['Huesos Rotos','Lesiones Musculares','Organos Dañados','Nada']
 
   constructor(private bd : BaseDatosService, private log : LocalStorageEncriptService){
+  }
+
+  ngAfterContentInit() {
 
     let logObj = this.log.GetEncriptStorage()
 
-
     this.bd.TraerUsuarioPorId(logObj.id).then((obj:any)=>{
       this.especialista = obj;
-    })
-
-    this.bd.TraerTurnos().subscribe((turnos)=>{
-      let arr : Array<Turno> = turnos;
-      for(let t of this.especialista.turnos){
-        for(let turno of  arr){
-          if(turno.id === t.id){
-           this.turnos.push(turno);
-            break;
-          }
-        }
-      }
-    })
-    this.bd.TraerUsuarioPorTipo('Paciente').subscribe((pa)=>{
-      this.pacientes = pa as Array<Paciente>
-      let arr : Array<any> = []
-      for(let turno of this.turnos){
- 
-        for(let pa of  this.pacientes){
-          if(pa.id === turno.paciente?.id){
-
-            if(arr.length > 0){
-              for(let p of  arr){
-                if(p.id !== pa.id){
-                  arr.push(pa)
+      this.TraerTurnosEspId()
+      this.bd.TraerUsuarioPorTipo('Paciente').subscribe((pa)=>{
+        let arrP = pa as Array<Paciente>
+        for(let t of this.turnos){
+          for(let p of arrP){
+              if(t.finalizado && p.id === t.uidPa){
+                if(this.pacientes.length > 0){
+                  for(let pa of this.pacientes){
+                    if(pa.id !== p.id){
+                      this.pacientes.push(p)
+                      break;
+                    }
+                  }
+                }else{
+                  this.pacientes.push(p)
+                  break;
                 }
               }
-            }else{
-              arr.push(pa)
-            }
           }
         }
-      }
-      this.pacientes = arr;
-      console.log(this.pacientes)
+        console.log(this.pacientes)
+      })
     })
   }
 
@@ -94,6 +83,12 @@ export class EhistoriaClinicaComponent {
     this.historiaClinicaPaciente = []
     this.bd.TraerHistoriasClinicasPorIdUsuario(this.paciente.id as string,"Paciente").subscribe((hc)=>{
       this.historiaClinicaPaciente = hc as Array<HistoriaClinica>
+    })
+  }
+
+  TraerTurnosEspId(){
+    this.bd.TraerTurnosPorIdUsuario(this.especialista.id as string,"Especialista").subscribe((t:any)=>{
+        this.turnos = t
     })
   }
 

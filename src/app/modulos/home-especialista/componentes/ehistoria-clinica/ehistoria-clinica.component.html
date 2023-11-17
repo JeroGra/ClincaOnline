@@ -1,5 +1,6 @@
 
 <div *ngIf="selectPaciente" class="card-body text-center">
+
     <h4>Seleccione Paciente</h4>
    <div>
     <button *ngFor="let pa of this.pacientes" (click)="SelectPaciente(pa)"  class="btn-select-p rounded-1">

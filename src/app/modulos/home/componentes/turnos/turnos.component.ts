@@ -6,6 +6,7 @@ import { Turno } from 'src/app/clases/turno';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encript.service';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-turnos',
@@ -22,61 +23,69 @@ export class TurnosComponent implements AfterContentInit {
 
   turnosFiltro:Array<Turno> = [];
 
-  constructor(private bd : BaseDatosService, private ruta :Router, private log : LocalStorageEncriptService){
+  constructor(private bd : BaseDatosService, private ruta :Router, private log : LocalStorageEncriptService,private spinner: NgxSpinnerService){
    
   }
 
   ngAfterContentInit() {
+
+    this.spinner.show();
+
     let logObj = this.log.GetEncriptStorage()
 
     this.bd.TraerUsuarioPorId(logObj.id).then((obj:any)=>{
       this.paciente = obj;
-    })
+      this.TraerTurnosPaId();
+      this.bd.TraerEspecialidades().subscribe((esp)=>{
+        this.especialidades = esp as Array<any>
+        console.log(this.especialidades)
+      })
+      this.bd.TraerUsuarioPorTipo('Especialista').subscribe((esp)=>{
+        this.especialistas = esp as Array<Especialista>
+        let arr : Array<any> = []
+        let equal = false;
+        for(let turno of this.turnos){
+          for(let esp of  this.especialistas){
+            if(esp.id === turno.especialista?.id){
+              if(arr.length > 0){
+                equal = false 
+                for(let e of  arr){
+                  if(e.id === esp.id){
+                    //arr.push(esp)
+                    equal = true;
+                    break;
+                  }
+                }
 
-    this.bd.TraerEspecialidades().subscribe((esp)=>{
-      this.especialidades = esp as Array<any>
-      console.log(this.especialidades)
-    })
-
-    this.bd.TraerTurnos().subscribe((turnos)=>{
-      let arr : Array<Turno> = turnos;
-      for(let t of this.paciente.turnos){
-        for(let turno of  arr){
-          if(turno.id === t.id){
-            this.turnos.push(turno);
-            this.turnosFijosBd.push(turno)
-            break;
-          }
-        }
-      }
-      console.log(this.turnos)
-      this.TurnosCancelar()
-    })
-    this.bd.TraerUsuarioPorTipo('Especialista').subscribe((esp)=>{
-      this.especialistas = esp as Array<Especialista>
-      let arr : Array<any> = []
-      for(let turno of this.turnos){
-        for(let esp of  this.especialistas){
-          if(esp.id === turno.especialista?.id){
-
-            if(arr.length > 0){
-              for(let p of  arr){
-                if(p.id !== esp.id){
+                if(!equal){
                   arr.push(esp)
                 }
-              }
-            }else{
-              arr.push(esp)
-            }
 
+              }else{
+                arr.push(esp)
+                break;
+              }
+            }
           }
         }
-      }
-      this.especialistas = arr;
-      console.log(this.especialistas)
+        this.especialistas = arr;
+        console.log(this.especialistas)
+      })
     })
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1500);
   }
   
+  TraerTurnosPaId(){
+    this.bd.TraerTurnosPorIdUsuario(this.paciente.id as string,"Paciente").subscribe((t:any)=>{
+        this.turnos = t
+        this.turnosFijosBd = t
+    })
+
+  }
 
   private Toast = Swal.mixin({
     toast: true,
@@ -109,10 +118,7 @@ export class TurnosComponent implements AfterContentInit {
 
   motivo = ""
 
-  calificarT = false;
-  encuestaT = false;
-  cancelarT = true;
-  reseniaT = false;
+
 
   pregunta1 = false;
   pregunta2 = false;
@@ -150,7 +156,6 @@ export class TurnosComponent implements AfterContentInit {
           }
       }
     this.turnos = tu;
-    if(this.reseniaT || this.encuestaT || this.calificarT  ){ this.TurnosResenia();}else if(this.cancelarT){this.TurnosCancelar();}
     this.ChangeToSelectTurno();
   }
 
@@ -160,66 +165,27 @@ export class TurnosComponent implements AfterContentInit {
     for(let t of esp.turnos){
       for(let turno of this.turnos){
           if(t.id === turno.id){
-            tu.push(turno);
+
+            if(tu.length > 0){
+              for(let tur of tu){
+                if(tur.id !== turno.id){
+                  tu.push(turno);
+                  break;
+                }
+              }
+            }else{
+              tu.push(turno);
+              break;
+            }
           }
       }
     }
     this.turnos = tu;
-    if(this.reseniaT || this.encuestaT || this.calificarT  ){ this.TurnosResenia();}else if(this.cancelarT){this.TurnosCancelar();}
     this.ChangeToSelectTurno();
   }
 
   Reset(){
     this.turnos = this.turnosFijosBd;
-    if(this.reseniaT || this.encuestaT || this.calificarT  ){ this.TurnosResenia();}else if(this.cancelarT){this.TurnosCancelar();}
-  }
-
-  ChangeCalificarT(){
-    this.calificarT = true;
-    this.encuestaT = false;
-    this.cancelarT = false;
-    this.reseniaT = false;
-    this.TurnosResenia()
-
-    this.OpcionesFalse()
-    
-    this.turno = new Turno
-
-  }
-
-  ChangeEncuestaT(){
-    this.calificarT = false;
-    this.encuestaT = true;
-    this.cancelarT = false;
-    this.reseniaT = false;
-    this.TurnosResenia()
-
-    this.OpcionesFalse()
-
-    this.turno = new Turno
-  }
-
-  ChangeCancelarT(){
-    this.calificarT = false;
-    this.encuestaT = false;
-    this.cancelarT = true;
-    this.reseniaT = false;
-    this.TurnosCancelar()
-
-    this.OpcionesFalse()
-
-    this.turno = new Turno
-  }
-
-  ChangeReseniaT(){
-    this.calificarT = false;
-    this.encuestaT = false;
-    this.cancelarT = false;
-    this.reseniaT = true;
-    this.TurnosResenia()
-
-    this.OpcionesFalse()
-
   }
 
   OpcionesFalse(){
@@ -257,7 +223,7 @@ export class TurnosComponent implements AfterContentInit {
     this.turnosFiltro = turnosResenia;
   }
 
-  SelectTurno(turno:Turno){
+  SelectTurno(turno:Turno,accion : "Encuesta" | "Cancelar" | "Resenia" | "Calificar"){
     this.turno = turno
     for(let e of this.especialidades){
       if(e.especialidad === turno.especialidad){
@@ -276,10 +242,10 @@ export class TurnosComponent implements AfterContentInit {
       }
     })
     
-    if(this.calificarT){this.calificar = true}
-    if(this.encuestaT){this.encuesta = true}
-    if(this.cancelarT){this.cancelar = true}
-    if(this.reseniaT){this.resenia = true}
+    if(accion === "Encuesta"){this.encuesta = true, this.cancelar = false, this.calificar = false, this.resenia = false}
+    if(accion === "Cancelar"){this.cancelar = true, this.encuesta = false, this.calificar = false, this.resenia = false}
+    if(accion === "Calificar"){this.calificar = true, this.cancelar = false, this.encuesta = false, this.resenia = false}
+    if(accion === "Resenia"){this.resenia = true, this.cancelar = false, this.calificar = false, this.encuesta = false}
   }
 
 
@@ -317,7 +283,8 @@ export class TurnosComponent implements AfterContentInit {
             title: 'Turno Cancelado',
             color:'#80ED99',
           })
-          this.ruta.navigateByUrl('home/miPerfil');
+          this.cancelar = false
+          this.Reset()
         })
       })
      }else{
@@ -408,7 +375,7 @@ export class TurnosComponent implements AfterContentInit {
             title: 'Turno Calificado',
             color:'#80ED99',
           })
-          this.ruta.navigateByUrl('home/miPerfil');
+          this.Reset()
         })
       })
      }else{
@@ -453,7 +420,7 @@ export class TurnosComponent implements AfterContentInit {
          title: 'Encuesta Realizada',
          color:'#80ED99',
        })
-       this.ruta.navigateByUrl('home/miPerfil');
+       this.Reset()
      })
    })
   }

@@ -52,7 +52,6 @@
 .btn-select-t{
     border: 2px solid #0F2636;
     border-radius: 20px;
-    background-color: rgb(255, 255, 255);
     margin: 0.1rem;
     width: 4rem;
     height: 1.9rem;
@@ -64,7 +63,8 @@
 }
 
 .btn-select-t:active{
-    background-color: rgb(164, 59, 59)
+    background-color: #0F2636;
+    color: #ffffff;
 }
 
 .btn-select-esp{

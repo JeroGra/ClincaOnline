@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
+import { AfterContentInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Especialista } from 'src/app/clases/especialista';
 import { Paciente } from 'src/app/clases/paciente';
 import { Turno } from 'src/app/clases/turno';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-turnos',
   templateUrl: './turnos.component.html',
   styleUrls: ['./turnos.component.css']
 })
-export class TurnosComponent {
+export class TurnosComponent implements AfterContentInit {
 
 
   especialidades:Array<any> = [];
@@ -19,24 +20,30 @@ export class TurnosComponent {
   turnos:Array<Turno> = [];
   turnosFijosBd:Array<Turno> = [];
 
-  constructor(private bd : BaseDatosService, private ruta :Router){
+  constructor(private bd : BaseDatosService, private ruta :Router,private spinner: NgxSpinnerService){
+  
+  }
+  ngAfterContentInit() {
+    
+    this.spinner.show();
+
     this.bd.TraerEspecialidades().subscribe((esp)=>{
       this.especialidades = esp as Array<any>
     })
     this.bd.TraerUsuarioPorTipo('Especialista').subscribe((esp)=>{
       this.especialistas = esp as Array<Especialista>
     })
-    this.bd.TraerTurnosSinAceptar().subscribe((turnos)=>{
-      let t : Array<Turno> = turnos;
-      t.forEach((turno)=>{
-          if(turno.cancelado === false){
-            this.turnos.push(turno);
-            this.turnosFijosBd.push(turno);
-          }
-      })
+    this.bd.TraerTurnos().subscribe((turnos)=>{
+      this.turnos = turnos;
+      this.turnosFijosBd = turnos;
     })
-  }
-  
+
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1500);
+
+  }  
 
   private Toast = Swal.mixin({
     toast: true,
@@ -98,16 +105,9 @@ export class TurnosComponent {
   }
 
   SelectEspecialista(esp:Especialista){
-    this.turnos = this.turnosFijosBd;
-    let tu : Array<Turno> = []
-    for(let t of esp.turnos){
-      for(let turno of this.turnos){
-          if(t.id === turno.id){
-            tu.push(turno);
-          }
-      }
-    }
-    this.turnos = tu;
+    this.bd.TraerTurnosPorIdUsuario(esp.id as string,"Especialista").subscribe((t)=>{
+      this.turnos = t;
+    })
     this.ChangeToSelectTurno();
   }
 
