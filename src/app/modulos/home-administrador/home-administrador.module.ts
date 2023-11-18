@@ -12,6 +12,8 @@ import { SolicitarTurnoComponent } from './componentes/solicitar-turno/solicitar
 import { AhistoriaClinicaComponent } from './componentes/ahistoria-clinica/ahistoria-clinica.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EstadisticasComponent } from './componentes/estadisticas/estadisticas.component';
+import { FechaPipe } from './pipes/fechaAH.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TurnosComponent,
     SolicitarTurnoComponent,
     AhistoriaClinicaComponent,
-    
+    EstadisticasComponent,
+    FechaPipe
   ],
   imports: [
     CommonModule,
@@ -29,6 +32,7 @@ import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
+    
   ],
 })
 export class HomeAdministradorModule { }

@@ -1,0 +1,46 @@
+<div class="card text-center">
+    <div class="card-header">
+      Logs del sistema
+    </div>
+    <div style="overflow: scroll;height: 10rem;" class="card-body">
+        <div class="container text-center tabla">
+            <div class="row tabla_cabecera">
+              <div class="col colum">
+                Logeado el
+              </div>
+              <div class="col colum">
+                Log hace
+              </div>
+              <div class="col colum">
+                ID Usuario
+              </div>
+              <div class="col colum">
+                Tipo Usuario
+              </div>
+              <div class="col colum">
+                Nombre Usuario
+              </div>
+            </div>
+            <div class="row tabla-datos" *ngFor="let log of logsS" >
+                <div class="col colum">
+                    {{log.fechaLog | date : "yyyy/MM/dd hh:mm"}}hs
+                </div>
+                <div class="col colum">
+                    {{log.fechaLog | fechaAH }}
+                </div>
+                <div class="col colum">
+                    {{log.user.id}}
+                </div>
+                <div class="col colum">
+                    {{log.user.tipo}}
+                </div>
+                <div class="col colum">
+                    {{log.user.nombre | uppercase }} {{log.user.apellido | uppercase }}
+                </div>
+              </div>
+          </div>
+    </div>
+    <div class="card-footer text-body-secondary">
+
+    </div>
+  </div>

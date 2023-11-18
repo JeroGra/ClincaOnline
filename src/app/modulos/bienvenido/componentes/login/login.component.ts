@@ -132,15 +132,18 @@ export class LoginComponent {
                     title: rt.mensaje,
                     color:'#80ED99',
                   })
-                  this.encriptService.RemoveEncriptStorage();
-                  this.encriptService.EncriptStorage(obj);
-                  if(obj.tipo === "Especialista"){
-                    this.ruta.navigateByUrl('homeEspecialista/miPerfil')
-                  }else if(obj.tipo === "Paciente"){
-                    this.ruta.navigateByUrl('home/miPerfil')
-                  }else if(obj.tipo === "Administrador"){
-                    this.ruta.navigateByUrl('homeAdministrador/miPerfil')
-                  }
+                  this.bd.AltaLog(obj).then(()=>{
+                    
+                    this.encriptService.RemoveEncriptStorage();
+                    this.encriptService.EncriptStorage(obj);
+                    if(obj.tipo === "Especialista"){
+                      this.ruta.navigateByUrl('homeEspecialista/miPerfil')
+                    }else if(obj.tipo === "Paciente"){
+                      this.ruta.navigateByUrl('home/miPerfil')
+                    }else if(obj.tipo === "Administrador"){
+                      this.ruta.navigateByUrl('homeAdministrador/miPerfil')
+                    }
+                  })
                 }else{
                   this.Toast.fire({
                     icon: 'error',

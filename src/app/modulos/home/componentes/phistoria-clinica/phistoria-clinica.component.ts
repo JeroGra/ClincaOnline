@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterContentInit, Component } from '@angular/core';
 import { Especialista } from 'src/app/clases/especialista';
 import { HistoriaClinica } from 'src/app/clases/historia-clinica';
 import { Paciente } from 'src/app/clases/paciente';
@@ -18,7 +18,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   templateUrl: './phistoria-clinica.component.html',
   styleUrls: ['./phistoria-clinica.component.css']
 })
-export class PhistoriaClinicaComponent {
+export class PhistoriaClinicaComponent implements AfterContentInit {
 
   pacientes:Array<Paciente> = [];
   paciente = new Paciente
@@ -31,13 +31,15 @@ export class PhistoriaClinicaComponent {
 
   constructor(private bd : BaseDatosService, private log : LocalStorageEncriptService){
 
+  }
+  
+  ngAfterContentInit() {
     let logObj = this.log.GetEncriptStorage()
 
     this.bd.TraerUsuarioPorId(logObj.id).then((obj:any)=>{
       this.paciente = obj;
       this.TraerHistoriaClinicaPaciente()
     })
-
   }
 
   private Toast = Swal.mixin({

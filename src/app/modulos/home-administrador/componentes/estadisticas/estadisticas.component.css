@@ -1,0 +1,16 @@
+.tabla{
+    border: 2px solid  #0F2636;
+}
+
+.tabla_cabecera{
+    border-bottom: 2px solid #0F2636;
+    font-weight: bold;
+}
+
+.tabla-datos{
+    border: 0.5px solid #0F2636;
+}
+
+.colum{
+    border-right: 0.5px solid #0F2636;
+}

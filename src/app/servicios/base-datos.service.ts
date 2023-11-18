@@ -258,4 +258,22 @@ export class BaseDatosService {
     return codigoArr.sort(() => Math.random() - 0.5).join("");
   }
 
+  AltaLog(usuario:any){ 
+    const coleccion = collection(this.firestore,'logs')
+    const documento = doc(coleccion);
+    const id = documento.id;
+    let log : any = {
+      id:id,
+      fechaLog : Date.now(),
+      user: usuario,
+    }
+    return setDoc(documento,log);
+  }
+
+  TraerLogs(){
+    const coleccion = collection(this.firestore,'logs')
+    return collectionData(coleccion);
+  }
+
+
 }
