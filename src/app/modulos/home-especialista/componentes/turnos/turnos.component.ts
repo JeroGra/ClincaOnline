@@ -8,6 +8,7 @@ import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encr
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from "ngx-spinner";
 import { DatePipe } from '@angular/common';
+import { HistoriaClinica } from 'src/app/clases/historia-clinica';
 
 @Component({
   selector: 'app-turnos',
@@ -21,6 +22,7 @@ export class TurnosComponent  implements AfterContentInit {
   turnos:Array<Turno> = [];
   turnosFijosBd:Array<Turno> = [];
   especialista:Especialista = new Especialista;
+  historiaClinica = new HistoriaClinica
 
  // turnosParaAceparRechazar:Array<Turno> = [];
  // turnosParaCancelarFinalizar:Array<Turno> = [];
@@ -137,6 +139,14 @@ export class TurnosComponent  implements AfterContentInit {
   horaInicio = "08:00"
   horaFin = "22:00"
   datePipe = new DatePipe('en-Ar')
+
+  altura = 0;
+  peso = 0;
+  temperatura = 0;
+  presion = 0;
+  clave = "";
+  valor = 0;
+  claves = ['Huesos Rotos','Lesiones Musculares','Organos Dañados','Nada']
 
   ChangeToSelectPaciente(){
     this.selectTurnos = false;
@@ -369,41 +379,62 @@ export class TurnosComponent  implements AfterContentInit {
 
   FinalizarTurno(){
     if(this.motivo.length >= 25){
+        if(this.EvaluarHC()){
 
-
-      this.bd.TraerUsuarioPorId( this.turno.especialista?.id as string).then((esp:any)=>{
-         esp.turnos.forEach((t:Turno)=>{
-          if(t.mes == this.turno.mes && this.turno.dia == t.dia)
-          {
-            t.finalizado = true;
-            t.diaDeFinalizacion = Date.now();
-            t.resenia = this.motivo;
-            t.id = this.turno.id
-          }
-        })
-        this.bd.ModificarUsuarioTurno(this.turno.especialista?.id as string, esp.turnos as Array<any>);
-        this.bd.TraerUsuarioPorId( this.turno.paciente?.id as string).then((pa:any)=>{
-          pa.turnos.forEach((t:Turno)=>{
-            if(t.mes == this.turno.mes && this.turno.dia == t.dia)
-            {
-              t.finalizado = true;
-              t.diaDeFinalizacion = Date.now();
-              t.resenia = this.motivo;
-              t.id = this.turno.id
-            }
+          this.bd.TraerUsuarioPorId( this.turno.especialista?.id as string).then((esp:any)=>{
+             esp.turnos.forEach((t:Turno)=>{
+              if(t.mes == this.turno.mes && this.turno.dia == t.dia)
+              {
+                t.finalizado = true;
+                t.diaDeFinalizacion = Date.now();
+                t.resenia = this.motivo;
+                t.id = this.turno.id
+              }
+            })
+            this.bd.ModificarUsuarioTurno(this.turno.especialista?.id as string, esp.turnos as Array<any>);
+            this.bd.TraerUsuarioPorId( this.turno.paciente?.id as string).then((pa:any)=>{
+              pa.turnos.forEach((t:Turno)=>{
+                if(t.mes == this.turno.mes && this.turno.dia == t.dia)
+                {
+                  t.finalizado = true;
+                  t.diaDeFinalizacion = Date.now();
+                  t.resenia = this.motivo;
+                  t.id = this.turno.id
+                }
+              })
+              this.bd.ModificarUsuarioTurno(this.turno.paciente?.id as string, pa.turnos as Array<any>);
+              this.bd.ModificarTurnoFinalizado(this.turno.id,this.motivo)
+    
+              this.historiaClinica.altura = this.altura;
+              this.historiaClinica.peso = this.peso;
+              this.historiaClinica.temperatura = this.temperatura;
+              this.historiaClinica.presion = this.presion;
+              this.historiaClinica.diagnostico.clave = this.clave;
+              this.historiaClinica.diagnostico.valor = this.valor;
+              this.historiaClinica.idEspecialista = this.turno.especialista?.id as string;
+              this.historiaClinica.idPaciente = this.turno.paciente?.id as string;
+              this.historiaClinica.idTurno = this.turno.id as string;
+              this.historiaClinica.turno = this.turno.anio + "-" + this.turno.mes + "-" + this.turno.dia + " " + this.turno.horarioInicio 
+    
+              this.bd.AltaHistoriaClinica(this.historiaClinica).then(()=>{
+    
+                this.Toast.fire({
+                  icon: 'success',
+                  title: 'Turno Finalizado! Historia CLinica Subida!!',
+                  color:'#80ED99',
+                })
+    
+                this.altura = 0;
+                this.peso = 0;
+                this.temperatura = 0;
+                this.presion = 0;
+                this.clave = "";
+                this.valor = 0;
+                this.Reset();
+              })
+            })
           })
-          this.bd.ModificarUsuarioTurno(this.turno.paciente?.id as string, pa.turnos as Array<any>);
-          this.bd.ModificarTurnoFinalizado(this.turno.id,this.motivo)
-
-          
-          this.Toast.fire({
-            icon: 'success',
-            title: 'Turno Finalizado Porfavor complete el historial clinico',
-            color:'#80ED99',
-          })
-          this.ruta.navigateByUrl('homeEspecialista/historiaClinica');
-        })
-      })
+        }
      }else{
       if(this.motivo = ""){
         this.Toast.fire({
@@ -420,6 +451,70 @@ export class TurnosComponent  implements AfterContentInit {
       }
     }
   }
+
+  SetClave(clave:string){
+    this.clave = clave;
+    this.valor = 1;
+  }
+
+  EvaluarHC(){
+    let pass = false;
+    if(!(this.altura < 100 || this.altura > 300)){
+      if(!(this.peso < 1 || this.peso > 300)){
+        if(!(this.temperatura < 20 || this.temperatura > 50)){
+          if(!(this.presion < 50 || this.presion > 200)){
+            if(this.clave !== ""){
+              if(this.valor > 0 ){
+
+                pass = true;
+  
+              }else{
+                this.Toast.fire({
+                  icon: 'error',
+                  title: 'Coloque un valor minimo (1) del diagnostico',
+                  color:'#fb7474',
+                })
+              }
+            }else{
+              this.Toast.fire({
+                icon: 'error',
+                title: 'Seleccione una clave del diagnostico',
+                color:'#fb7474',
+              })
+            }
+          }else{
+            this.Toast.fire({
+              icon: 'error',
+              title: 'Coloque una Presión arterial sistólica valida',
+              color:'#fb7474',
+            })
+          }
+        }else{
+          this.Toast.fire({
+            icon: 'error',
+            title: 'Coloque una temperatura valida en grados C°',
+            color:'#fb7474',
+          })
+        }
+      }else{
+        this.Toast.fire({
+          icon: 'error',
+          title: 'Coloque un peso valido en k',
+          color:'#fb7474',
+        })
+      }
+    }else{
+      this.Toast.fire({
+        icon: 'error',
+        title: 'Coloque una altura valida en cm',
+        color:'#fb7474',
+      })
+    }
+
+    return pass
+
+  }
+
 
   AceptarTurno(t:Turno){
 

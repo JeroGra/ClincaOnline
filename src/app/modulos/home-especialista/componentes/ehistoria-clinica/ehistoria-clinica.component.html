@@ -47,52 +47,8 @@
         </div>
     </div>
 
-    <div *ngIf="verHistorias" class="card-body">
-        <button (click)="AgregarHC()" class="btn btn-agregar-hc">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-              </svg>
-        </button>
-    </div>
   </div>
 
-
-<div *ngIf="agregarH" class="card text-center">
-    <div class="card-header">
-      Agregar Historia Clinica
-    </div>
-    <div class="card-body">
-        <div class="input-group input-group-sm mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Altura</span>
-            <input name="altura" [(ngModel)]="altura" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Peso</span>
-            <input  name="peso" [(ngModel)]="peso" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Temperatura</span>
-            <input  name="temperatura" [(ngModel)]="temperatura" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Presion</span>
-            <input  name="presion" [(ngModel)]="presion" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-        </div>
-        <h6 class="text-center">Diagnostico</h6>
-        <div class="input-group input-group-sm mb-3">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Clave</span>
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
-            <ul class="dropdown-menu">
-              <li *ngFor="let clave of claves" ><a class="dropdown-item" (click)="SetClave(clave)">{{clave}}</a></li>
-            </ul>
-            <input  name="clave" [(ngModel)]="clave" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-            <span class="input-group-text" id="inputGroup-sizing-sm">Valor</span>
-            <input  name="valor" [(ngModel)]="valor" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-        </div>
-    </div>
-    <div class="card-footer text-body-secondary">
-        <button (click)="SubirHC()" class="btn btn-subir-historia">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
-                <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"/>
-                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
-              </svg>
-        </button>
-    </div>
-  </div>
 
 
     

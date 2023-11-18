@@ -6,7 +6,9 @@ import { Turno } from 'src/app/clases/turno';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encript.service';
 import Swal from 'sweetalert2';
+//@ts-ignore
 import pdfMake from 'pdfmake/build/pdfmake';
+//@ts-ignore
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { DatePipe } from '@angular/common';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -115,7 +117,7 @@ export class PhistoriaClinicaComponent {
     const pdf = pdfMake.createPdf(pdfDefinition).download('HistoriaClinica_'+this.paciente.nombre+'_'+this.paciente.apellido+'_'+this.historiaClinica.fechaDeCreacion+'.pdf');   
   }
 
-  getBase64ImageFromURL(url) {
+  getBase64ImageFromURL(url:any) {
     return new Promise((resolve, reject) => {
       var img = new Image();
       img.setAttribute("crossOrigin", "anonymous");
@@ -126,7 +128,7 @@ export class PhistoriaClinicaComponent {
         canvas.height = img.height;
   
         var ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0);
+        ctx?.drawImage(img, 0, 0); 
   
         var dataURL = canvas.toDataURL("image/png");
   

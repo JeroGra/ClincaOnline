@@ -175,6 +175,34 @@
                             <label for="exampleFormControlTextarea1" class="form-label">Diagnostico/Reseña</label>
                             <textarea  [(ngModel)]="motivo" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                          </div>
+
+                         <div class="card-header">
+                            Agregar Historia Clinica
+                          </div>
+                          <div class="card-body">
+                              <div class="input-group input-group-sm mb-3">
+                                  <span class="input-group-text" id="inputGroup-sizing-sm">Altura</span>
+                                  <input name="altura" [(ngModel)]="altura" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                  <span class="input-group-text" id="inputGroup-sizing-sm">Peso</span>
+                                  <input  name="peso" [(ngModel)]="peso" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                  <span class="input-group-text" id="inputGroup-sizing-sm">Temperatura</span>
+                                  <input  name="temperatura" [(ngModel)]="temperatura" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                  <span class="input-group-text" id="inputGroup-sizing-sm">Presion</span>
+                                  <input  name="presion" [(ngModel)]="presion" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                              </div>
+                              <h6 class="text-center">Diagnostico</h6>
+                              <div class="input-group input-group-sm mb-3">
+                                  <span class="input-group-text" id="inputGroup-sizing-sm">Clave</span>
+                                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+                                  <ul class="dropdown-menu">
+                                    <li *ngFor="let clave of claves" ><a class="dropdown-item" (click)="SetClave(clave)">{{clave}}</a></li>
+                                  </ul>
+                                  <input  name="clave" [(ngModel)]="clave" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                  <span class="input-group-text" id="inputGroup-sizing-sm">Valor</span>
+                                  <input  name="valor" [(ngModel)]="valor" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                              </div>
+
+
                          <button (click)="FinalizarTurno()" class="btn-acc">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
                                 <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
