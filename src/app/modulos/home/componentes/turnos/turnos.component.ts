@@ -263,6 +263,7 @@ export class TurnosComponent implements AfterContentInit {
 
   Reset(){
     this.turnos = this.turnosFijosBd;
+    this.OpcionesFalse()
   }
 
   OpcionesFalse(){
