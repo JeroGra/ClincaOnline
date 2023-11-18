@@ -49,7 +49,7 @@
 
     <div *ngIf="verHistoria" class="card" style="width: 100%;">
         <div class="card-body">
-          <h5 class="card-title">Historia CLinica del {{historiaClinica.fechaDeCreacion | date : 'yyyy/MM/dd'}}</h5>
+          <h5 class="card-title">Historia CLinica del {{historiaClinica.fechaDeCreacion | date : 'yyyy/MM/dd'}} Referida al turno del {{historiaClinica.turno}}</h5>
           <p class="card-text">Altura {{historiaClinica.altura}} cm</p>
           <p class="card-text">Peso {{historiaClinica.peso}} kg</p>
           <p class="card-text">Temperatura {{historiaClinica.temperatura}} C°</p>

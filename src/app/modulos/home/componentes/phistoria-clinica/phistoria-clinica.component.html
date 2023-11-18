@@ -57,7 +57,7 @@
     <div *ngIf="verHistoria" class="card mt-1" style="width: 100%;">
         <img *ngIf="especialista !== undefined" style="width: 10rem; margin-left: auto;margin-right: auto;margin-top: 0.5rem;" src="{{especialista.fotos[0].path}}" class="card-img-center " alt="...">
         <div class="card-body">
-          <h5 class="card-title">Historia CLinica del {{historiaClinica.fechaDeCreacion | date : 'yyyy/MM/dd'}}</h5>
+          <h5 class="card-title">Historia CLinica del {{historiaClinica.fechaDeCreacion | date : 'yyyy/MM/dd'}} Referida al turno del {{historiaClinica.turno}}</h5>
           <p class="card-text">Altura {{historiaClinica.altura}} cm</p>
           <p class="card-text">Peso {{historiaClinica.peso}} kg</p>
           <p class="card-text">Temperatura {{historiaClinica.temperatura}} C°</p>

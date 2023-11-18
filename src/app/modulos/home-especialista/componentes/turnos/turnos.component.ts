@@ -266,6 +266,7 @@ export class TurnosComponent  implements AfterContentInit {
 
   Reset(){
     this.turnos = this.turnosFijosBd;
+    this.OpcionesFalse();
   }
 
   OpcionesFalse(){
@@ -354,9 +355,6 @@ export class TurnosComponent  implements AfterContentInit {
             title: 'Turno Cancelado/Rechazado',
             color:'#80ED99',
           })
-          this.cancelar = false;
-          this.rechazar = false;
-
           this.Reset()
         })
       })
@@ -423,7 +421,6 @@ export class TurnosComponent  implements AfterContentInit {
                   title: 'Turno Finalizado! Historia CLinica Subida!!',
                   color:'#80ED99',
                 })
-    
                 this.altura = 0;
                 this.peso = 0;
                 this.temperatura = 0;

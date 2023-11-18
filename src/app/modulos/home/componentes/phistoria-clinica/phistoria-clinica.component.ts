@@ -90,7 +90,7 @@ export class PhistoriaClinicaComponent {
           alignment: 'center',
           margin: [0, 20],
         },
-        {text:'Historia Clinica de '+this.paciente.nombre+' '+this.paciente.apellido, style: 'header',	alignment: 'center',fontSize: 20, bold: true,	margin: [0, 1],},
+        {text:'Historia Clinica de '+this.paciente.nombre+' '+this.paciente.apellido + ' Referida al turno del '+this.historiaClinica.turno, style: 'header',	alignment: 'center',fontSize: 20, bold: true,	margin: [0, 1],},
         {text:'Generada en la fecha de '+this.datePipe.transform(this.historiaClinica.fechaDeCreacion,'yyyy/MM/dd') + ' Por el Especialista '+this.especialista.nombre + ' '+this.especialista.apellido, alignment: 'center',fontSize: 15, bold: true,	margin: [0, 5],},
         {
           ul: [

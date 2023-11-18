@@ -168,86 +168,86 @@
                                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
                             </svg>
                        </button>
-                   </div>
+                    </div>
 
-                      <div  *ngIf="finalizar">
-                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Diagnostico/Reseña</label>
-                            <textarea  [(ngModel)]="motivo" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                         </div>
+                        <div  *ngIf="finalizar">
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Diagnostico/Reseña</label>
+                                <textarea  [(ngModel)]="motivo" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                       
 
-                         <div class="card-header">
-                            Agregar Historia Clinica
-                          </div>
-                          <div class="card-body">
-                              <div class="input-group input-group-sm mb-3">
-                                  <span class="input-group-text" id="inputGroup-sizing-sm">Altura</span>
-                                  <input name="altura" [(ngModel)]="altura" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                                  <span class="input-group-text" id="inputGroup-sizing-sm">Peso</span>
-                                  <input  name="peso" [(ngModel)]="peso" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                                  <span class="input-group-text" id="inputGroup-sizing-sm">Temperatura</span>
-                                  <input  name="temperatura" [(ngModel)]="temperatura" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                                  <span class="input-group-text" id="inputGroup-sizing-sm">Presion</span>
-                                  <input  name="presion" [(ngModel)]="presion" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                              </div>
-                              <h6 class="text-center">Diagnostico</h6>
-                              <div class="input-group input-group-sm mb-3">
-                                  <span class="input-group-text" id="inputGroup-sizing-sm">Clave</span>
-                                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
-                                  <ul class="dropdown-menu">
+                                <div class="card-header">
+                                Agregar Historia Clinica
+                                </div>
+                                <div class="card-body">
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Altura</span>
+                                    <input name="altura" [(ngModel)]="altura" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Peso</span>
+                                    <input  name="peso" [(ngModel)]="peso" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Temperatura</span>
+                                    <input  name="temperatura" [(ngModel)]="temperatura" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Presion</span>
+                                    <input  name="presion" [(ngModel)]="presion" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                 </div>
+                                <h6 class="text-center">Diagnostico</h6>
+                                <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Clave</span>
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+                                    <ul class="dropdown-menu">
                                     <li *ngFor="let clave of claves" ><a class="dropdown-item" (click)="SetClave(clave)">{{clave}}</a></li>
-                                  </ul>
-                                  <input  name="clave" [(ngModel)]="clave" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                                  <span class="input-group-text" id="inputGroup-sizing-sm">Valor</span>
-                                  <input  name="valor" [(ngModel)]="valor" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-                              </div>
+                                    </ul>
+                                    <input  name="clave" [(ngModel)]="clave" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Valor</span>
+                                    <input  name="valor" [(ngModel)]="valor" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                 </div>
 
 
-                         <button (click)="FinalizarTurno()" class="btn-acc">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
-                                <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
-                              </svg>
-                        </button>
-                    </div>
+                                <button (click)="FinalizarTurno()" class="btn-acc">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+                                    </svg>
+                                </button>
+                            </div>
 
-                    <div  *ngIf="cancelar">
-                        <div class="mb-3">
-                           <label for="exampleFormControlTextarea1" class="form-label">Motivo de Cancelacion</label>
-                           <textarea  [(ngModel)]="motivo" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            
                         </div>
-                        <button (click)="CancerlarTurno()" class="btn-acc">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16"  style="margin-bottom: 0.2rem">
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
-                            </svg>
-                       </button>
-                   </div>
-
-                   <div *ngIf="resenia" class="row" style="margin-top: 0.5rem;">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Reseña Profecional</h5>
-                          <p class="card-text">{{turno.resenia}}</p>
-                          <p>Finalizado el {{turno.diaDeFinalizacion | date : 'yyyy/MM/dd'}}</p>
-                        </div>
-                      </div>
                     </div>
-                    <div class="col-sm-6">
-                      <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">Comentario Paciente y Calificacion</h5>
-                          <p *ngIf="turno.resultadoEncuesta !== '' " class="card-text">Encuesta : {{turno.resultadoEncuesta}}</p>
-                          <p *ngIf="turno.calificacionAtencion !== '' " class="card-text">Calificacion/Comentario : {{turno.calificacionAtencion}}</p>
-                          <p *ngIf="turno.resultadoEncuesta === '' " class="card-text">Sin Encuesta</p>
-                          <p *ngIf="turno.calificacionAtencion === '' " class="card-text">No Calificado</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                    
                 </div>
-            </div>
+                <div  *ngIf="cancelar">
+                  <div class="mb-3">
+                     <label for="exampleFormControlTextarea1" class="form-label">Motivo de Cancelacion</label>
+                     <textarea  [(ngModel)]="motivo" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                  <button (click)="CancerlarTurno()" class="btn-acc">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16"  style="margin-bottom: 0.2rem">
+                          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                      </svg>
+                 </button>
+                </div>
+
+               <div *ngIf="resenia" class="row" style="margin-top: 0.5rem;">
+               <div class="col-sm-6 mb-3 mb-sm-0">
+                   <div class="card">
+                   <div class="card-body">
+                       <h5 class="card-title">Reseña Profecional</h5>
+                       <p class="card-text">{{turno.resenia}}</p>
+                       <p>Finalizado el {{turno.diaDeFinalizacion | date : 'yyyy/MM/dd'}}</p>
+                   </div>
+                   </div>
+              </div>
+               <div class="col-sm-6">
+                   <div class="card">
+                   <div class="card-body">
+                       <h5 class="card-title">Comentario Paciente y Calificacion</h5>
+                       <p *ngIf="turno.resultadoEncuesta !== '' " class="card-text">Encuesta : {{turno.resultadoEncuesta}}</p>
+                       <p *ngIf="turno.calificacionAtencion !== '' " class="card-text">Calificacion/Comentario : {{turno.calificacionAtencion}}</p>
+                       <p *ngIf="turno.resultadoEncuesta === '' " class="card-text">Sin Encuesta</p>
+                       <p *ngIf="turno.calificacionAtencion === '' " class="card-text">No Calificado</p>
+                   </div>
+                   </div>
+               </div>
 
         </div>
 
