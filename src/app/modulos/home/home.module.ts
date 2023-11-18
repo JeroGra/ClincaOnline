@@ -9,7 +9,6 @@ import { PhistoriaClinicaComponent } from './componentes/phistoria-clinica/phist
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 @NgModule({
   declarations: [
     HomeComponent,

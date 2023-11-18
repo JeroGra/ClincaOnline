@@ -7,6 +7,7 @@ import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encript.service';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from "ngx-spinner";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-turnos',
@@ -115,7 +116,8 @@ export class TurnosComponent  implements AfterContentInit {
   selectTurnos = true;
   selectEspecialidad = false;
   selectPaciente = false;
-
+  selectFiltro = false;
+  
   aceptar = false;
   finalizar = false;
   rechazar = false;
@@ -130,23 +132,38 @@ export class TurnosComponent  implements AfterContentInit {
 
   motivo = ""
 
+  fechaInicial:any
+  fechaFinal:any
+  horaInicio = "08:00"
+  horaFin = "22:00"
+  datePipe = new DatePipe('en-Ar')
 
   ChangeToSelectPaciente(){
     this.selectTurnos = false;
     this.selectEspecialidad = false;
     this.selectPaciente= true;
+    this.selectFiltro = false;
   }
 
   ChangeToSelectEspecialdiad(){
     this.selectTurnos = false;
     this.selectEspecialidad = true;
     this.selectPaciente = false;
+    this.selectFiltro = false;
   }
 
   ChangeToSelectTurno(){
     this.selectTurnos = true;
     this.selectEspecialidad = false;
     this.selectPaciente = false;
+    this.selectFiltro = false;
+  }
+
+  ChangeToSelectFiltro(){
+    this.selectTurnos = false;
+    this.selectEspecialidad = false;
+    this.selectPaciente = false;
+    this.selectFiltro = true;
   }
 
   SelectEspecialdiad(esp:any){
@@ -173,6 +190,68 @@ export class TurnosComponent  implements AfterContentInit {
     }
     this.turnos = tu;
     this.ChangeToSelectTurno()
+  }
+
+
+  FiltroTomado(){
+    this.turnos = this.turnosFijosBd
+    this.turnos.forEach((t:Turno) => {
+      if(t.aceptado === false || t.finalizado === true ){
+        this.turnos = this.turnos.filter((i) => i !== t)
+      }
+    });
+    this.selectFiltro = false;
+    this.selectTurnos = true;
+  }
+
+  FiltroFinalizado(){
+    this.turnos = this.turnosFijosBd
+    this.turnos.forEach((t:Turno) => {
+      if(t.aceptado === false || t.finalizado === false){
+        this.turnos = this.turnos.filter((i) => i !== t)
+      }
+    });
+    this.selectFiltro = false;
+    this.selectTurnos = true;
+  }
+
+  FiltroSolicitado(){
+    this.turnos = this.turnosFijosBd
+    this.turnos.forEach((t:Turno) => {
+      if(t.aceptado === true || t.finalizado === true){
+        this.turnos = this.turnos.filter((i) => i !== t)
+      }
+    });
+    this.selectFiltro = false;
+    this.selectTurnos = true;
+  }
+
+  FiltroFecha(){
+    if(this.fechaInicial != undefined && this.fechaFinal != undefined){
+
+      this.turnos = this.turnosFijosBd
+      let fechaTurno = ""
+
+      this.turnos.forEach((t:Turno) => {
+        fechaTurno = t.anio+"-"+t.mes+"-"+t.dia
+
+        if(fechaTurno < this.fechaInicial || fechaTurno > this.fechaFinal){
+
+
+          this.turnos = this.turnos.filter((i) => i !== t)
+        }
+      });
+      this.selectFiltro = false;
+      this.selectTurnos = true;
+
+
+    }else{
+      this.Toast.fire({
+        icon: 'error',
+        title: 'Porfavor coloque las fechas de inicio y fin',
+        color:'#fb7474',
+      })
+    }
   }
 
   Reset(){

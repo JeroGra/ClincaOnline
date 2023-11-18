@@ -6,6 +6,7 @@ import { Turno } from 'src/app/clases/turno';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from "ngx-spinner";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-turnos',
@@ -61,6 +62,8 @@ export class TurnosComponent implements AfterContentInit {
   selectTurnos = true;
   selectEspecialidad = false;
   selectEspecialista = false;
+
+
   cancelar= false;
   turno:Turno = new Turno;
   fotoEsp:any = "";
@@ -69,6 +72,8 @@ export class TurnosComponent implements AfterContentInit {
   paNombreApellido = "";
 
   motivo = ""
+
+
 
   ChangeToSelectEspecialista(){
     this.selectTurnos = false;

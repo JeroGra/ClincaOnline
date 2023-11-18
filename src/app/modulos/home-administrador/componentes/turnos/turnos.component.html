@@ -56,7 +56,7 @@
                     Solicitado
                 </div>
                 <div *ngIf="t.cancelado === false && t.finalizado === false && t.aceptado === true" class="col border-col">
-                    Aceptado
+                    Tomado
                 </div>
                 <div *ngIf="t.cancelado === false && t.finalizado === false" class="col border-col">
                     {{t.diaDeSolicitud | date : 'dd/MM/yyyy'}}
@@ -136,5 +136,7 @@
        </div>
         
     </div>
+
+
 
 </div>

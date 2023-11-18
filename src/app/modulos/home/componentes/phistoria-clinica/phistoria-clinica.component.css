@@ -60,3 +60,21 @@
     background-color: #0F2636;
     color: #80ED99;
 }
+
+.btn-descargar{
+    border: 2px solid #0F2636;
+    background-color: #ebebeb;
+    margin: 0.1rem;
+    width: 100%;
+    height: 3rem;
+    border-radius: 20px;
+}
+
+.btn-descargar:hover{
+    border: 2px solid #80ED99;
+    background-color: #ffffff;
+}
+.btn-descargar:active{
+    background-color: #0F2636;
+    color: #80ED99;
+}
