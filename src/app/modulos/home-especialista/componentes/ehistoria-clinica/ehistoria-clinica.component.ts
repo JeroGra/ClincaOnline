@@ -1,4 +1,5 @@
 import { AfterContentInit, Component } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Especialista } from 'src/app/clases/especialista';
 import { HistoriaClinica } from 'src/app/clases/historia-clinica';
 import { Paciente } from 'src/app/clases/paciente';
@@ -32,13 +33,12 @@ export class EhistoriaClinicaComponent implements AfterContentInit {
   valor = 0;
   claves = ['Huesos Rotos','Lesiones Musculares','Organos Dañados','Nada']
 
-  constructor(private bd : BaseDatosService, private log : LocalStorageEncriptService){
+  constructor(private bd : BaseDatosService, private log : LocalStorageEncriptService,private spinner: NgxSpinnerService){
   }
 
   ngAfterContentInit() {
-
+    this.spinner.show();
     let logObj = this.log.GetEncriptStorage()
-
     this.bd.TraerUsuarioPorId(logObj.id).then((obj:any)=>{
       this.especialista = obj;
       this.TraerTurnosEspId()
@@ -64,6 +64,10 @@ export class EhistoriaClinicaComponent implements AfterContentInit {
         console.log(this.pacientes)
       })
     })
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
   }
 
   private Toast = Swal.mixin({

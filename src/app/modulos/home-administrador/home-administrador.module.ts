@@ -11,9 +11,13 @@ import { TurnosComponent } from './componentes/turnos/turnos.component';
 import { SolicitarTurnoComponent } from './componentes/solicitar-turno/solicitar-turno.component';
 import { AhistoriaClinicaComponent } from './componentes/ahistoria-clinica/ahistoria-clinica.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EstadisticasComponent } from './componentes/estadisticas/estadisticas.component';
 import { FechaPipe } from './pipes/fechaAH.pipe';
+import { NgChartsModule } from 'ng2-charts';
+import { DiasPipePipe } from './pipes/dias-pipe.pipe';
+import { ColorHoverDirective } from './directivas/color-hover.directive';
+import { EnterActionDirective } from './directivas/enter-action.directive';
+import { ClickActionDirective } from './directivas/click-action.directive';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,11 @@ import { FechaPipe } from './pipes/fechaAH.pipe';
     SolicitarTurnoComponent,
     AhistoriaClinicaComponent,
     EstadisticasComponent,
-    FechaPipe
+    FechaPipe,
+    DiasPipePipe,
+    ColorHoverDirective,
+    EnterActionDirective,
+    ClickActionDirective,
   ],
   imports: [
     CommonModule,
@@ -32,6 +40,7 @@ import { FechaPipe } from './pipes/fechaAH.pipe';
     FormsModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
+    NgChartsModule,
     
   ],
 })

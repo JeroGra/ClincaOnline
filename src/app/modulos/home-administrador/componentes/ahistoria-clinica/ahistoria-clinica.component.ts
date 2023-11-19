@@ -5,6 +5,7 @@ import { Paciente } from 'src/app/clases/paciente';
 import { Turno } from 'src/app/clases/turno';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encript.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-ahistoria-clinica',
@@ -26,7 +27,7 @@ export class AhistoriaClinicaComponent implements AfterContentInit {
   verHistoria = false;
 
 
-  constructor(private bd : BaseDatosService, private log : LocalStorageEncriptService){
+  constructor(private bd : BaseDatosService, private log : LocalStorageEncriptService,private spinner: NgxSpinnerService){
 
 
 
@@ -84,14 +85,15 @@ export class AhistoriaClinicaComponent implements AfterContentInit {
   }
   
   ngAfterContentInit() {
-
     let logObj = this.log.GetEncriptStorage()
-
-
+    this.spinner.show();
     this.bd.TraerUsuarioPorTipo("Especialista").subscribe((obj:any)=>{
       this.especialistas = obj;
     })
-
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
   }
 
   TraerHistoriaClinicaPaciente(){

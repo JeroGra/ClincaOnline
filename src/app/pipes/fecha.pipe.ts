@@ -5,9 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FechaPipe implements PipeTransform {
 
-    transform(value: string, ...args: unknown[]): string {
+    transform(value: number, ...args: unknown[]): string {
       let ahora = Date.now();
-      let antes = Date.parse(value);
+      let antes = value;
   
       let milisegundo = ahora - antes;
       let segundos: any = Math.floor(milisegundo / 1000);

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Especialista } from 'src/app/clases/especialista';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import Swal from 'sweetalert2';
@@ -14,7 +15,8 @@ export class ValidarEspecialistaComponent {
   especialistasNoHabilitados:Array<Especialista> = []
   especialistasHabilitados:Array<Especialista> = []
 
-  constructor(private bd : BaseDatosService){
+  constructor(private bd : BaseDatosService,private spinner: NgxSpinnerService){
+    this.spinner.show();
    this.bd.TraerUsuarioPorTipo('Especialista').subscribe((users:any)=>{
     this.especialistas = users as Array<Especialista>
     users.forEach((user:Especialista) => {
@@ -24,11 +26,11 @@ export class ValidarEspecialistaComponent {
         this.especialistasNoHabilitados.push(user)
       }
     });
-
-    console.log(this.especialistas)
-    console.log(this.especialistasHabilitados)
-    console.log(this.especialistasNoHabilitados)
    })
+   setTimeout(() => {
+    /** spinner ends after 5 seconds */
+    this.spinner.hide();
+  }, 1000);
   }
 
   private Toast = Swal.mixin({

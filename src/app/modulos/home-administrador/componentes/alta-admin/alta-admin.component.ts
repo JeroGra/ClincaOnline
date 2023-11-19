@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/servicios/auth.service';
 import { BaseDatosService } from 'src/app/servicios/base-datos.service';
 import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encript.service';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-alta-admin',
@@ -24,8 +25,8 @@ export class AltaAdminComponent {
 
   constructor(private fb : FormBuilder,
     private ruta : Router,private encriptService :LocalStorageEncriptService,
-    private bd : BaseDatosService, private storage : Storage, private auth : AuthService){
-    
+    private bd : BaseDatosService, private storage : Storage, private auth : AuthService,private spinner: NgxSpinnerService){
+      this.spinner.show();
     this.bd.TraerUsuarios().subscribe((sub:any)=>{
       this.usuarios = sub;
     });
@@ -62,7 +63,10 @@ export class AltaAdminComponent {
         Validators.required,
       ]],
     })
-
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
   }
 
   

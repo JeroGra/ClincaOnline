@@ -42,7 +42,7 @@ export class TurnosComponent implements AfterContentInit {
     setTimeout(() => {
       /** spinner ends after 5 seconds */
       this.spinner.hide();
-    }, 1500);
+    }, 1000);
 
   }  
 

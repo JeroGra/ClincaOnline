@@ -11,6 +11,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 //@ts-ignore
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { DatePipe } from '@angular/common';
+import { NgxSpinnerService } from 'ngx-spinner';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -29,17 +30,21 @@ export class PhistoriaClinicaComponent implements AfterContentInit {
   verHistoria = false;
   datePipe = new DatePipe('en-Ar')
 
-  constructor(private bd : BaseDatosService, private log : LocalStorageEncriptService){
+  constructor(private bd : BaseDatosService, private log : LocalStorageEncriptService,private spinner: NgxSpinnerService){
 
   }
   
   ngAfterContentInit() {
+    this.spinner.show();
     let logObj = this.log.GetEncriptStorage()
-
     this.bd.TraerUsuarioPorId(logObj.id).then((obj:any)=>{
       this.paciente = obj;
       this.TraerHistoriaClinicaPaciente()
     })
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
   }
 
   private Toast = Swal.mixin({

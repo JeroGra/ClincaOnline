@@ -14,3 +14,30 @@
 .colum{
     border-right: 0.5px solid #0F2636;
 }
+
+.cont-tabla::-webkit-scrollbar{
+    display: none;
+}
+
+.btn-select-f{
+    border: 2px solid #0F2636;
+    color: #0F2636;
+    border-radius: 50px;
+    margin: 0.1rem;
+    width: 45%;
+    height: 1.9rem;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.btn-select-f:hover{
+    border: 2px solid #80ED99;
+    background-color: #fafafa;
+    color: #80ED99;
+}
+
+.btn-select-f:active{
+    background-color: #0F2636;
+    color: #fafafa;
+}
