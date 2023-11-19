@@ -1,10 +1,10 @@
-<div appEnterAction (FlechasEvent)="FlechasCambiarGrafico($event)" (EnterEcapeEvent)="CapturarEscape($event)" class="card text-center">
+<div appEnterAction (FlechasEvent)="FlechasCambiarGrafico($event)" (EcapeEvent)="CapturarEscape($event)" class="card text-center">
   <ngx-spinner bdColor = "rgb(128,237,153)" size = "large" color = "#0f2636" type = "ball-scale-multiple" [fullScreen] = "true"><img style="width: 20rem;border-radius: 100px;" src="../../../assets/imagenes/gifLatido.gif"></ngx-spinner>
   
   <div class="card-header">
       Logs del sistema
     </div>
-    <div appEnterAction [ubicacion]="'Tabla'" (EnterEcapeEvent)="CapturarEnter($event)" class="card-body">
+    <div appEnterAction [ubicacion]="'Tabla'" (EnterEvent)="CapturarEnter($event)" class="card-body">
         <div   class="container text-center tabla">
             <div  class="row tabla_cabecera">
               <div class="col colum">

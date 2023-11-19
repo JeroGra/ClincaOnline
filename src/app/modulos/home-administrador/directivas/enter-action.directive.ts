@@ -10,7 +10,8 @@ export class EnterActionDirective {
   @Input() ubicacion:any
 
   @Output() FlechasEvent = new EventEmitter<any>;
-  @Output() EnterEcapeEvent = new EventEmitter<any>;
+  @Output() EcapeEvent = new EventEmitter<any>;
+  @Output() EnterEvent = new EventEmitter<any>;
 
   @HostListener('document:keyup', ['$event'])
   KeyUpEvent(event: KeyboardEvent) {
@@ -22,10 +23,10 @@ export class EnterActionDirective {
       this.FlechasEvent.emit('izquierda')
     }
     if(event.code === "Enter"){
-      this.EnterEcapeEvent.emit(this.ubicacion)
+      this.EnterEvent.emit(this.ubicacion)
     }
     if(event.code === "Escape"){
-      this.EnterEcapeEvent.emit()
+      this.EcapeEvent.emit()
     }
 
   }
