@@ -83,7 +83,7 @@
     <div class="card-header text-center" style="font-weight: bolder;">
       {{tituloGrafico}}
     </div>
-    <div  class="card-body">
+    <div *ngIf="!selectFechaGrafico" class="card-body">
 
       <canvas 
       height="100"
