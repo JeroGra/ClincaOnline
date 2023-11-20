@@ -251,53 +251,117 @@
 
         </div>
 
-        <div *ngIf="selectEspecialidad" class="card-body text-center">
-            <h4>Seleccione Especialidad</h4>
-            <div class="list-group ">
-                <div class="list-group-item" *ngFor="let esp of especialidades">
-                    <p style="font-weight: bolder;">{{esp.especialidad}}</p>
-                    <button (click)="SelectEspecialdiad(esp.especialidad)"  class="btn-select-esp  rounded-1">
-                        <img style="width: 6rem;height: 6rem;" src="{{esp.foto}}">
-                    </button>
-                </div>
+    </div>
+    <div *ngIf="selectEspecialidad" class="card-body text-center">
+        <h4>Seleccione Especialidad</h4>
+        <div class="list-group ">
+            <div class="list-group-item" *ngFor="let esp of especialidades">
+                <p style="font-weight: bolder;">{{esp.especialidad}}</p>
+                <button (click)="SelectEspecialdiad(esp.especialidad)"  class="btn-select-esp  rounded-1">
+                    <img style="width: 6rem;height: 6rem;" src="{{esp.foto}}">
+                </button>
             </div>
         </div>
-    
-        <div *ngIf="selectPaciente" class="card-body text-center">
-            <h4>Seleccione Paciente</h4>
-            <div *ngIf="selectPaciente" class="card-body text-center">
-                <button (click)="SelectPaciente(pa)" *ngFor="let pa of pacientes"  class="btn-select-espe rounded-1">
-                    <img style="width: 6rem;height: 6rem;" src="{{pa.fotos[0].path}}">
-                </button>
-           </div>
-            
-        </div>
+    </div>
 
-        <div *ngIf="selectFiltro" class="card-body text-center">
-            <h4>Seleccione tipo de Filtro</h4>
+    <div *ngIf="selectPaciente" class="card-body text-center">
+        <h4>Seleccione Paciente</h4>
+        <div *ngIf="selectPaciente" class="card-body text-center">
+            <button (click)="SelectPaciente(pa)" *ngFor="let pa of pacientes"  class="btn-select-espe rounded-1">
+                <img style="width: 6rem;height: 6rem;" src="{{pa.fotos[0].path}}">
+            </button>
+       </div>
+        
+    </div>
+
+    <div *ngIf="selectFiltro" class="card-body text-center">
+        <h4>Seleccione tipo de Filtro</h4>
+        <hr>
+        <h6>Filtrar Por</h6>
+            <button (click)="FiltroSolicitado()"  class="btn-select-espe rounded-1">
+                Solicitados
+            </button>
+            <button (click)="FiltroTomado()"  class="btn-select-espe rounded-1">
+                Tomados
+            </button>
+            <button (click)="FiltroFinalizado()"  class="btn-select-espe rounded-1">
+                Finalizados
+            </button>
             <hr>
-            <h6>Filtrar Por</h6>
-                <button (click)="FiltroSolicitado()"  class="btn-select-espe rounded-1">
-                    Solicitados
-                </button>
-                <button (click)="FiltroTomado()"  class="btn-select-espe rounded-1">
-                    Tomados
-                </button>
-                <button (click)="FiltroFinalizado()"  class="btn-select-espe rounded-1">
-                    Finalizados
-                </button>
-                <hr>
-                <h6>Filtrar Por Fechas</h6>
-                <div class="input-group input-group-sm mb-3">
-                    <span class="input-group-text" id="inputGroup-sizing-default">De la Fecha</span>
-                    <input  name="fehcai" [(ngModel)]="fechaInicial" type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                    <span  class="input-group-text" id="inputGroup-sizing-default">Hasta la Fecha</span>
-                    <input name="fechaf" [(ngModel)]="fechaFinal" type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                </div>
-                <button (click)="FiltroFecha()" style="height: 4rem;"  class="btn-select-espe rounded-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16">
-                        <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM9.5 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm3 0h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zM2 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/>
-                      </svg>
-                </button>
-        </div>
-</div>
+            <h6>Filtrar Por Fechas</h6>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">De la Fecha</span>
+                <input  name="fehcai" [(ngModel)]="fechaInicial" type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <span  class="input-group-text" id="inputGroup-sizing-default">Hasta la Fecha</span>
+                <input name="fechaf" [(ngModel)]="fechaFinal" type="date" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <button (click)="FiltroFecha()" style="height: 4rem;"  class="btn-select-espe rounded-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16">
+                    <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zM9.5 7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm3 0h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zM2 10.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/>
+                  </svg>
+            </button>
+            <hr>
+            <h3 style="font-weight: bolder;">Filtrar Por Historia Clinica</h3>
+            <h6>Por Altura</h6>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Altura Minima</span>
+                <input  name="altmin" [(ngModel)]="altMin" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <span  class="input-group-text" id="inputGroup-sizing-default">Altura Maxima</span>
+                <input name="altmax" [(ngModel)]="altMax" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+            </div>
+            <button (click)="FiltroHistoriaCli('Altura')" style="height: 2rem;width: 40%;"  class="btn-select-espe rounded-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
+                  </svg>
+            </button>
+            <hr>
+
+            <h6>Por Peso</h6>
+            <div class="input-group input-group-sm mb-3">
+                <span  class="input-group-text" id="inputGroup-sizing-default">Peso Minimo</span>
+                <input name="pemin" [(ngModel)]="peMin" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <span  class="input-group-text" id="inputGroup-sizing-default">Peso Maximo</span>
+                <input name="pemax" [(ngModel)]="peMax" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">    
+            </div>
+            <button (click)="FiltroHistoriaCli('Peso')" style="height: 2rem;width: 40%;"  class="btn-select-espe rounded-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
+                  </svg>
+            </button>
+            <hr>
+
+            <h6>Por Temperatura</h6>
+            <div class="input-group input-group-sm mb-3">
+                <span  class="input-group-text" id="inputGroup-sizing-default">Temperatura Minima</span>
+                <input name="tempmin" [(ngModel)]="tempMin" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <span  class="input-group-text" id="inputGroup-sizing-default">Temperatura Maxima</span>
+                <input name="tempmax" [(ngModel)]="tempMax" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">    
+            </div>
+            <button (click)="FiltroHistoriaCli('Temp')" style="height: 2rem;width: 40%;" class="btn-select-espe rounded-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
+                  </svg>
+            </button>
+            <hr>
+
+            <h6>Por Presión arterial sistólica</h6>
+            <div class="input-group input-group-sm mb-3">
+                <span  class="input-group-text" id="inputGroup-sizing-default">Presión arterial sistólica Minima</span>
+                <input name="presmin" [(ngModel)]="presMin" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <span  class="input-group-text" id="inputGroup-sizing-default">Presión arterial sistólica Maxima</span>
+                <input name="presmax" [(ngModel)]="presMax" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">    
+            </div>
+            <button (click)="FiltroHistoriaCli('Presion')" style="height: 2rem;width: 40%;" class="btn-select-espe rounded-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5zm14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5z"/>
+                  </svg>
+            </button>
+            <hr>
+
+            <h6>Por todos los datos</h6>
+            <button (click)="FiltroHistoriaCli('Todos')" style="height: 4rem;"  class="btn-select-espe rounded-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-week-fill" viewBox="0 0 16 16">
+                    <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5ZM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2ZM8 7.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z"/>
+                </svg>
+            </button>
+    </div>

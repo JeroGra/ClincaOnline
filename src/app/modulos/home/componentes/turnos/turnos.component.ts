@@ -8,6 +8,7 @@ import { LocalStorageEncriptService } from 'src/app/servicios/local-storage-encr
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from "ngx-spinner";
 import { DatePipe } from '@angular/common';
+import { HistoriaClinica } from 'src/app/clases/historia-clinica';
 
 @Component({
   selector: 'app-turnos',
@@ -21,6 +22,7 @@ export class TurnosComponent implements AfterContentInit {
   turnos:Array<Turno> = [];
   turnosFijosBd:Array<Turno> = [];
   paciente:Paciente = new Paciente;
+  historiasCli : Array<HistoriaClinica> = []
 
   turnosFiltro:Array<Turno> = [];
 
@@ -71,6 +73,9 @@ export class TurnosComponent implements AfterContentInit {
         }
         this.especialistas = arr;
         console.log(this.especialistas)
+      })
+      this.bd.TraerHistoriasClinicas().subscribe((hc:any)=>{
+        this.historiasCli = hc
       })
     })
 
@@ -134,7 +139,16 @@ export class TurnosComponent implements AfterContentInit {
   horaInicio = "08:00"
   horaFin = "22:00"
   datePipe = new DatePipe('en-Ar')
-  
+
+  altMin = 140;
+  altMax = 200;
+  peMin = 25;
+  peMax = 100;
+  tempMin = 37;
+  tempMax = 45;
+  presMin = 80;
+  presMax = 180;
+
   ChangeToSelectEspecialista(){
     this.selectTurnos = false;
     this.selectEspecialidad = false;
@@ -259,6 +273,105 @@ export class TurnosComponent implements AfterContentInit {
         color:'#fb7474',
       })
     }
+  }
+
+  FiltroHistoriaCli(filtro : 'Altura' | 'Peso' | 'Temp' | 'Presion' | 'Todos'){
+    if(this.ValidarDatosHisCli()){
+
+      let turnosId :Array<string> = []
+
+      this.turnos = this.turnosFijosBd
+
+      this.historiasCli.forEach((hc:any)=>{
+        if(filtro === 'Altura'){
+          if(hc.altura >= this.altMin && hc.altura <= this.altMax){
+            turnosId.push(hc.idTurno as string)
+          }
+        }
+
+        if(filtro === 'Peso'){
+
+          if(hc.peso >= this.peMin && hc.peso <= this.peMax){
+            turnosId.push(hc.idTurno as string)
+          }
+        }
+
+
+        if(filtro === 'Temp'){
+
+          if(hc.temperatura >= this.tempMin && hc.temperatura <= this.tempMin){
+            turnosId.push(hc.idTurno as string)
+          }
+        }
+
+        if(filtro === 'Presion'){
+
+          if(hc.presion >= this.presMin && hc.presion <= this.presMax){
+            turnosId.push(hc.idTurno as string)
+          }
+        }
+
+        if(filtro === 'Todos'){
+
+          if(hc.altura >= this.altMin && hc.altura <= this.altMax){
+            if(hc.peso >= this.peMin && hc.peso <= this.peMax){
+              if(hc.temperatura >= this.tempMin && hc.temperatura <= this.tempMin){
+                if(hc.presion >= this.presMin && hc.presion <= this.presMax){
+                  turnosId.push(hc.idTurno as string)
+                }
+              }
+            }
+          }
+        }
+      })
+      
+      let newTurnos : Array<Turno> = []
+      
+      if(turnosId.length > 0){
+        turnosId.forEach((tId:string)=>{
+          for(let turno of this.turnos){
+            if(turno.id === tId){
+              newTurnos.push(turno)
+            }
+          }
+        })
+
+        this.turnos = newTurnos;
+
+      }else{
+        this.turnos = []
+        this.Toast.fire({
+          icon: 'error',
+          title: 'No se encontraron turnos con dichas caracteristicas',
+          color:'#fb7474',
+        })
+      }
+
+      this.selectFiltro = false;
+      this.selectTurnos = true;
+
+    }else{
+      this.Toast.fire({
+        icon: 'error',
+        title: 'Porfavor coloque datos validos de busqueda',
+        color:'#fb7474',
+      })
+    }
+  }
+
+  ValidarDatosHisCli(){
+    let ok = true;
+
+    if(!(this.altMin > 0 && this.altMin < 400)){ok = false}
+    if(!(this.altMax > 0 && this.altMax < 400)){ok = false}
+    if(!(this.peMin > 0 && this.peMin < 400)){ok = false}
+    if(!(this.peMax > 0 && this.peMax < 400)){ok = false}
+    if(!(this.tempMin > 30 && this.tempMin < 55)){ok = false}
+    if(!(this.tempMax > 30 && this.tempMax < 55)){ok = false}
+    if(!(this.presMin > 40 && this.presMin < 200)){ok = false}
+    if(!(this.presMax > 40 && this.presMax < 200)){ok = false}
+
+    return ok
   }
 
   Reset(){
