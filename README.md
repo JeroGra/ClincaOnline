@@ -124,42 +124,30 @@ Luego en la barra superior de la app web tendremos el icono de la libreta/turno 
 ![vet](https://github.com/JeroGra/ClincaOnline/assets/97103645/2b8442e2-0d4f-4c6b-b5d2-fc03a7bf8f93)
 
 
-![vet1](https://github.com/JeroGra/ClincaOnline/assets/97103645/e9e9fd9c-da18-4fba-9532-9f76256b0106)
+![ea](https://github.com/JeroGra/ClincaOnline/assets/97103645/8b59867a-cbdf-48a3-b840-fdbb2f6214cf)
 
-Esta administracion de turnos podremos filtrar los turnos por las especialidades del especialista y por los pacientes que tienen relacion con los turnos de dicho especialista, a su vez depende del estado del turno podremos realizar acciones:
+Como vemos aqui veremos todos los turnos relacionados al especialista que estan Solicitados/Tomados/Finalizados
+podemos visualizar su estado facilmente. Segun su estado podremos realizar acciones:
 
-- Aceptar turnos que esten solicitados:
+Si esta Solicitado veremos dos botones:
+- El boton verde con un icono de un turno con un + nos permite aceptar el turno
+- El boton amarillo con un icono de un turno con un - nos permite rechazar el turno y dar su motivo.
 
-  ![ta](https://github.com/JeroGra/ClincaOnline/assets/97103645/13b1baed-a819-432a-8372-823cebc5507f)
+Si esta Tomado veremos dos botones:
+- El boton azul con un icono de un turno y un check o tilde ✔ nos permite finalizar el turno y a la vez dejar la reseña y generar la historia clinica de dicho turno.
+- El boton rojo con un icono de un turno y una equis ❌ nos permite cancelar el turno y dejar el motivo.
+  
 
-  nos mostrara los turnos solicitaso para seleccionarlos, ver el detalle del turno y aceptarlo si asi lo deseamos.
+Por ultimo tendremos un boton rosa con un icono de un turno y lineas de frecuencias cardiacas que nos permitira ver los detalles de
+los turnos finalizados:
 
-- Rechazar turnos que esten solicitados:
+![eee](https://github.com/JeroGra/ClincaOnline/assets/97103645/3300f191-188c-4d93-9aac-88db8ef35996)
 
-  ![tr](https://github.com/JeroGra/ClincaOnline/assets/97103645/145b59b9-b928-4228-9621-e992277cf305)
 
-  nos mostrara los turnos solicitaso para seleccionarlos, ver el detalle del turno y rechazarlo si asi lo deseamos.
+En la barra de acceso del Especialista tambien encontraremos una seccion pacientes donde podremos seleccionar el icono de un calendario
+con un corazón para ver las historias clinicas de los pacientes atendidos:
 
-- Cancelar turnos que esten aceptados:
-
-  ![tc](https://github.com/JeroGra/ClincaOnline/assets/97103645/1a753e27-b50f-4ce4-b4db-57290963d228)
-
-  nos mostrara los turnos aceptados para seleccionarlos, ver el detalle del turno y cancelarlo si asi lo deseamos.
-
-- Finalizar turnos que esten aceptados:
-
-  ![tf](https://github.com/JeroGra/ClincaOnline/assets/97103645/c3712774-426a-463e-87b7-c67f710a7be9)
-
-    nos mostrara los turnos aceptados para seleccionarlos, ver el detalle del turno y finalizarlos si asi lo deseamos.
-
-- Ver turnos finalizados junto al detalle de la resenia realizada por el prfesional:
-
-  ![tff](https://github.com/JeroGra/ClincaOnline/assets/97103645/d2ea06d2-4959-4076-9c51-45b59593aa4b)
-
-  nos mostrara turnos finalizados para seleccionarlos y ver su reseña, su comentario realizado por el paciente y encuesta del paciente
-  (eso se vera cuando el paciente lo realize).
-
-![vetff](https://github.com/JeroGra/ClincaOnline/assets/97103645/bd2922a8-9edf-48f9-8484-3cff59a858db)
+![ee](https://github.com/JeroGra/ClincaOnline/assets/97103645/7c14ece2-e5ef-4087-a204-fc23d25f5221)
 
 
 # Vista Paciente
