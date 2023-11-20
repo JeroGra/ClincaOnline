@@ -83,6 +83,28 @@ Cancelar un turno tambien es muy sencillo y imtuitivo, a demas de que podemos fi
 
 ![vact](https://github.com/JeroGra/ClincaOnline/assets/97103645/db565640-f430-4a69-abaa-cdbd40d8af18)
 
+Tambien encontraremos la seccion de estadisticas/graficos del sistema:
+
+![Captura2](https://github.com/JeroGra/ClincaOnline/assets/97103645/4d02db1d-154f-44e4-8406-dca77a44c055)
+
+El icono de las barritas/graficos nos llevara a la pagina donde veremos los Logs del sistema y los graficos estadisticos de los turnos
+de la Clinica:
+
+![logs](https://github.com/JeroGra/ClincaOnline/assets/97103645/73b0fbd6-23ef-4fe9-a7a9-958bdd0a2b24)
+
+Aqui veremos los logs, podemos descargar la tabla en formato XLSX (Excel) pulsando el boton que esta debajo de los logs o 
+aretando la tecla Enter.
+
+![graf](https://github.com/JeroGra/ClincaOnline/assets/97103645/d7cf2b9d-c037-4bdc-b065-0da6786c4ea6)
+
+
+Aqui vemos los graficos estadisticos de los turnos, el primero es sobre Turnos por Especialidad, si tocamos el icono  del calendario que
+dice FRI (dia de la semana) veremos el grafico pero con turnos segun dia de habil de la semana y si seleccionamos el icono con el calendario y un + (mas) podremos filtrar turnos por una fecha de inicio y fin seleccionada y ver dentro de esa fecha turnos finalizados
+por especialista o turnos solicitados por especialista (en estado solicitado actual). Podemos navegar entre los graficos usando las teclas de flecha a la izquiera ⬅ y felcha a la derecha ➡ del teclado, tambien podemos descargar un Excel del grafico que estamos viendo en el momento apretando el boton que esta debajo del grafico.
+
+Dato extra: Si apretamos la tecla Escape en esta seccion nos mandara a la Seccion Mi Perfil del Administrador.
+
+
 
 # Vista Especialista
 
