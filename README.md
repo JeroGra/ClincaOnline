@@ -154,7 +154,7 @@ con un corazón para ver las historias clinicas de los pacientes atendidos:
 
 inicio/prefil:
 
-![vp](https://github.com/JeroGra/ClincaOnline/assets/97103645/214efdcd-904b-405f-bed9-f25ae98f6a60)
+![vp](https://github.com/JeroGra/ClincaOnline/assets/97103645/52531450-8f83-44b8-abe0-7a01eacecf3b)
 
 Turnos:
 
@@ -163,10 +163,33 @@ Turnos:
 El icono con una libreta/turno con un mas nos lleva a solicitar un turno.
 El icono con una libreta/turno con un grafico de barras nos lleva a ver nuestros turnos solicitados y finalizados para realizar acciones:
 
-![vptt](https://github.com/JeroGra/ClincaOnline/assets/97103645/12672935-1809-414c-9ea2-7dfc2ce10101)
+![p2](https://github.com/JeroGra/ClincaOnline/assets/97103645/a9b556f9-5389-4696-be8f-43bd4dbcc598)
 
-- El turno con una crux o X nos permite cancelarlo al igual que un especialista o administrador.
-- El turno con un corazon nos permite ver la reseña realizada por el profesional de un turno finalizado.
-- El turno con un simbolo de correcto nos permite realizar la encuesta para un turno.
-- La libretita con una lapicera nos permite dejar un comentario sobre la atencion del especialista de un turno finalizado.
+- El boton rojo con el icono de un turno con una ❌ nos permite cancelar turnos Tomados o Solicitados y dejar el motivo.
+- El boton rosa con el icono de un turno con lineas de frecuencias cardiacas nos permite ver los datos del turno finalizado.
+- El boton verde con el icono de una libreta y una lapicera nos permite dejar un comentario acerca de la atencion medica.
+- El boton azul con el icono de una libreta y un tilde ✔ nos permite realizar una encuesta acerca del turno y el sistema.
+
+Historia Clinica del paciente, accedemos a travez del icono de un calendario con un corazón:
+
+![hs](https://github.com/JeroGra/ClincaOnline/assets/97103645/ac325536-93aa-4e7e-9199-e47a2a6fc33c)
+
+Podremos seleccionar una historia clinica y ver sus datos cargados por el especialista, y a la vez si tocamos el boton que esta debajo de esta que posee un icono de un archivo PDF podremos descargar la historia clinica en forma de PDF.
+
+
+# Filtros Especiales para Turnos (Especialista y Paciente)
+
+![pf](https://github.com/JeroGra/ClincaOnline/assets/97103645/c5d07603-d861-4c84-aef9-08b5c4d2dee1)
+
+(filtro vista paciente)
+
+En la seccion turnos de los especialistas y pacientes tendremos filtros especiales, tales como:
+- Filtrar por Especialidad
+- Filtrar por Paciente (solo especialistas) 
+- Filtrar por Especialista (solo pacientes)
+- Filtro especial Icono de flechitas 🔁 donde podremos filtrar por estado de turnos Solicitado/Tomado/Finalizado, por un rango de fechas y por datos de historias clinicas como Rango de Altura, Rango de Peso, Rango de Temperatura, Rango de Presión Arterial sistólica o por todas estas.
+
+![filtros](https://github.com/JeroGra/ClincaOnline/assets/97103645/87731793-5cef-46d5-8c93-3d44e4e29a5b)
+
+
 
