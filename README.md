@@ -62,7 +62,7 @@ El administrador tiene como funciones las siguientes:
 
 Aqui encontraremos la seccion de usuarios: 
 
-especialistas:![CapturaAV](https://github.com/JeroGra/ClincaOnline/assets/97103645/d716eb41-6749-4124-b815-455ee9a78236)
+![CapturaAV](https://github.com/JeroGra/ClincaOnline/assets/97103645/d716eb41-6749-4124-b815-455ee9a78236)
 
 El icono de usuario con el mas nos lleva a registrar un administrador, el icono con el usuario y una lista nos lleva a una lista donde podremos habilitar o deshabilitar, 
 y el icono de calendario con un corazón nos lleva a ver las Historias Clinicas de los pacientes realizadas por los especialistas registrados en el sistema
