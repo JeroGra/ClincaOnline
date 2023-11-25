@@ -21,6 +21,7 @@ import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MiPerfilComponent,
     FechaPipe,
 
+
   ],
   imports: [
     BrowserModule,

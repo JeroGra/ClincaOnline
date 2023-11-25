@@ -12,7 +12,7 @@ temperatura?:number
 presion?:number
 diagnostico = {
     clave:"",
-    valor:0
+    valor:""
 }
 
 }

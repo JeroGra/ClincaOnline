@@ -45,6 +45,9 @@
                               </svg>
                         </a>
                     </li>
+                    <li  class="nav-item">
+                        <input  appDirectivaFiltroDinamicoTurno [historiasClinicas]="historiasCli" (filtroEvent)="FiltrarDatosDinamicosHC($event)" [filtro]="filtro" style="margin-left: 0.5rem;margin-top: 0.2.5rem;width: 20rem;" class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="filtro" [(ngModel)]="filtro">
+                    </li>
                 </ul>
             </div>
 

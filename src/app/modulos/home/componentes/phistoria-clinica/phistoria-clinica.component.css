@@ -78,3 +78,7 @@
     background-color: #0F2636;
     color: #80ED99;
 }
+
+.div-tabla-t::-webkit-scrollbar{
+    display: none;
+}

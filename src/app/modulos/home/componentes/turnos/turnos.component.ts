@@ -149,6 +149,8 @@ export class TurnosComponent implements AfterContentInit {
   presMin = 80;
   presMax = 180;
 
+  filtro = ""
+  
   ChangeToSelectEspecialista(){
     this.selectTurnos = false;
     this.selectEspecialidad = false;
@@ -358,6 +360,36 @@ export class TurnosComponent implements AfterContentInit {
       })
     }
   }
+
+  FiltrarDatosDinamicosHC(obj:any){
+    if(obj.filtrar){
+
+      let turnosId :Array<string> = []
+      this.turnos = this.turnosFijosBd
+      let newTurnos : Array<Turno> = []
+
+      obj.historias.forEach((hc:HistoriaClinica) => {
+        turnosId.push(hc.idTurno as string)
+      });
+      
+      if(turnosId.length > 0){
+        
+        turnosId.forEach((tId:string)=>{
+          for(let turno of this.turnos){
+            if(turno.id === tId){
+              newTurnos.push(turno)
+            }
+          }
+        })
+
+        this.turnos = newTurnos;
+    }else{
+      this.turnos = newTurnos;
+    }
+  }else{
+    this.Reset()
+  }
+}
 
   ValidarDatosHisCli(){
     let ok = true;

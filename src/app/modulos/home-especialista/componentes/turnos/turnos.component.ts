@@ -150,8 +150,8 @@ export class TurnosComponent  implements AfterContentInit {
   temperatura = 0;
   presion = 0;
   clave = "";
-  valor = 0;
-  claves = ['Huesos Rotos','Lesiones Musculares','Organos Dañados','Nada']
+  valor = "";
+
 
   altMin = 140;
   altMax = 200;
@@ -161,6 +161,8 @@ export class TurnosComponent  implements AfterContentInit {
   tempMax = 45;
   presMin = 80;
   presMax = 180;
+
+  filtro = ""
 
   ChangeToSelectPaciente(){
     this.selectTurnos = false;
@@ -363,6 +365,36 @@ export class TurnosComponent  implements AfterContentInit {
     }
   }
 
+  FiltrarDatosDinamicosHC(obj:any){
+    if(obj.filtrar){
+
+      let turnosId :Array<string> = []
+      this.turnos = this.turnosFijosBd
+      let newTurnos : Array<Turno> = []
+
+      obj.historias.forEach((hc:HistoriaClinica) => {
+        turnosId.push(hc.idTurno as string)
+      });
+      
+      if(turnosId.length > 0){
+        
+        turnosId.forEach((tId:string)=>{
+          for(let turno of this.turnos){
+            if(turno.id === tId){
+              newTurnos.push(turno)
+            }
+          }
+        })
+
+        this.turnos = newTurnos;
+    }else{
+      this.turnos = newTurnos;
+    }
+  }else{
+    this.Reset()
+  }
+}
+
   ValidarDatosHisCli(){
     let ok = true;
 
@@ -540,7 +572,7 @@ export class TurnosComponent  implements AfterContentInit {
                 this.temperatura = 0;
                 this.presion = 0;
                 this.clave = "";
-                this.valor = 0;
+                this.valor = "";
                 this.Reset();
               })
             })
@@ -565,7 +597,7 @@ export class TurnosComponent  implements AfterContentInit {
 
   SetClave(clave:string){
     this.clave = clave;
-    this.valor = 1;
+    this.valor = "";
   }
 
   EvaluarHC(){
@@ -574,8 +606,8 @@ export class TurnosComponent  implements AfterContentInit {
       if(!(this.peso < 1 || this.peso > 300)){
         if(!(this.temperatura < 20 || this.temperatura > 50)){
           if(!(this.presion < 50 || this.presion > 200)){
-            if(this.clave !== ""){
-              if(this.valor > 0 ){
+            if(this.clave.length >= 3){
+              if(this.valor !== "" ){
 
                 pass = true;
   

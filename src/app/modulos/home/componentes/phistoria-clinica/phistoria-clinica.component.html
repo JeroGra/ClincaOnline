@@ -4,21 +4,21 @@
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-                <a class="nav-link active">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <a class="nav-link" [ngClass]="(selectHc  == true)? 'active' : '' " (click)="ChangeToSelectHC()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
                   </svg>
                 </a>
             </li>
-           <!--<li class="nav-item">
-                <a class="nav-link ">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 16">
+          <li class="nav-item">
+                <a class="nav-link " [ngClass]="(selectEsp == true)? 'active' : '' " (click)="ChangeToSelectEspe()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 16">
                         <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5ZM9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8Zm1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Z"/>
                         <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2ZM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96c.026-.163.04-.33.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1.006 1.006 0 0 1 1 12V4Z"/>
                       </svg>
                 </a>
             </li>
-            <li class="nav-item">
+             <!--<li class="nav-item">
                 <a class="nav-link ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-week" viewBox="0 0 16 16">
                         <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
@@ -36,14 +36,20 @@
             </li>--> 
         </ul>
     </div>
-    <div class="card-body">
+    <div *ngIf="selectHc" class="card-body">
+        <button (click)="Reset()" class="rounded-pill btn btn-light border border-black" style="width: 10rem;height: 1.5rem;margin-bottom: 1rem;margin-left: 36rem;">
+            <svg style="margin-bottom: 2rem;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+              </svg>
+        </button>
       <h5 class="card-title text-center">{{paciente.nombre | uppercase  }} {{paciente.apellido  | uppercase }}</h5>
       <h4 class="card-title text-center">Historias Clinicas</h4>
     </div >
-    <div class="container text-center div-tabla-t" style="overflow: scroll; width: 100%;height: 10rem;">
+    <div *ngIf="selectHc" class="container text-center div-tabla-t" style="overflow: scroll; width: 100%;height: 23rem;">
         <div class="row align-items-start tabla-titulo">
             <div class="col  border-col">
-               Historia Clinica Emitida
+                Diagnostico Emitido
             </div>
         </div>
 
@@ -56,10 +62,10 @@
         </div>
     </div>
 
-    <div *ngIf="verHistoria" class="card mt-1" style="width: 100%;">
+    <div *ngIf="verHistoria " class="card mt-1" style="width: 100%;">
         <img *ngIf="especialista !== undefined" style="width: 10rem; margin-left: auto;margin-right: auto;margin-top: 0.5rem;" src="{{especialista.fotos[0].path}}" class="card-img-center " alt="...">
         <div class="card-body">
-          <h5 class="card-title">Historia CLinica del {{historiaClinica.fechaDeCreacion | date : 'yyyy/MM/dd'}} Referida al turno del {{historiaClinica.turno}}</h5>
+          <h5 class="card-title">Diagnostico del {{historiaClinica.fechaDeCreacion | date : 'yyyy/MM/dd'}} Referida al turno del {{historiaClinica.turno}}</h5>
           <p class="card-text">Altura {{historiaClinica.altura}} cm</p>
           <p class="card-text">Peso {{historiaClinica.peso}} kg</p>
           <p class="card-text">Temperatura {{historiaClinica.temperatura}} C°</p>
@@ -70,10 +76,24 @@
         </div>
         <div class="card-footer">
             <button (click)="CrearPDF()" class="btn-descargar">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-filetype-pdf" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z"/>
-                  </svg>
+                Descargar Diagnostico Seleccionado
             </button>
         </div>
     </div>
+    <button *ngIf="selectHc" (click)="CrearPDFHS()"  class="btn-descargar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-filetype-pdf" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M14 4.5V14a2 2 0 0 1-2 2h-1v-1h1a1 1 0 0 0 1-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v9H2V2a2 2 0 0 1 2-2h5.5L14 4.5ZM1.6 11.85H0v3.999h.791v-1.342h.803c.287 0 .531-.057.732-.173.203-.117.358-.275.463-.474a1.42 1.42 0 0 0 .161-.677c0-.25-.053-.476-.158-.677a1.176 1.176 0 0 0-.46-.477c-.2-.12-.443-.179-.732-.179Zm.545 1.333a.795.795 0 0 1-.085.38.574.574 0 0 1-.238.241.794.794 0 0 1-.375.082H.788V12.48h.66c.218 0 .389.06.512.181.123.122.185.296.185.522Zm1.217-1.333v3.999h1.46c.401 0 .734-.08.998-.237a1.45 1.45 0 0 0 .595-.689c.13-.3.196-.662.196-1.084 0-.42-.065-.778-.196-1.075a1.426 1.426 0 0 0-.589-.68c-.264-.156-.599-.234-1.005-.234H3.362Zm.791.645h.563c.248 0 .45.05.609.152a.89.89 0 0 1 .354.454c.079.201.118.452.118.753a2.3 2.3 0 0 1-.068.592 1.14 1.14 0 0 1-.196.422.8.8 0 0 1-.334.252 1.298 1.298 0 0 1-.483.082h-.563v-2.707Zm3.743 1.763v1.591h-.79V11.85h2.548v.653H7.896v1.117h1.606v.638H7.896Z"/>
+          </svg>
+    </button>
   </div>
+
+  <div *ngIf="selectEsp" class="card-body text-center">
+    <h4>Seleccione Especialista</h4>
+    <div *ngIf="selectEsp" class="card-body text-center">
+        <button (click)="SelectEspecialista(esp)" *ngFor="let esp of especialistas"  class="btn-select-espe rounded-1">
+            <img style="width: 6rem;height: 6rem;" src="{{esp.fotos[0].path}}">
+        </button>
+   </div>
+    
+</div>
+  

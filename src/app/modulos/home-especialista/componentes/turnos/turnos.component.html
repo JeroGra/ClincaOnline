@@ -45,6 +45,9 @@
                                   </svg>
                             </a>
                         </li>
+                        <li  class="nav-item">
+                            <input  appDirectivaFiltroDinamicoTurno [historiasClinicas]="historiasCli" (filtroEvent)="FiltrarDatosDinamicosHC($event)" [filtro]="filtro" style="margin-left: 0.5rem;margin-top: 0.2.5rem;width: 20rem;" class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="filtro" [(ngModel)]="filtro">
+                        </li>
                     </ul>
                 </div>
 
@@ -194,13 +197,9 @@
                                 <h6 class="text-center">Diagnostico</h6>
                                 <div class="input-group input-group-sm mb-3">
                                     <span class="input-group-text" id="inputGroup-sizing-sm">Clave</span>
-                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
-                                    <ul class="dropdown-menu">
-                                    <li *ngFor="let clave of claves" ><a class="dropdown-item" (click)="SetClave(clave)">{{clave}}</a></li>
-                                    </ul>
                                     <input  name="clave" [(ngModel)]="clave" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                     <span class="input-group-text" id="inputGroup-sizing-sm">Valor</span>
-                                    <input  name="valor" [(ngModel)]="valor" type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    <input  name="valor" [(ngModel)]="valor" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
                                  </div>
 
 

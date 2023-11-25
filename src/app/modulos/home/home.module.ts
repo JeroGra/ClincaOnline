@@ -8,6 +8,7 @@ import { TurnosComponent } from './componentes/turnos/turnos.component';
 import { PhistoriaClinicaComponent } from './componentes/phistoria-clinica/phistoria-clinica.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DirectivaFiltroDinamicoTurnoDirective } from './directivas/directiva-filtro-dinamico-turno.directive';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SolicitarTurnoComponent,
     TurnosComponent,
     PhistoriaClinicaComponent,
+    DirectivaFiltroDinamicoTurnoDirective
   ],
   imports: [
     CommonModule,

@@ -43,24 +43,34 @@ export class EhistoriaClinicaComponent implements AfterContentInit {
       this.especialista = obj;
       this.TraerTurnosEspId()
       this.bd.TraerUsuarioPorTipo('Paciente').subscribe((pa)=>{
-        let arrP = pa as Array<Paciente>
-        for(let t of this.turnos){
-          for(let p of arrP){
-              if(t.finalizado && p.id === t.uidPa){
-                if(this.pacientes.length > 0){
-                  for(let pa of this.pacientes){
-                    if(pa.id !== p.id){
-                      this.pacientes.push(p)
-                      break;
-                    }
+        this.pacientes = pa as Array<Paciente>
+        let arr : Array<any> = []
+        let equal = false;
+        for(let turno of this.turnos){
+          for(let pa of  this.pacientes){
+            if(pa.id === turno.paciente?.id && turno.cancelado !== true){
+              if(arr.length > 0){
+                equal = false 
+                for(let p of  arr){
+                  if(p.id === pa.id){
+                   // arr.push(pa)
+                    equal = true;
+                    break;
                   }
-                }else{
-                  this.pacientes.push(p)
-                  break;
                 }
+
+                if(!equal){
+                  arr.push(pa)
+                }
+
+              }else{
+                arr.push(pa)
               }
+            }
           }
         }
+        this.pacientes = arr;
+        console.log("Mis pacientes")
         console.log(this.pacientes)
       })
     })
