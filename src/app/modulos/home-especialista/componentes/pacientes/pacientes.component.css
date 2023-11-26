@@ -1,0 +1,87 @@
+.img-btn{
+    width: 15rem;
+    height: 15rem;
+    margin-bottom: 0.5rem;
+}
+
+.my-fav-btn{
+    height: 20rem;
+    width: 20.5rem;
+    background-color: #80ED99;
+    box-shadow: 0px 11px 67px 4px rgba(0,0,0,0.64);
+    margin: 0.5rem;
+    margin-left: 30.5rem;
+    padding: 2rem;
+}
+
+.my-fav-btn:active{
+    transform: scale(0.9);
+    background-color: #22577A;
+    opacity: 0.5;
+}
+
+.img-btn:active{
+    opacity: 0.5;
+}
+
+.div-p{
+    width: 100%;
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+.div-tabla{
+    background-color: #ffffff;
+    margin-top: 5rem;
+    color: #0F2636;
+    border-radius: 20px;
+    font-weight: bolder;
+    height: 20rem;
+    overflow: scroll;
+}
+
+.div-tabla-t{
+    background-color: #ffffff;
+    margin-top: 0rem;
+    color: #0F2636;
+    border-radius: 20px;
+    font-weight: bolder;
+    height: 10rem;
+    overflow: scroll;
+    margin-bottom: 0rem;
+}
+
+.tabla-titulo{
+    color: #0F2636;
+    border: 2px solid #0F2636;
+    border-radius: 20px;
+}
+
+.tabla-content{
+    color: #0F2636;
+    border-bottom: #0F2636 solid 1px;
+    border-radius: 20px;
+    overflow: scroll;
+
+}
+
+.tabla-content::-webkit-scrollbar{
+    display: none;
+}
+
+.div-tabla::-webkit-scrollbar {
+    display: none;
+}
+
+.div-tabla-t::-webkit-scrollbar {
+    display: none;
+}
+
+.border-col{
+    border-right: #0F2636 solid 2px;
+}
+
+.tabla-content:hover{
+    background-color: #38A3A5;
+    color: #0F2636;
+}

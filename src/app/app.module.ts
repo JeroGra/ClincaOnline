@@ -20,8 +20,6 @@ import {BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ErrorComponent,
     MiPerfilComponent,
     FechaPipe,
-
-
   ],
   imports: [
     BrowserModule,
