@@ -32,7 +32,7 @@ export class PacientesComponent implements AfterContentInit {
         let equal = false;
         for(let turno of this.turnos){
           for(let pa of  this.pacientes){
-            if(pa.id === turno.paciente?.id && turno.cancelado !== true){
+            if(pa.id === turno.paciente?.id && turno.finalizado === true){
               if(arr.length > 0){
                 equal = false 
                 for(let p of  arr){

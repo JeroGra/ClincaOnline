@@ -18,6 +18,7 @@ import { DiasPipePipe } from './pipes/dias-pipe.pipe';
 import { ColorHoverDirective } from './directivas/color-hover.directive';
 import { EnterActionDirective } from './directivas/enter-action.directive';
 import { ClickActionDirective } from './directivas/click-action.directive';
+import { UsuariosComponent } from './componentes/usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ClickActionDirective } from './directivas/click-action.directive';
     ColorHoverDirective,
     EnterActionDirective,
     ClickActionDirective,
+    UsuariosComponent,
   ],
   imports: [
     CommonModule,

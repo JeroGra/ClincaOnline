@@ -1,0 +1,11 @@
+<div   *ngFor="let user of usuarios" class="card div-p" style="width: 18rem;">
+    <img (click)="SelectUser(user)" src="{{user.fotos[0].path}}" class="card-img-top" alt="...">
+    <div class="card-body text-center">
+      <h5 class="card-title">{{user.nombre | uppercase}} {{user.apellido | uppercase}}</h5>
+      <p style="text-align: start;" class="card-text"><strong>ID:</strong> {{user.id}} </p>
+      <p style="text-align: start;" class="card-text"><strong>DNI:</strong> {{user.dni}} </p>
+      <p style="text-align: start;" class="card-text"><strong>Edad:</strong>{{user.edad}} </p>
+      <p style="text-align: start;" class="card-text"><strong>Obra Social:</strong> {{user.obraSocial}} </p>
+      <p style="text-align: start;" class="card-text"><strong>Email:</strong> {{user.email}} </p>
+    </div>
+  </div>
